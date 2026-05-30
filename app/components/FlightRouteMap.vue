@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import 'cesium/Build/Cesium/Widgets/widgets.css'
 import type { FlightWithSnapshot } from '~/types/flight'
+import type { SectorTraffic } from '~/types/sector'
 
 const props = defineProps<{
   flight: FlightWithSnapshot | null
   currentTime: string
+  sectorTraffic?: SectorTraffic | null
+  showSectorTraffic?: boolean
 }>()
 
 const emit = defineEmits<{ select: [flight: FlightWithSnapshot] }>()
@@ -14,6 +17,13 @@ const ready = ref(false)
 const isDarkMap = useMapTimeTheme(toRef(props, 'flight'), toRef(props, 'currentTime'))
 const { init, getViewer, setBaseImagery } = useCesiumViewer(container)
 const { draw, clear, updateAircraft } = useFlightRouteLayer(getViewer, (f) => emit('select', f))
+const { render: renderSector, clear: clearSector } = useSectorTrafficLayer(getViewer)
+
+async function syncSectorLayer() {
+  if (!getViewer()) return
+  if (props.showSectorTraffic && props.sectorTraffic) await renderSector(props.sectorTraffic)
+  else clearSector()
+}
 
 async function ensureViewer() {
   if (getViewer() || !container.value) return
@@ -36,6 +46,8 @@ watch(
     if (!getViewer()) return
     if (flight) await draw(flight)
     else await clear()
+    // draw()/clear() wipe all entities — re-add the sector layer afterwards.
+    await syncSectorLayer()
   }
 )
 
@@ -44,6 +56,11 @@ watch(
   async ([flight, time]) => {
     if (flight && time && getViewer()) await updateAircraft(flight, time)
   }
+)
+
+watch(
+  () => [props.sectorTraffic, props.showSectorTraffic] as const,
+  () => syncSectorLayer()
 )
 </script>
 

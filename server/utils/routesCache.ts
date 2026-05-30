@@ -99,3 +99,12 @@ export async function getSnapshotMeta(): Promise<Pick<RoutesSnapshot, 'asked_at'
   const data = await loadSnapshot()
   return { asked_at: data.asked_at }
 }
+
+export async function getRoutesSnapshot(): Promise<RoutesSnapshot> {
+  return loadSnapshot()
+}
+
+/** Synchronous lookup — only valid after the snapshot has been loaded. */
+export function getFlightById(id: string): Flight | undefined {
+  return flightMap.get(id)
+}
