@@ -42,21 +42,48 @@ export function useFlightRouteLayer(
       id: 'origin',
       position: positions[0],
       point: { pixelSize: 10, color: Cesium.Color.LIME },
-      label: { text: flight.origin_airport_icao, font: '12px sans-serif', pixelOffset: new Cesium.Cartesian2(0, -16) }
+      label: {
+        text: flight.origin_airport_icao,
+        font: '12px sans-serif',
+        pixelOffset: new Cesium.Cartesian2(0, -16),
+        fillColor: Cesium.Color.WHITE,
+        outlineColor: Cesium.Color.BLACK,
+        outlineWidth: 2,
+        style: Cesium.LabelStyle.FILL_AND_OUTLINE
+      }
     })
 
     viewer.entities.add({
       id: 'destination',
       position: positions[positions.length - 1],
       point: { pixelSize: 10, color: Cesium.Color.ORANGE },
-      label: { text: flight.destination_airport_icao, font: '12px sans-serif', pixelOffset: new Cesium.Cartesian2(0, -16) }
+      label: {
+        text: flight.destination_airport_icao,
+        font: '12px sans-serif',
+        pixelOffset: new Cesium.Cartesian2(0, -16),
+        fillColor: Cesium.Color.WHITE,
+        outlineColor: Cesium.Color.BLACK,
+        outlineWidth: 2,
+        style: Cesium.LabelStyle.FILL_AND_OUTLINE
+      }
     })
 
     viewer.entities.add({
       id: 'aircraft',
       position: positions[0],
       point: { pixelSize: 14, color: Cesium.Color.YELLOW, outlineColor: Cesium.Color.BLACK, outlineWidth: 2 },
-      label: { text: flight.flight_number, font: 'bold 13px sans-serif', pixelOffset: new Cesium.Cartesian2(0, -20) }
+      label: {
+        text: flight.flight_number,
+        font: 'bold 14px sans-serif',
+        pixelOffset: new Cesium.Cartesian2(0, -24),
+        fillColor: Cesium.Color.WHITE,
+        outlineColor: Cesium.Color.BLACK,
+        outlineWidth: 3,
+        style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+        showBackground: true,
+        backgroundColor: Cesium.Color.BLACK.withAlpha(0.7),
+        backgroundPadding: new Cesium.Cartesian2(8, 4)
+      }
     })
 
     handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas)

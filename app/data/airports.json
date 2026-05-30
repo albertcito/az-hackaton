@@ -1,0 +1,4366 @@
+{
+  "KIYA": {
+    "city": "Abbeville",
+    "state": "LA"
+  },
+  "KAPS": {
+    "city": "Reserve",
+    "state": "LA"
+  },
+  "KLUV": {
+    "city": "Lamesa",
+    "state": "TX"
+  },
+  "KJHN": {
+    "city": "Johnson City",
+    "state": "KS"
+  },
+  "KCPP": {
+    "city": "Greensboro",
+    "state": "GA"
+  },
+  "KCNI": {
+    "city": "Canton",
+    "state": "GA"
+  },
+  "KHMP": {
+    "city": "Hampton",
+    "state": "GA"
+  },
+  "KGPC": {
+    "city": "Greencastle",
+    "state": "IN"
+  },
+  "KCQF": {
+    "city": "Fairhope",
+    "state": "AL"
+  },
+  "KFHB": {
+    "city": "Fernandina Beach",
+    "state": "FL"
+  },
+  "KDNA": {
+    "city": "Santa Teresa",
+    "state": "NM"
+  },
+  "KBVU": {
+    "city": "Boulder City",
+    "state": "NV"
+  },
+  "KHRF": {
+    "city": "Hamilton",
+    "state": "MT"
+  },
+  "KBFZ": {
+    "city": "Albertville",
+    "state": "AL"
+  },
+  "KRCV": {
+    "city": "Del Norte",
+    "state": "CO"
+  },
+  "KCVC": {
+    "city": "Covington",
+    "state": "GA"
+  },
+  "KAAF": {
+    "city": "Apalachicola",
+    "state": "FL"
+  },
+  "KAAO": {
+    "city": "Wichita",
+    "state": "KS"
+  },
+  "KABE": {
+    "city": "Allentown/Bethlehem",
+    "state": "PA"
+  },
+  "KABI": {
+    "city": "Abilene",
+    "state": "TX"
+  },
+  "KABQ": {
+    "city": "Albuquerque",
+    "state": "NM"
+  },
+  "KABR": {
+    "city": "Aberdeen",
+    "state": "SD"
+  },
+  "KABY": {
+    "city": "Albany",
+    "state": "GA"
+  },
+  "KACK": {
+    "city": "Nantucket",
+    "state": "MA"
+  },
+  "KACT": {
+    "city": "Waco",
+    "state": "TX"
+  },
+  "KACV": {
+    "city": "Arcata/Eureka",
+    "state": "CA"
+  },
+  "KACY": {
+    "city": "Atlantic City",
+    "state": "NJ"
+  },
+  "KADG": {
+    "city": "Adrian",
+    "state": "MI"
+  },
+  "KADS": {
+    "city": "Dallas",
+    "state": "TX"
+  },
+  "KADW": {
+    "city": "Camp Springs",
+    "state": "MD"
+  },
+  "KAEX": {
+    "city": "Alexandria",
+    "state": "LA"
+  },
+  "KAFJ": {
+    "city": "Washington",
+    "state": "PA"
+  },
+  "KAFK": {
+    "city": "Nebraska City",
+    "state": "NE"
+  },
+  "KAFO": {
+    "city": "Afton",
+    "state": "WY"
+  },
+  "KAFW": {
+    "city": "Fort Worth",
+    "state": "TX"
+  },
+  "KAGC": {
+    "city": "Pittsburgh",
+    "state": "PA"
+  },
+  "KAGS": {
+    "city": "Augusta",
+    "state": "GA"
+  },
+  "KAHN": {
+    "city": "Athens",
+    "state": "GA"
+  },
+  "KAIA": {
+    "city": "Alliance",
+    "state": "NE"
+  },
+  "KAIK": {
+    "city": "Aiken",
+    "state": "SC"
+  },
+  "KAIO": {
+    "city": "Atlantic",
+    "state": "IA"
+  },
+  "KAIZ": {
+    "city": "Kaiser Lake Ozark",
+    "state": "MO"
+  },
+  "KAJZ": {
+    "city": "Delta",
+    "state": "CO"
+  },
+  "KAKO": {
+    "city": "Akron",
+    "state": "CO"
+  },
+  "KALB": {
+    "city": "Albany",
+    "state": "NY"
+  },
+  "KALN": {
+    "city": "Alton/St Louis",
+    "state": "IL"
+  },
+  "KALO": {
+    "city": "Waterloo",
+    "state": "IA"
+  },
+  "KALS": {
+    "city": "Alamosa",
+    "state": "CO"
+  },
+  "KALW": {
+    "city": "Walla Walla",
+    "state": "WA"
+  },
+  "KALX": {
+    "city": "Alexander City",
+    "state": "AL"
+  },
+  "KAMA": {
+    "city": "Amarillo",
+    "state": "TX"
+  },
+  "KAMG": {
+    "city": "Alma",
+    "state": "GA"
+  },
+  "KAND": {
+    "city": "Anderson",
+    "state": "SC"
+  },
+  "KANE": {
+    "city": "Minneapolis",
+    "state": "MN"
+  },
+  "KANQ": {
+    "city": "Angola",
+    "state": "IN"
+  },
+  "KAOH": {
+    "city": "Lima",
+    "state": "OH"
+  },
+  "KAOO": {
+    "city": "Altoona",
+    "state": "PA"
+  },
+  "KAPA": {
+    "city": "Denver",
+    "state": "CO"
+  },
+  "KAPC": {
+    "city": "Napa",
+    "state": "CA"
+  },
+  "KAPF": {
+    "city": "Naples",
+    "state": "FL"
+  },
+  "KAPN": {
+    "city": "Alpena",
+    "state": "MI"
+  },
+  "KARA": {
+    "city": "New Iberia",
+    "state": "LA"
+  },
+  "KARB": {
+    "city": "Ann Arbor",
+    "state": "MI"
+  },
+  "KARR": {
+    "city": "Chicago/Aurora",
+    "state": "IL"
+  },
+  "KART": {
+    "city": "Watertown",
+    "state": "NY"
+  },
+  "KARV": {
+    "city": "Woodruff",
+    "state": "WI"
+  },
+  "KARW": {
+    "city": "Beaufort",
+    "state": "SC"
+  },
+  "KASD": {
+    "city": "Slidell",
+    "state": "LA"
+  },
+  "KASE": {
+    "city": "Aspen",
+    "state": "CO"
+  },
+  "KASG": {
+    "city": "Springdale",
+    "state": "AR"
+  },
+  "KASH": {
+    "city": "Nashua",
+    "state": "NH"
+  },
+  "KASL": {
+    "city": "Marshall",
+    "state": "TX"
+  },
+  "KAST": {
+    "city": "Astoria",
+    "state": "OR"
+  },
+  "KASX": {
+    "city": "Ashland",
+    "state": "WI"
+  },
+  "KATL": {
+    "city": "Atlanta",
+    "state": "GA"
+  },
+  "KATS": {
+    "city": "Artesia",
+    "state": "NM"
+  },
+  "KATW": {
+    "city": "Appleton",
+    "state": "WI"
+  },
+  "KATY": {
+    "city": "Watertown",
+    "state": "SD"
+  },
+  "KAUG": {
+    "city": "Augusta",
+    "state": "ME"
+  },
+  "KAUH": {
+    "city": "Aurora",
+    "state": "NE"
+  },
+  "KAUN": {
+    "city": "Auburn",
+    "state": "CA"
+  },
+  "KAUO": {
+    "city": "Auburn",
+    "state": "AL"
+  },
+  "KAUS": {
+    "city": "Austin",
+    "state": "TX"
+  },
+  "KAVL": {
+    "city": "Asheville",
+    "state": "NC"
+  },
+  "KAVP": {
+    "city": "Wilkes-Barre/Scranton",
+    "state": "PA"
+  },
+  "KAVQ": {
+    "city": "Marana",
+    "state": "AZ"
+  },
+  "KAWM": {
+    "city": "West Memphis",
+    "state": "AR"
+  },
+  "KAWO": {
+    "city": "Arlington",
+    "state": "WA"
+  },
+  "KAXH": {
+    "city": "Rosharon",
+    "state": "TX"
+  },
+  "KAXN": {
+    "city": "Alexandria",
+    "state": "MN"
+  },
+  "KAXV": {
+    "city": "Wapakoneta",
+    "state": "OH"
+  },
+  "KAZO": {
+    "city": "Kalamazoo",
+    "state": "MI"
+  },
+  "KBAF": {
+    "city": "Westfield",
+    "state": "MA"
+  },
+  "KBAK": {
+    "city": "Columbus",
+    "state": "IN"
+  },
+  "KBAZ": {
+    "city": "New Braunfels",
+    "state": "TX"
+  },
+  "KBBG": {
+    "city": "Branson",
+    "state": "MO"
+  },
+  "KBCB": {
+    "city": "Blacksburg",
+    "state": "VA"
+  },
+  "KBCT": {
+    "city": "Boca Raton",
+    "state": "FL"
+  },
+  "KBDG": {
+    "city": "Blanding",
+    "state": "UT"
+  },
+  "KBDH": {
+    "city": "Willmar",
+    "state": "MN"
+  },
+  "KBDL": {
+    "city": "Hartford",
+    "state": "CT"
+  },
+  "KBDN": {
+    "city": "Bend",
+    "state": "OR"
+  },
+  "KBDR": {
+    "city": "Bridgeport",
+    "state": "CT"
+  },
+  "KBEA": {
+    "city": "Beeville",
+    "state": "TX"
+  },
+  "KBED": {
+    "city": "Bedford",
+    "state": "MA"
+  },
+  "KBEH": {
+    "city": "Benton Harbor",
+    "state": "MI"
+  },
+  "KBFD": {
+    "city": "Bradford",
+    "state": "PA"
+  },
+  "KBFF": {
+    "city": "Scottsbluff",
+    "state": "NE"
+  },
+  "KBFI": {
+    "city": "Seattle",
+    "state": "WA"
+  },
+  "KBFL": {
+    "city": "Bakersfield",
+    "state": "CA"
+  },
+  "KBFM": {
+    "city": "Mobile",
+    "state": "AL"
+  },
+  "KBGE": {
+    "city": "Bainbridge",
+    "state": "GA"
+  },
+  "KBGF": {
+    "city": "Winchester",
+    "state": "TN"
+  },
+  "KBGR": {
+    "city": "Bangor",
+    "state": "ME"
+  },
+  "KBHB": {
+    "city": "Bar Harbor",
+    "state": "ME"
+  },
+  "KBHM": {
+    "city": "Birmingham",
+    "state": "AL"
+  },
+  "KBIE": {
+    "city": "Beatrice",
+    "state": "NE"
+  },
+  "KBIF": {
+    "city": "Fort Bliss/El Paso",
+    "state": "TX"
+  },
+  "KBIL": {
+    "city": "Billings",
+    "state": "MT"
+  },
+  "KBIS": {
+    "city": "Bismarck",
+    "state": "ND"
+  },
+  "KBIV": {
+    "city": "Holland",
+    "state": "MI"
+  },
+  "KBJC": {
+    "city": "Denver",
+    "state": "CO"
+  },
+  "KBJI": {
+    "city": "Bemidji",
+    "state": "MN"
+  },
+  "KBKD": {
+    "city": "Breckenridge",
+    "state": "TX"
+  },
+  "KBKE": {
+    "city": "Baker City",
+    "state": "OR"
+  },
+  "KBKL": {
+    "city": "Cleveland",
+    "state": "OH"
+  },
+  "KBKS": {
+    "city": "Falfurrias",
+    "state": "TX"
+  },
+  "KBKT": {
+    "city": "Blackstone",
+    "state": "VA"
+  },
+  "KBKV": {
+    "city": "Brooksville",
+    "state": "FL"
+  },
+  "KBKW": {
+    "city": "Beaver",
+    "state": "WV"
+  },
+  "KBLF": {
+    "city": "Bluefield",
+    "state": "WV"
+  },
+  "KBLH": {
+    "city": "Blythe",
+    "state": "CA"
+  },
+  "KBLI": {
+    "city": "Bellingham",
+    "state": "WA"
+  },
+  "KBLM": {
+    "city": "Belmar/Farmingdale",
+    "state": "NJ"
+  },
+  "KBMC": {
+    "city": "Brigham City",
+    "state": "UT"
+  },
+  "KBMG": {
+    "city": "Bloomington",
+    "state": "IN"
+  },
+  "KBMI": {
+    "city": "Bloomington/Normal",
+    "state": "IL"
+  },
+  "KBML": {
+    "city": "Berlin",
+    "state": "NH"
+  },
+  "KBMQ": {
+    "city": "Burnet",
+    "state": "TX"
+  },
+  "KBNA": {
+    "city": "Nashville",
+    "state": "TN"
+  },
+  "KBNW": {
+    "city": "Boone",
+    "state": "IA"
+  },
+  "KBOI": {
+    "city": "Boise",
+    "state": "ID"
+  },
+  "KBOS": {
+    "city": "Boston",
+    "state": "MA"
+  },
+  "KBPK": {
+    "city": "Mountain Home",
+    "state": "AR"
+  },
+  "KBPT": {
+    "city": "Beaumont/Port Arthur",
+    "state": "TX"
+  },
+  "KBQK": {
+    "city": "Brunswick",
+    "state": "GA"
+  },
+  "KBRD": {
+    "city": "Brainerd",
+    "state": "MN"
+  },
+  "KBRL": {
+    "city": "Burlington",
+    "state": "IA"
+  },
+  "KBRO": {
+    "city": "Brownsville",
+    "state": "TX"
+  },
+  "KBTM": {
+    "city": "Butte",
+    "state": "MT"
+  },
+  "KBTN": {
+    "city": "Britton",
+    "state": "SD"
+  },
+  "KBTP": {
+    "city": "Butler",
+    "state": "PA"
+  },
+  "KBTR": {
+    "city": "Baton Rouge",
+    "state": "LA"
+  },
+  "KBTV": {
+    "city": "Burlington",
+    "state": "VT"
+  },
+  "KBUF": {
+    "city": "Buffalo",
+    "state": "NY"
+  },
+  "KBUR": {
+    "city": "Burbank",
+    "state": "CA"
+  },
+  "KBUU": {
+    "city": "Burlington",
+    "state": "WI"
+  },
+  "KBUY": {
+    "city": "Burlington",
+    "state": "NC"
+  },
+  "KBVI": {
+    "city": "Beaver Falls",
+    "state": "PA"
+  },
+  "KBVS": {
+    "city": "Burlington",
+    "state": "WA"
+  },
+  "KBVX": {
+    "city": "Batesville",
+    "state": "AR"
+  },
+  "KBVY": {
+    "city": "Beverly / Danvers",
+    "state": "MA"
+  },
+  "KBWD": {
+    "city": "Brownwood",
+    "state": "TX"
+  },
+  "KBWG": {
+    "city": "Bowling Green",
+    "state": "KY"
+  },
+  "KBWI": {
+    "city": "Baltimore",
+    "state": "MD"
+  },
+  "KBXK": {
+    "city": "Buckeye",
+    "state": "AZ"
+  },
+  "KBXM": {
+    "city": "Brunswick",
+    "state": "ME"
+  },
+  "KBZN": {
+    "city": "Bozeman",
+    "state": "MT"
+  },
+  "KCAE": {
+    "city": "Columbia",
+    "state": "SC"
+  },
+  "KCAK": {
+    "city": "Akron",
+    "state": "OH"
+  },
+  "KCBE": {
+    "city": "Wiley Ford",
+    "state": "WV"
+  },
+  "KCBF": {
+    "city": "Council Bluffs",
+    "state": "IA"
+  },
+  "KCBK": {
+    "city": "Colby",
+    "state": "KS"
+  },
+  "KCCB": {
+    "city": "Upland",
+    "state": "CA"
+  },
+  "KCCO": {
+    "city": "Newnan",
+    "state": "GA"
+  },
+  "KCCR": {
+    "city": "Concord",
+    "state": "CA"
+  },
+  "KCCY": {
+    "city": "Charles City",
+    "state": "IA"
+  },
+  "KCDC": {
+    "city": "Cedar City",
+    "state": "UT"
+  },
+  "KCDH": {
+    "city": "Camden",
+    "state": "AR"
+  },
+  "KCDN": {
+    "city": "Camden",
+    "state": "SC"
+  },
+  "KCDS": {
+    "city": "Childress",
+    "state": "TX"
+  },
+  "KCDW": {
+    "city": "Caldwell",
+    "state": "NJ"
+  },
+  "KCEF": {
+    "city": "Chicopee",
+    "state": "MA"
+  },
+  "KCEU": {
+    "city": "Clemson",
+    "state": "SC"
+  },
+  "KCEZ": {
+    "city": "Cortez",
+    "state": "CO"
+  },
+  "KCFD": {
+    "city": "Bryan",
+    "state": "TX"
+  },
+  "KCFE": {
+    "city": "Buffalo",
+    "state": "MN"
+  },
+  "KCGC": {
+    "city": "Crystal River",
+    "state": "FL"
+  },
+  "KCGE": {
+    "city": "Cambridge",
+    "state": "MD"
+  },
+  "KCGF": {
+    "city": "Cleveland",
+    "state": "OH"
+  },
+  "KCGI": {
+    "city": "Cape Girardeau",
+    "state": "MO"
+  },
+  "KCGZ": {
+    "city": "Casa Grande",
+    "state": "AZ"
+  },
+  "KCHA": {
+    "city": "Chattanooga",
+    "state": "TN"
+  },
+  "KCHD": {
+    "city": "Chandler",
+    "state": "AZ"
+  },
+  "KCHN": {
+    "city": "Wauchula",
+    "state": "FL"
+  },
+  "KCHO": {
+    "city": "Charlottesville",
+    "state": "VA"
+  },
+  "KCHS": {
+    "city": "Charleston",
+    "state": "SC"
+  },
+  "KCIC": {
+    "city": "Chico",
+    "state": "CA"
+  },
+  "KCID": {
+    "city": "Cedar Rapids",
+    "state": "IA"
+  },
+  "KCIU": {
+    "city": "Kincheloe",
+    "state": "MI"
+  },
+  "KCKB": {
+    "city": "Bridgeport",
+    "state": "WV"
+  },
+  "KCKV": {
+    "city": "Clarksville",
+    "state": "TN"
+  },
+  "KCLE": {
+    "city": "Cleveland",
+    "state": "OH"
+  },
+  "KCLL": {
+    "city": "College Station",
+    "state": "TX"
+  },
+  "KCLM": {
+    "city": "Port Angeles",
+    "state": "WA"
+  },
+  "KCLT": {
+    "city": "Charlotte",
+    "state": "NC"
+  },
+  "KCMA": {
+    "city": "Camarillo",
+    "state": "CA"
+  },
+  "KCMD": {
+    "city": "Cullman",
+    "state": "AL"
+  },
+  "KCMH": {
+    "city": "Columbus",
+    "state": "OH"
+  },
+  "KCMI": {
+    "city": "Savoy",
+    "state": "IL"
+  },
+  "KCMX": {
+    "city": "Hancock",
+    "state": "MI"
+  },
+  "KCNM": {
+    "city": "Carlsbad",
+    "state": "NM"
+  },
+  "KCNO": {
+    "city": "Chino",
+    "state": "CA"
+  },
+  "KCNY": {
+    "city": "Moab",
+    "state": "UT"
+  },
+  "KCOD": {
+    "city": "Cody",
+    "state": "WY"
+  },
+  "KCOE": {
+    "city": "Coeur d'Alene",
+    "state": "ID"
+  },
+  "KCOM": {
+    "city": "Coleman",
+    "state": "TX"
+  },
+  "KCON": {
+    "city": "Concord",
+    "state": "NH"
+  },
+  "KCOS": {
+    "city": "Colorado Springs",
+    "state": "CO"
+  },
+  "KCOT": {
+    "city": "Cotulla",
+    "state": "TX"
+  },
+  "KCOU": {
+    "city": "Columbia",
+    "state": "MO"
+  },
+  "KCPK": {
+    "city": "Chesapeake",
+    "state": "VA"
+  },
+  "KCPR": {
+    "city": "Casper",
+    "state": "WY"
+  },
+  "KCPS": {
+    "city": "Cahokia/St Louis",
+    "state": "IL"
+  },
+  "KCRE": {
+    "city": "North Myrtle Beach",
+    "state": "SC"
+  },
+  "KCRG": {
+    "city": "Jacksonville",
+    "state": "FL"
+  },
+  "KCRP": {
+    "city": "Corpus Christi",
+    "state": "TX"
+  },
+  "KCRQ": {
+    "city": "Carlsbad",
+    "state": "CA"
+  },
+  "KCRW": {
+    "city": "Charleston",
+    "state": "WV"
+  },
+  "KCSG": {
+    "city": "Columbus",
+    "state": "GA"
+  },
+  "KCTJ": {
+    "city": "Carrollton",
+    "state": "GA"
+  },
+  "KCTY": {
+    "city": "Cross City",
+    "state": "FL"
+  },
+  "KCUB": {
+    "city": "Columbia",
+    "state": "SC"
+  },
+  "KCVG": {
+    "city": "Cincinnati / Covington",
+    "state": "KY"
+  },
+  "KCVH": {
+    "city": "Hollister",
+    "state": "CA"
+  },
+  "KCVN": {
+    "city": "Clovis",
+    "state": "NM"
+  },
+  "KCVO": {
+    "city": "Corvallis",
+    "state": "OR"
+  },
+  "KCVX": {
+    "city": "Charlevoix",
+    "state": "MI"
+  },
+  "KCWA": {
+    "city": "Mosinee",
+    "state": "WI"
+  },
+  "KCWC": {
+    "city": "Wichita Falls",
+    "state": "TX"
+  },
+  "KCXO": {
+    "city": "Houston",
+    "state": "TX"
+  },
+  "KCXP": {
+    "city": "Carson City",
+    "state": "NV"
+  },
+  "KCXU": {
+    "city": "Camilla",
+    "state": "GA"
+  },
+  "KCXW": {
+    "city": "Conway",
+    "state": "AR"
+  },
+  "KCXY": {
+    "city": "Harrisburg",
+    "state": "PA"
+  },
+  "KCYO": {
+    "city": "Circleville",
+    "state": "OH"
+  },
+  "KCYS": {
+    "city": "Cheyenne",
+    "state": "WY"
+  },
+  "KDAB": {
+    "city": "Daytona Beach",
+    "state": "FL"
+  },
+  "KDAL": {
+    "city": "Dallas",
+    "state": "TX"
+  },
+  "KDAW": {
+    "city": "Rochester",
+    "state": "NH"
+  },
+  "KDAY": {
+    "city": "Dayton",
+    "state": "OH"
+  },
+  "KDBN": {
+    "city": "Dublin",
+    "state": "GA"
+  },
+  "KDBQ": {
+    "city": "Dubuque",
+    "state": "IA"
+  },
+  "KDCA": {
+    "city": "Washington",
+    "state": "DC"
+  },
+  "KDCU": {
+    "city": "Decatur",
+    "state": "AL"
+  },
+  "KDDC": {
+    "city": "Dodge City",
+    "state": "KS"
+  },
+  "KDEC": {
+    "city": "Decatur",
+    "state": "IL"
+  },
+  "KDEN": {
+    "city": "Denver",
+    "state": "CO"
+  },
+  "KDET": {
+    "city": "Detroit",
+    "state": "MI"
+  },
+  "KDFI": {
+    "city": "Defiance",
+    "state": "OH"
+  },
+  "KDFW": {
+    "city": "Dallas-Fort Worth",
+    "state": "TX"
+  },
+  "KDGL": {
+    "city": "Douglas",
+    "state": "AZ"
+  },
+  "KDHN": {
+    "city": "Dothan",
+    "state": "AL"
+  },
+  "KDHT": {
+    "city": "Dalhart",
+    "state": "TX"
+  },
+  "KDIK": {
+    "city": "Dickinson",
+    "state": "ND"
+  },
+  "KDKB": {
+    "city": "DeKalb",
+    "state": "IL"
+  },
+  "KDKX": {
+    "city": "Knoxville",
+    "state": "TN"
+  },
+  "KDLH": {
+    "city": "Duluth",
+    "state": "MN"
+  },
+  "KDLL": {
+    "city": "Baraboo",
+    "state": "WI"
+  },
+  "KDLZ": {
+    "city": "Delaware",
+    "state": "OH"
+  },
+  "KDMN": {
+    "city": "Deming",
+    "state": "NM"
+  },
+  "KDMW": {
+    "city": "Westminster",
+    "state": "MD"
+  },
+  "KDNL": {
+    "city": "Augusta",
+    "state": "GA"
+  },
+  "KDNN": {
+    "city": "Dalton",
+    "state": "GA"
+  },
+  "KDNV": {
+    "city": "Danville",
+    "state": "IL"
+  },
+  "KDPA": {
+    "city": "Chicago/West Chicago",
+    "state": "IL"
+  },
+  "KDQH": {
+    "city": "Douglas",
+    "state": "GA"
+  },
+  "KDRO": {
+    "city": "Durango",
+    "state": "CO"
+  },
+  "KDRT": {
+    "city": "Del Rio",
+    "state": "TX"
+  },
+  "KDSM": {
+    "city": "Des Moines",
+    "state": "IA"
+  },
+  "KDTA": {
+    "city": "Delta",
+    "state": "UT"
+  },
+  "KDTN": {
+    "city": "Shreveport",
+    "state": "LA"
+  },
+  "KDTS": {
+    "city": "Destin",
+    "state": "FL"
+  },
+  "KDTW": {
+    "city": "Detroit",
+    "state": "MI"
+  },
+  "KDUA": {
+    "city": "Durant",
+    "state": "OK"
+  },
+  "KDUG": {
+    "city": "Douglas Bisbee",
+    "state": "AZ"
+  },
+  "KDUJ": {
+    "city": "Dubois",
+    "state": "PA"
+  },
+  "KDVK": {
+    "city": "Danville",
+    "state": "KY"
+  },
+  "KDVL": {
+    "city": "Devils Lake",
+    "state": "ND"
+  },
+  "KDVN": {
+    "city": "Davenport",
+    "state": "IA"
+  },
+  "KDVO": {
+    "city": "Novato",
+    "state": "CA"
+  },
+  "KDVT": {
+    "city": "Phoenix",
+    "state": "AZ"
+  },
+  "KDWH": {
+    "city": "Houston",
+    "state": "TX"
+  },
+  "KDXR": {
+    "city": "Danbury",
+    "state": "CT"
+  },
+  "KDXX": {
+    "city": "Louisburg",
+    "state": "MN"
+  },
+  "KDYR": {
+    "city": "Dyersburg",
+    "state": "TN"
+  },
+  "KEAR": {
+    "city": "Kearney",
+    "state": "NE"
+  },
+  "KEAT": {
+    "city": "Wenatchee",
+    "state": "WA"
+  },
+  "KEAU": {
+    "city": "Eau Claire",
+    "state": "WI"
+  },
+  "KEBG": {
+    "city": "Edinburg",
+    "state": "TX"
+  },
+  "KECG": {
+    "city": "Elizabeth City",
+    "state": "NC"
+  },
+  "KECP": {
+    "city": "Panama City Beach",
+    "state": "FL"
+  },
+  "KEDC": {
+    "city": "Pflugerville",
+    "state": "TX"
+  },
+  "KEDU": {
+    "city": "Davis",
+    "state": "CA"
+  },
+  "KEET": {
+    "city": "Alabaster",
+    "state": "AL"
+  },
+  "KEFD": {
+    "city": "Houston",
+    "state": "TX"
+  },
+  "KEGE": {
+    "city": "Eagle",
+    "state": "CO"
+  },
+  "KEGT": {
+    "city": "Wellington",
+    "state": "KS"
+  },
+  "KEHO": {
+    "city": "Shelby",
+    "state": "NC"
+  },
+  "KEIK": {
+    "city": "Erie",
+    "state": "CO"
+  },
+  "KEKM": {
+    "city": "Elkhart",
+    "state": "IN"
+  },
+  "KEKN": {
+    "city": "Elkins",
+    "state": "WV"
+  },
+  "KEKO": {
+    "city": "Elko",
+    "state": "NV"
+  },
+  "KEKY": {
+    "city": "Bessemer",
+    "state": "AL"
+  },
+  "KELD": {
+    "city": "El Dorado",
+    "state": "AR"
+  },
+  "KELM": {
+    "city": "Elmira/Corning",
+    "state": "NY"
+  },
+  "KELP": {
+    "city": "El Paso",
+    "state": "TX"
+  },
+  "KEMM": {
+    "city": "Kemmerer",
+    "state": "WY"
+  },
+  "KENV": {
+    "city": "Wendover",
+    "state": "UT"
+  },
+  "KENW": {
+    "city": "Kenosha",
+    "state": "WI"
+  },
+  "KEPH": {
+    "city": "Ephrata",
+    "state": "WA"
+  },
+  "KEPM": {
+    "city": "Eastport",
+    "state": "ME"
+  },
+  "KEQY": {
+    "city": "Monroe",
+    "state": "NC"
+  },
+  "KERI": {
+    "city": "Erie",
+    "state": "PA"
+  },
+  "KERV": {
+    "city": "Kerrville",
+    "state": "TX"
+  },
+  "KESC": {
+    "city": "Escanaba",
+    "state": "MI"
+  },
+  "KESF": {
+    "city": "Alexandria",
+    "state": "LA"
+  },
+  "KESN": {
+    "city": "Easton",
+    "state": "MD"
+  },
+  "KEUF": {
+    "city": "Eufaula",
+    "state": "AL"
+  },
+  "KEUG": {
+    "city": "Eugene",
+    "state": "OR"
+  },
+  "KEUL": {
+    "city": "Caldwell",
+    "state": "ID"
+  },
+  "KEVB": {
+    "city": "New Smyrna Beach",
+    "state": "FL"
+  },
+  "KEVV": {
+    "city": "Evansville",
+    "state": "IN"
+  },
+  "KEWB": {
+    "city": "New Bedford",
+    "state": "MA"
+  },
+  "KEWK": {
+    "city": "Newton",
+    "state": "KS"
+  },
+  "KEWN": {
+    "city": "New Bern",
+    "state": "NC"
+  },
+  "KEWR": {
+    "city": "Newark",
+    "state": "NJ"
+  },
+  "KEXX": {
+    "city": "Lexington",
+    "state": "NC"
+  },
+  "KEYE": {
+    "city": "Indianapolis",
+    "state": "IN"
+  },
+  "KEYW": {
+    "city": "Key West",
+    "state": "FL"
+  },
+  "KEZF": {
+    "city": "Fredericksburg",
+    "state": "VA"
+  },
+  "KRCE": {
+    "city": "Oklahoma City",
+    "state": "OK"
+  },
+  "KFAR": {
+    "city": "Fargo",
+    "state": "ND"
+  },
+  "KFAT": {
+    "city": "Fresno",
+    "state": "CA"
+  },
+  "KFAY": {
+    "city": "Fayetteville",
+    "state": "NC"
+  },
+  "KFCH": {
+    "city": "Fresno",
+    "state": "CA"
+  },
+  "KFCI": {
+    "city": "North Chesterfield",
+    "state": "VA"
+  },
+  "KFCM": {
+    "city": "Minneapolis",
+    "state": "MN"
+  },
+  "KFDK": {
+    "city": "Frederick",
+    "state": "MD"
+  },
+  "KFET": {
+    "city": "Fremont",
+    "state": "NE"
+  },
+  "KFFA": {
+    "city": "Kill Devil Hills",
+    "state": "NC"
+  },
+  "KFFC": {
+    "city": "Peachtree City",
+    "state": "GA"
+  },
+  "KFFT": {
+    "city": "Frankfort",
+    "state": "KY"
+  },
+  "KFFX": {
+    "city": "Fremont",
+    "state": "MI"
+  },
+  "KFFZ": {
+    "city": "Mesa",
+    "state": "AZ"
+  },
+  "KFGU": {
+    "city": "Apison",
+    "state": "TN"
+  },
+  "KFHU": {
+    "city": "Fort Huachuca / Sierra Vista",
+    "state": "AZ"
+  },
+  "KFKL": {
+    "city": "Franklin",
+    "state": "PA"
+  },
+  "KFLD": {
+    "city": "Fond du Lac",
+    "state": "WI"
+  },
+  "KFLG": {
+    "city": "Flagstaff",
+    "state": "AZ"
+  },
+  "KFLL": {
+    "city": "Fort Lauderdale",
+    "state": "FL"
+  },
+  "KFLO": {
+    "city": "Florence",
+    "state": "SC"
+  },
+  "KFMN": {
+    "city": "Farmington",
+    "state": "NM"
+  },
+  "KFMY": {
+    "city": "Fort Myers",
+    "state": "FL"
+  },
+  "KFNL": {
+    "city": "Loveland",
+    "state": "CO"
+  },
+  "KFNT": {
+    "city": "Flint",
+    "state": "MI"
+  },
+  "KFOD": {
+    "city": "Fort Dodge",
+    "state": "IA"
+  },
+  "KFOE": {
+    "city": "Topeka",
+    "state": "KS"
+  },
+  "KFOK": {
+    "city": "Westhampton Beach",
+    "state": "NY"
+  },
+  "KFPR": {
+    "city": "Fort Pierce",
+    "state": "FL"
+  },
+  "KFQD": {
+    "city": "Rutherfordton",
+    "state": "NC"
+  },
+  "KFRG": {
+    "city": "East Farmingdale",
+    "state": "NY"
+  },
+  "KFRM": {
+    "city": "Fairmont",
+    "state": "MN"
+  },
+  "KFSD": {
+    "city": "Sioux Falls",
+    "state": "SD"
+  },
+  "KFSM": {
+    "city": "Fort Smith",
+    "state": "AR"
+  },
+  "KFTW": {
+    "city": "Fort Worth",
+    "state": "TX"
+  },
+  "KFTY": {
+    "city": "Atlanta",
+    "state": "GA"
+  },
+  "KFWA": {
+    "city": "Fort Wayne",
+    "state": "IN"
+  },
+  "KFWS": {
+    "city": "Fort Worth",
+    "state": "TX"
+  },
+  "KFXE": {
+    "city": "Fort Lauderdale",
+    "state": "FL"
+  },
+  "KFYV": {
+    "city": "Fayetteville",
+    "state": "AR"
+  },
+  "KFZG": {
+    "city": "Fitzgerald",
+    "state": "GA"
+  },
+  "KGAD": {
+    "city": "Gadsden",
+    "state": "AL"
+  },
+  "KGAI": {
+    "city": "Gaithersburg",
+    "state": "MD"
+  },
+  "KGAS": {
+    "city": "Gallipolis",
+    "state": "OH"
+  },
+  "KGCK": {
+    "city": "Garden City",
+    "state": "KS"
+  },
+  "KGCM": {
+    "city": "Claremore",
+    "state": "OK"
+  },
+  "KGCN": {
+    "city": "Grand Canyon - Tusayan",
+    "state": "AZ"
+  },
+  "KGCY": {
+    "city": "Greeneville",
+    "state": "TN"
+  },
+  "KGDJ": {
+    "city": "Granbury",
+    "state": "TX"
+  },
+  "KGDV": {
+    "city": "Glendive",
+    "state": "MT"
+  },
+  "KGED": {
+    "city": "Georgetown",
+    "state": "DE"
+  },
+  "KGEG": {
+    "city": "Spokane",
+    "state": "WA"
+  },
+  "KGEU": {
+    "city": "Glendale",
+    "state": "AZ"
+  },
+  "KGFK": {
+    "city": "Grand Forks",
+    "state": "ND"
+  },
+  "KGGE": {
+    "city": "Georgetown",
+    "state": "SC"
+  },
+  "KGGG": {
+    "city": "Longview",
+    "state": "TX"
+  },
+  "KGGI": {
+    "city": "Grinnell",
+    "state": "IA"
+  },
+  "KGGW": {
+    "city": "Glasgow",
+    "state": "MT"
+  },
+  "KGHG": {
+    "city": "Marshfield",
+    "state": "MA"
+  },
+  "KGIF": {
+    "city": "Winter Haven",
+    "state": "FL"
+  },
+  "KGJT": {
+    "city": "Grand Junction",
+    "state": "CO"
+  },
+  "KGKT": {
+    "city": "Sevierville",
+    "state": "TN"
+  },
+  "KGKY": {
+    "city": "Arlington",
+    "state": "TX"
+  },
+  "KGLD": {
+    "city": "Goodland",
+    "state": "KS"
+  },
+  "KGLE": {
+    "city": "Gainesville",
+    "state": "TX"
+  },
+  "KGLH": {
+    "city": "Greenville",
+    "state": "MS"
+  },
+  "KGLR": {
+    "city": "Gaylord",
+    "state": "MI"
+  },
+  "KGMJ": {
+    "city": "Grove",
+    "state": "OK"
+  },
+  "KGMU": {
+    "city": "Greenville",
+    "state": "SC"
+  },
+  "KGNV": {
+    "city": "Gainesville",
+    "state": "FL"
+  },
+  "KGOK": {
+    "city": "Guthrie",
+    "state": "OK"
+  },
+  "KGON": {
+    "city": "Groton",
+    "state": "CT"
+  },
+  "KGOO": {
+    "city": "Grass Valley",
+    "state": "CA"
+  },
+  "KGPH": {
+    "city": "Excelsior Springs",
+    "state": "MO"
+  },
+  "KGPI": {
+    "city": "Kalispell",
+    "state": "MT"
+  },
+  "KGPM": {
+    "city": "Grand Prairie",
+    "state": "TX"
+  },
+  "KGPT": {
+    "city": "Gulfport",
+    "state": "MS"
+  },
+  "KGPZ": {
+    "city": "Grand Rapids",
+    "state": "MN"
+  },
+  "KGRB": {
+    "city": "Green Bay",
+    "state": "WI"
+  },
+  "KGRD": {
+    "city": "Greenwood",
+    "state": "SC"
+  },
+  "KGRI": {
+    "city": "Grand Island",
+    "state": "NE"
+  },
+  "KGRK": {
+    "city": "Fort Cavazos",
+    "state": "TX"
+  },
+  "KGRR": {
+    "city": "Grand Rapids",
+    "state": "MI"
+  },
+  "KGSO": {
+    "city": "Greensboro",
+    "state": "NC"
+  },
+  "KGSP": {
+    "city": "Greenville/Greer/Spartanburg",
+    "state": "SC"
+  },
+  "KGTF": {
+    "city": "Great Falls",
+    "state": "MT"
+  },
+  "KGTR": {
+    "city": "Columbus/W Point/Starkville",
+    "state": "MS"
+  },
+  "KGTU": {
+    "city": "Georgetown",
+    "state": "TX"
+  },
+  "KGUC": {
+    "city": "Gunnison",
+    "state": "CO"
+  },
+  "KGVL": {
+    "city": "Gainesville",
+    "state": "GA"
+  },
+  "KGWB": {
+    "city": "Auburn",
+    "state": "IN"
+  },
+  "KGWW": {
+    "city": "Pikeville",
+    "state": "NC"
+  },
+  "KGYH": {
+    "city": "Greenville",
+    "state": "SC"
+  },
+  "KGYI": {
+    "city": "Denison",
+    "state": "TX"
+  },
+  "KGYL": {
+    "city": "Glencoe",
+    "state": "MN"
+  },
+  "KGYR": {
+    "city": "Goodyear",
+    "state": "AZ"
+  },
+  "KGYY": {
+    "city": "Gary",
+    "state": "IN"
+  },
+  "KOZS": {
+    "city": "Camdenton",
+    "state": "MO"
+  },
+  "KHAB": {
+    "city": "Hamilton",
+    "state": "AL"
+  },
+  "KHAF": {
+    "city": "Half Moon Bay",
+    "state": "CA"
+  },
+  "KHAO": {
+    "city": "Hamilton",
+    "state": "OH"
+  },
+  "KHBG": {
+    "city": "Hattiesburg",
+    "state": "MS"
+  },
+  "KHCR": {
+    "city": "Heber",
+    "state": "UT"
+  },
+  "KHDC": {
+    "city": "Hammond",
+    "state": "LA"
+  },
+  "KHDE": {
+    "city": "Holdrege",
+    "state": "NE"
+  },
+  "KHDN": {
+    "city": "Hayden",
+    "state": "CO"
+  },
+  "KHDO": {
+    "city": "Hondo",
+    "state": "TX"
+  },
+  "KHEF": {
+    "city": "Manassas",
+    "state": "VA"
+  },
+  "KHFD": {
+    "city": "Hartford",
+    "state": "CT"
+  },
+  "KHFJ": {
+    "city": "Pierce City",
+    "state": "MO"
+  },
+  "KHFY": {
+    "city": "Indianapolis",
+    "state": "IN"
+  },
+  "KHGR": {
+    "city": "Hagerstown",
+    "state": "MD"
+  },
+  "KHHG": {
+    "city": "Huntington",
+    "state": "IN"
+  },
+  "KHHR": {
+    "city": "Hawthorne",
+    "state": "CA"
+  },
+  "KHII": {
+    "city": "Lake Havasu City",
+    "state": "AZ"
+  },
+  "KHIO": {
+    "city": "Portland",
+    "state": "OR"
+  },
+  "KHJO": {
+    "city": "Hanford",
+    "state": "CA"
+  },
+  "KHKS": {
+    "city": "Jackson",
+    "state": "MS"
+  },
+  "KHLN": {
+    "city": "Helena",
+    "state": "MT"
+  },
+  "KHMZ": {
+    "city": "Bedford",
+    "state": "PA"
+  },
+  "KHNB": {
+    "city": "Huntingburg",
+    "state": "IN"
+  },
+  "KHND": {
+    "city": "Las Vegas",
+    "state": "NV"
+  },
+  "KHOB": {
+    "city": "Hobbs",
+    "state": "NM"
+  },
+  "KHOT": {
+    "city": "Hot Springs",
+    "state": "AR"
+  },
+  "KHOU": {
+    "city": "Houston",
+    "state": "TX"
+  },
+  "KHPN": {
+    "city": "White Plains",
+    "state": "NY"
+  },
+  "KHPY": {
+    "city": "Baytown",
+    "state": "TX"
+  },
+  "KHQG": {
+    "city": "Hugoton",
+    "state": "KS"
+  },
+  "KHQU": {
+    "city": "Thomson",
+    "state": "GA"
+  },
+  "KHRL": {
+    "city": "Harlingen",
+    "state": "TX"
+  },
+  "KHRO": {
+    "city": "Harrison",
+    "state": "AR"
+  },
+  "KHRX": {
+    "city": "Hereford",
+    "state": "TX"
+  },
+  "KHSA": {
+    "city": "Bay St Louis",
+    "state": "MS"
+  },
+  "KHSD": {
+    "city": "Oklahoma City",
+    "state": "OK"
+  },
+  "KHSV": {
+    "city": "Huntsville",
+    "state": "AL"
+  },
+  "KJPX": {
+    "city": "East Hampton",
+    "state": "NY"
+  },
+  "KHTS": {
+    "city": "Huntington",
+    "state": "WV"
+  },
+  "KHUF": {
+    "city": "Terre Haute",
+    "state": "IN"
+  },
+  "KHUM": {
+    "city": "Houma",
+    "state": "LA"
+  },
+  "KHUT": {
+    "city": "Hutchinson",
+    "state": "KS"
+  },
+  "KHVN": {
+    "city": "New Haven",
+    "state": "CT"
+  },
+  "KHWD": {
+    "city": "Hayward",
+    "state": "CA"
+  },
+  "KHWO": {
+    "city": "Hollywood",
+    "state": "FL"
+  },
+  "KHWV": {
+    "city": "Shirley",
+    "state": "NY"
+  },
+  "KHWY": {
+    "city": "Midland",
+    "state": "VA"
+  },
+  "KHXD": {
+    "city": "Hilton Head Island",
+    "state": "SC"
+  },
+  "KHYA": {
+    "city": "Hyannis",
+    "state": "MA"
+  },
+  "KHYI": {
+    "city": "San Marcos",
+    "state": "TX"
+  },
+  "KHYS": {
+    "city": "Hays",
+    "state": "KS"
+  },
+  "KHYX": {
+    "city": "Saginaw",
+    "state": "MI"
+  },
+  "KHZD": {
+    "city": "Huntingdon",
+    "state": "TN"
+  },
+  "KIAD": {
+    "city": "Dulles",
+    "state": "VA"
+  },
+  "KIAG": {
+    "city": "Niagara Falls",
+    "state": "NY"
+  },
+  "KIAH": {
+    "city": "Houston",
+    "state": "TX"
+  },
+  "KICT": {
+    "city": "Wichita",
+    "state": "KS"
+  },
+  "KIDA": {
+    "city": "Idaho Falls",
+    "state": "ID"
+  },
+  "KIER": {
+    "city": "Natchitoches",
+    "state": "LA"
+  },
+  "KIFP": {
+    "city": "Bullhead City",
+    "state": "AZ"
+  },
+  "KIGM": {
+    "city": "Kingman",
+    "state": "AZ"
+  },
+  "KIJX": {
+    "city": "Jacksonville",
+    "state": "IL"
+  },
+  "KIKG": {
+    "city": "Kingsville",
+    "state": "TX"
+  },
+  "KIKK": {
+    "city": "Kankakee",
+    "state": "IL"
+  },
+  "KILG": {
+    "city": "Wilmington",
+    "state": "DE"
+  },
+  "KILM": {
+    "city": "Wilmington",
+    "state": "NC"
+  },
+  "KILN": {
+    "city": "Wilmington",
+    "state": "OH"
+  },
+  "KIML": {
+    "city": "Imperial",
+    "state": "NE"
+  },
+  "KIMM": {
+    "city": "Immokalee",
+    "state": "FL"
+  },
+  "KIMT": {
+    "city": "Kingsford",
+    "state": "MI"
+  },
+  "KIND": {
+    "city": "Indianapolis",
+    "state": "IN"
+  },
+  "KINF": {
+    "city": "Inverness",
+    "state": "FL"
+  },
+  "KINK": {
+    "city": "Wink",
+    "state": "TX"
+  },
+  "KINT": {
+    "city": "Winston Salem",
+    "state": "NC"
+  },
+  "KINW": {
+    "city": "Winslow",
+    "state": "AZ"
+  },
+  "KIOB": {
+    "city": "Mount Sterling",
+    "state": "KY"
+  },
+  "KIPL": {
+    "city": "Imperial",
+    "state": "CA"
+  },
+  "KIPT": {
+    "city": "Williamsport",
+    "state": "PA"
+  },
+  "KIRK": {
+    "city": "Kirksville",
+    "state": "MO"
+  },
+  "KISM": {
+    "city": "Orlando",
+    "state": "FL"
+  },
+  "KISP": {
+    "city": "Islip",
+    "state": "NY"
+  },
+  "KITH": {
+    "city": "Ithaca",
+    "state": "NY"
+  },
+  "KITR": {
+    "city": "Burlington",
+    "state": "CO"
+  },
+  "KIWA": {
+    "city": "Mesa",
+    "state": "AZ"
+  },
+  "KIWD": {
+    "city": "Ironwood",
+    "state": "MI"
+  },
+  "KIWS": {
+    "city": "Houston",
+    "state": "TX"
+  },
+  "KIXD": {
+    "city": "New Century",
+    "state": "KS"
+  },
+  "KIZA": {
+    "city": "Santa Ynez",
+    "state": "CA"
+  },
+  "KJAC": {
+    "city": "Jackson",
+    "state": "WY"
+  },
+  "KJAN": {
+    "city": "Jackson",
+    "state": "MS"
+  },
+  "KJAU": {
+    "city": "Jacksboro",
+    "state": "TN"
+  },
+  "KJAX": {
+    "city": "Jacksonville",
+    "state": "FL"
+  },
+  "KJBR": {
+    "city": "Jonesboro",
+    "state": "AR"
+  },
+  "KJEF": {
+    "city": "Jefferson City",
+    "state": "MO"
+  },
+  "KJFK": {
+    "city": "New York",
+    "state": "NY"
+  },
+  "KJKA": {
+    "city": "Gulf Shores",
+    "state": "AL"
+  },
+  "KJKJ": {
+    "city": "Moorhead",
+    "state": "MN"
+  },
+  "KJLN": {
+    "city": "Joplin",
+    "state": "MO"
+  },
+  "KJMS": {
+    "city": "Jamestown",
+    "state": "ND"
+  },
+  "KJNX": {
+    "city": "Smithfield",
+    "state": "NC"
+  },
+  "KJQF": {
+    "city": "Concord",
+    "state": "NC"
+  },
+  "KJST": {
+    "city": "Johnstown",
+    "state": "PA"
+  },
+  "KJVL": {
+    "city": "Janesville",
+    "state": "WI"
+  },
+  "KJVY": {
+    "city": "Jeffersonville",
+    "state": "IN"
+  },
+  "KJWN": {
+    "city": "Nashville",
+    "state": "TN"
+  },
+  "KJWY": {
+    "city": "Midlothian/Waxahachie",
+    "state": "TX"
+  },
+  "KJXN": {
+    "city": "Jackson",
+    "state": "MI"
+  },
+  "KJYO": {
+    "city": "Leesburg",
+    "state": "VA"
+  },
+  "KJYR": {
+    "city": "York",
+    "state": "NE"
+  },
+  "KJZI": {
+    "city": "Johns Island",
+    "state": "SC"
+  },
+  "KPCD": {
+    "city": "Perryville",
+    "state": "MO"
+  },
+  "KKLS": {
+    "city": "Kelso",
+    "state": "WA"
+  },
+  "KREG": {
+    "city": "Gonzales",
+    "state": "LA"
+  },
+  "KLAA": {
+    "city": "Lamar",
+    "state": "CO"
+  },
+  "KLAF": {
+    "city": "West Lafayette",
+    "state": "IN"
+  },
+  "KLAL": {
+    "city": "Lakeland",
+    "state": "FL"
+  },
+  "KLAN": {
+    "city": "Lansing",
+    "state": "MI"
+  },
+  "KLAR": {
+    "city": "Laramie",
+    "state": "WY"
+  },
+  "KLAS": {
+    "city": "Las Vegas",
+    "state": "NV"
+  },
+  "KLAW": {
+    "city": "Lawton",
+    "state": "OK"
+  },
+  "KLAX": {
+    "city": "Los Angeles",
+    "state": "CA"
+  },
+  "KLBB": {
+    "city": "Lubbock",
+    "state": "TX"
+  },
+  "KLBE": {
+    "city": "Latrobe",
+    "state": "PA"
+  },
+  "KLBF": {
+    "city": "North Platte",
+    "state": "NE"
+  },
+  "KLBL": {
+    "city": "Liberal",
+    "state": "KS"
+  },
+  "KLBO": {
+    "city": "Lebanon",
+    "state": "MO"
+  },
+  "KLBX": {
+    "city": "Angleton",
+    "state": "TX"
+  },
+  "KLCH": {
+    "city": "Lake Charles",
+    "state": "LA"
+  },
+  "KLCI": {
+    "city": "Laconia / Gilford",
+    "state": "NH"
+  },
+  "KLCK": {
+    "city": "Columbus",
+    "state": "OH"
+  },
+  "KLCQ": {
+    "city": "Lake City",
+    "state": "FL"
+  },
+  "KLEB": {
+    "city": "Lebanon",
+    "state": "NH"
+  },
+  "KLEE": {
+    "city": "Leesburg",
+    "state": "FL"
+  },
+  "KLEX": {
+    "city": "Lexington",
+    "state": "KY"
+  },
+  "KLFK": {
+    "city": "Lufkin",
+    "state": "TX"
+  },
+  "KLFT": {
+    "city": "Lafayette",
+    "state": "LA"
+  },
+  "KLGA": {
+    "city": "New York",
+    "state": "NY"
+  },
+  "KLGB": {
+    "city": "Long Beach",
+    "state": "CA"
+  },
+  "KLGC": {
+    "city": "LaGrange",
+    "state": "GA"
+  },
+  "KLGU": {
+    "city": "Logan",
+    "state": "UT"
+  },
+  "KLHW": {
+    "city": "Hinesville",
+    "state": "GA"
+  },
+  "KLHX": {
+    "city": "La Junta",
+    "state": "CO"
+  },
+  "KLHZ": {
+    "city": "Louisburg",
+    "state": "NC"
+  },
+  "KLIT": {
+    "city": "Little Rock",
+    "state": "AR"
+  },
+  "KLIU": {
+    "city": "Littlefield",
+    "state": "TX"
+  },
+  "KLKR": {
+    "city": "Lancaster",
+    "state": "SC"
+  },
+  "KLKU": {
+    "city": "Louisa",
+    "state": "VA"
+  },
+  "KLLQ": {
+    "city": "Monticello",
+    "state": "AR"
+  },
+  "KLLR": {
+    "city": "Little River",
+    "state": "CA"
+  },
+  "KLMO": {
+    "city": "Longmont",
+    "state": "CO"
+  },
+  "KLMT": {
+    "city": "Klamath Falls",
+    "state": "OR"
+  },
+  "KLNC": {
+    "city": "Lancaster",
+    "state": "TX"
+  },
+  "KLNK": {
+    "city": "Lincoln",
+    "state": "NE"
+  },
+  "KLNN": {
+    "city": "Willoughby",
+    "state": "OH"
+  },
+  "KLNS": {
+    "city": "Lancaster",
+    "state": "PA"
+  },
+  "KLOM": {
+    "city": "Philadelphia",
+    "state": "PA"
+  },
+  "KLOT": {
+    "city": "Chicago/Romeoville",
+    "state": "IL"
+  },
+  "KLOU": {
+    "city": "Louisville",
+    "state": "KY"
+  },
+  "KLOZ": {
+    "city": "London",
+    "state": "KY"
+  },
+  "KLPR": {
+    "city": "Lorain/Elyria",
+    "state": "OH"
+  },
+  "KLQK": {
+    "city": "Pickens",
+    "state": "SC"
+  },
+  "KLRD": {
+    "city": "Laredo",
+    "state": "TX"
+  },
+  "KLRO": {
+    "city": "Mount Pleasant",
+    "state": "SC"
+  },
+  "KLRU": {
+    "city": "Las Cruces",
+    "state": "NM"
+  },
+  "KLSE": {
+    "city": "La Crosse",
+    "state": "WI"
+  },
+  "KLSF": {
+    "city": "Fort Benning",
+    "state": "GA"
+  },
+  "KLSK": {
+    "city": "Lusk",
+    "state": "WY"
+  },
+  "KLUK": {
+    "city": "Cincinnati",
+    "state": "OH"
+  },
+  "KLUL": {
+    "city": "Laurel",
+    "state": "MS"
+  },
+  "KLUM": {
+    "city": "Menomonie",
+    "state": "WI"
+  },
+  "KLVK": {
+    "city": "Livermore",
+    "state": "CA"
+  },
+  "KLVM": {
+    "city": "Livingston",
+    "state": "MT"
+  },
+  "KLWB": {
+    "city": "Lewisburg",
+    "state": "WV"
+  },
+  "KLWC": {
+    "city": "Lawrence",
+    "state": "KS"
+  },
+  "KLWS": {
+    "city": "Lewiston",
+    "state": "ID"
+  },
+  "KLXT": {
+    "city": "Lee's Summit",
+    "state": "MO"
+  },
+  "KLXV": {
+    "city": "Leadville",
+    "state": "CO"
+  },
+  "KLYH": {
+    "city": "Lynchburg",
+    "state": "VA"
+  },
+  "KLZU": {
+    "city": "Lawrenceville",
+    "state": "GA"
+  },
+  "KJVW": {
+    "city": "Raymond",
+    "state": "MS"
+  },
+  "KXNX": {
+    "city": "Gallatin",
+    "state": "TN"
+  },
+  "KADF": {
+    "city": "Arkadelphia",
+    "state": "AR"
+  },
+  "KMAE": {
+    "city": "Madera",
+    "state": "CA"
+  },
+  "KMAF": {
+    "city": "Midland",
+    "state": "TX"
+  },
+  "KMBG": {
+    "city": "Mobridge",
+    "state": "SD"
+  },
+  "KMBL": {
+    "city": "Manistee",
+    "state": "MI"
+  },
+  "KMBO": {
+    "city": "Madison",
+    "state": "MS"
+  },
+  "KMBS": {
+    "city": "Freeland",
+    "state": "MI"
+  },
+  "KMBT": {
+    "city": "Murfreesboro",
+    "state": "TN"
+  },
+  "KMBY": {
+    "city": "Moberly",
+    "state": "MO"
+  },
+  "KMCC": {
+    "city": "Sacramento",
+    "state": "CA"
+  },
+  "KMCD": {
+    "city": "Mackinac Island",
+    "state": "MI"
+  },
+  "KMCE": {
+    "city": "Merced",
+    "state": "CA"
+  },
+  "KMCI": {
+    "city": "Kansas City",
+    "state": "MO"
+  },
+  "KMCK": {
+    "city": "McCook",
+    "state": "NE"
+  },
+  "KMCN": {
+    "city": "Macon",
+    "state": "GA"
+  },
+  "KMCO": {
+    "city": "Orlando",
+    "state": "FL"
+  },
+  "KMCW": {
+    "city": "Mason City",
+    "state": "IA"
+  },
+  "KMDD": {
+    "city": "Midland",
+    "state": "TX"
+  },
+  "KMDH": {
+    "city": "Murphysboro",
+    "state": "IL"
+  },
+  "KMDQ": {
+    "city": "Huntsville",
+    "state": "AL"
+  },
+  "KMDT": {
+    "city": "Harrisburg",
+    "state": "PA"
+  },
+  "KMDW": {
+    "city": "Chicago",
+    "state": "IL"
+  },
+  "KMEB": {
+    "city": "Maxton",
+    "state": "NC"
+  },
+  "KMEI": {
+    "city": "Meridian",
+    "state": "MS"
+  },
+  "KMEM": {
+    "city": "Memphis",
+    "state": "TN"
+  },
+  "KMER": {
+    "city": "Merced",
+    "state": "CA"
+  },
+  "KMEV": {
+    "city": "Minden",
+    "state": "NV"
+  },
+  "KMEZ": {
+    "city": "Mena",
+    "state": "AR"
+  },
+  "KMFE": {
+    "city": "McAllen",
+    "state": "TX"
+  },
+  "KMFI": {
+    "city": "Marshfield",
+    "state": "WI"
+  },
+  "KMFR": {
+    "city": "Medford",
+    "state": "OR"
+  },
+  "KMGJ": {
+    "city": "Montgomery",
+    "state": "NY"
+  },
+  "KMGM": {
+    "city": "Montgomery",
+    "state": "AL"
+  },
+  "KMGR": {
+    "city": "Moultrie",
+    "state": "GA"
+  },
+  "KMGW": {
+    "city": "Morgantown",
+    "state": "WV"
+  },
+  "KMGY": {
+    "city": "Dayton",
+    "state": "OH"
+  },
+  "KMHE": {
+    "city": "Mitchell",
+    "state": "SD"
+  },
+  "KMHK": {
+    "city": "Manhattan",
+    "state": "KS"
+  },
+  "KMHR": {
+    "city": "Sacramento",
+    "state": "CA"
+  },
+  "KMHT": {
+    "city": "Manchester",
+    "state": "NH"
+  },
+  "KMIA": {
+    "city": "Miami",
+    "state": "FL"
+  },
+  "KMIE": {
+    "city": "Muncie",
+    "state": "IN"
+  },
+  "KMIT": {
+    "city": "Shafter",
+    "state": "CA"
+  },
+  "KMIV": {
+    "city": "Millville",
+    "state": "NJ"
+  },
+  "KMJD": {
+    "city": "Picayune",
+    "state": "MS"
+  },
+  "KMJX": {
+    "city": "Toms River",
+    "state": "NJ"
+  },
+  "KMKC": {
+    "city": "Kansas City",
+    "state": "MO"
+  },
+  "KMKE": {
+    "city": "Milwaukee",
+    "state": "WI"
+  },
+  "KMKL": {
+    "city": "Jackson",
+    "state": "TN"
+  },
+  "KMKO": {
+    "city": "Muskogee",
+    "state": "OK"
+  },
+  "KMKY": {
+    "city": "Marco Island",
+    "state": "FL"
+  },
+  "KMLB": {
+    "city": "Melbourne",
+    "state": "FL"
+  },
+  "KMLE": {
+    "city": "Omaha",
+    "state": "NE"
+  },
+  "KMLI": {
+    "city": "Moline",
+    "state": "IL"
+  },
+  "KMLJ": {
+    "city": "Milledgeville",
+    "state": "GA"
+  },
+  "KMLU": {
+    "city": "Monroe",
+    "state": "LA"
+  },
+  "KMMH": {
+    "city": "Mammoth Lakes",
+    "state": "CA"
+  },
+  "KMMK": {
+    "city": "Meriden",
+    "state": "CT"
+  },
+  "KMMU": {
+    "city": "Morristown",
+    "state": "NJ"
+  },
+  "KMNV": {
+    "city": "Madisonville",
+    "state": "TN"
+  },
+  "KMOB": {
+    "city": "Mobile",
+    "state": "AL"
+  },
+  "KMOD": {
+    "city": "Modesto",
+    "state": "CA"
+  },
+  "KMOR": {
+    "city": "Morristown",
+    "state": "TN"
+  },
+  "KMOT": {
+    "city": "Minot",
+    "state": "ND"
+  },
+  "KMOX": {
+    "city": "Morris",
+    "state": "MN"
+  },
+  "KMPO": {
+    "city": "Mount Pocono",
+    "state": "PA"
+  },
+  "KMQB": {
+    "city": "Macomb",
+    "state": "IL"
+  },
+  "KMQI": {
+    "city": "Manteo",
+    "state": "NC"
+  },
+  "KMQJ": {
+    "city": "Indianapolis",
+    "state": "IN"
+  },
+  "KMQS": {
+    "city": "Coatesville",
+    "state": "PA"
+  },
+  "KMQY": {
+    "city": "Smyrna",
+    "state": "TN"
+  },
+  "KMRB": {
+    "city": "Martinsburg",
+    "state": "WV"
+  },
+  "KMRC": {
+    "city": "Columbia/Mount Pleasant",
+    "state": "TN"
+  },
+  "KMRH": {
+    "city": "Beaufort",
+    "state": "NC"
+  },
+  "KMRY": {
+    "city": "Monterey",
+    "state": "CA"
+  },
+  "KMSL": {
+    "city": "Muscle Shoals",
+    "state": "AL"
+  },
+  "KMSN": {
+    "city": "Madison",
+    "state": "WI"
+  },
+  "KMSO": {
+    "city": "Missoula",
+    "state": "MT"
+  },
+  "KMSP": {
+    "city": "Minneapolis",
+    "state": "MN"
+  },
+  "KMSS": {
+    "city": "Massena",
+    "state": "NY"
+  },
+  "KMSY": {
+    "city": "New Orleans",
+    "state": "LA"
+  },
+  "KMTH": {
+    "city": "Marathon",
+    "state": "FL"
+  },
+  "KMTJ": {
+    "city": "Montrose",
+    "state": "CO"
+  },
+  "KMTN": {
+    "city": "Baltimore",
+    "state": "MD"
+  },
+  "KMTO": {
+    "city": "Mattoon",
+    "state": "IL"
+  },
+  "KMTV": {
+    "city": "Martinsville",
+    "state": "VA"
+  },
+  "KMUT": {
+    "city": "Muscatine",
+    "state": "IA"
+  },
+  "KMVN": {
+    "city": "Mount Vernon",
+    "state": "IL"
+  },
+  "KMVY": {
+    "city": "Martha's Vineyard",
+    "state": "MA"
+  },
+  "KMWA": {
+    "city": "Marion",
+    "state": "IL"
+  },
+  "KMWC": {
+    "city": "Milwaukee",
+    "state": "WI"
+  },
+  "KMWH": {
+    "city": "Moses Lake",
+    "state": "WA"
+  },
+  "KMWK": {
+    "city": "Mount Airy",
+    "state": "NC"
+  },
+  "KMWL": {
+    "city": "Mineral Wells",
+    "state": "TX"
+  },
+  "KMWO": {
+    "city": "Middletown",
+    "state": "OH"
+  },
+  "KMXO": {
+    "city": "Monticello",
+    "state": "IA"
+  },
+  "KMYF": {
+    "city": "San Diego",
+    "state": "CA"
+  },
+  "KMYR": {
+    "city": "Myrtle Beach",
+    "state": "SC"
+  },
+  "KMZZ": {
+    "city": "Marion",
+    "state": "IN"
+  },
+  "KNDZ": {
+    "city": "Milton",
+    "state": "FL"
+  },
+  "KNEW": {
+    "city": "New Orleans",
+    "state": "LA"
+  },
+  "KNGU": {
+    "city": "Norfolk",
+    "state": "VA"
+  },
+  "KNIP": {
+    "city": "Jacksonville",
+    "state": "FL"
+  },
+  "KNQA": {
+    "city": "Millington",
+    "state": "TN"
+  },
+  "KNTU": {
+    "city": "Virginia Beach",
+    "state": "VA"
+  },
+  "KNUQ": {
+    "city": "Mountain View",
+    "state": "CA"
+  },
+  "KNUW": {
+    "city": "Oak Harbor",
+    "state": "WA"
+  },
+  "KNYL": {
+    "city": "Yuma",
+    "state": "AZ"
+  },
+  "KOAJ": {
+    "city": "Richlands",
+    "state": "NC"
+  },
+  "KOAK": {
+    "city": "Oakland",
+    "state": "CA"
+  },
+  "KOBE": {
+    "city": "Okeechobee",
+    "state": "FL"
+  },
+  "KOCF": {
+    "city": "Ocala",
+    "state": "FL"
+  },
+  "KODO": {
+    "city": "Odessa",
+    "state": "TX"
+  },
+  "KODX": {
+    "city": "Ord",
+    "state": "NE"
+  },
+  "KOFK": {
+    "city": "Norfolk",
+    "state": "NE"
+  },
+  "KOFP": {
+    "city": "Hanover",
+    "state": "VA"
+  },
+  "KOGB": {
+    "city": "Orangeburg",
+    "state": "SC"
+  },
+  "KOGD": {
+    "city": "Ogden",
+    "state": "UT"
+  },
+  "KOJA": {
+    "city": "Weatherford",
+    "state": "OK"
+  },
+  "KOJC": {
+    "city": "Olathe",
+    "state": "KS"
+  },
+  "KOKC": {
+    "city": "Oklahoma City",
+    "state": "OK"
+  },
+  "KOKK": {
+    "city": "Kokomo",
+    "state": "IN"
+  },
+  "KOKV": {
+    "city": "Winchester",
+    "state": "VA"
+  },
+  "KOLF": {
+    "city": "Wolf Point",
+    "state": "MT"
+  },
+  "KOLM": {
+    "city": "Olympia",
+    "state": "WA"
+  },
+  "KOLS": {
+    "city": "Nogales",
+    "state": "AZ"
+  },
+  "KOLV": {
+    "city": "Olive Branch",
+    "state": "MS"
+  },
+  "KOMA": {
+    "city": "Omaha",
+    "state": "NE"
+  },
+  "KONO": {
+    "city": "Oregon",
+    "state": "OR"
+  },
+  "KONP": {
+    "city": "Newport",
+    "state": "OR"
+  },
+  "KONT": {
+    "city": "Ontario",
+    "state": "CA"
+  },
+  "KONX": {
+    "city": "Maple",
+    "state": "NC"
+  },
+  "KONY": {
+    "city": "Olney",
+    "state": "TX"
+  },
+  "KOPF": {
+    "city": "Miami",
+    "state": "FL"
+  },
+  "KOPN": {
+    "city": "Thomaston",
+    "state": "GA"
+  },
+  "KOQU": {
+    "city": "North Kingstown",
+    "state": "RI"
+  },
+  "KORD": {
+    "city": "Chicago",
+    "state": "IL"
+  },
+  "KORF": {
+    "city": "Norfolk",
+    "state": "VA"
+  },
+  "KORH": {
+    "city": "Worcester",
+    "state": "MA"
+  },
+  "KORK": {
+    "city": "North Little Rock",
+    "state": "AR"
+  },
+  "KORL": {
+    "city": "Orlando",
+    "state": "FL"
+  },
+  "KOSA": {
+    "city": "Mount Pleasant",
+    "state": "TX"
+  },
+  "KOSH": {
+    "city": "Oshkosh",
+    "state": "WI"
+  },
+  "KOSU": {
+    "city": "Columbus",
+    "state": "OH"
+  },
+  "KOTH": {
+    "city": "North Bend",
+    "state": "OR"
+  },
+  "KOUN": {
+    "city": "Norman",
+    "state": "OK"
+  },
+  "KOWB": {
+    "city": "Owensboro",
+    "state": "KY"
+  },
+  "KOWD": {
+    "city": "Norwood",
+    "state": "MA"
+  },
+  "KOXB": {
+    "city": "Ocean City",
+    "state": "MD"
+  },
+  "KOXC": {
+    "city": "Oxford",
+    "state": "CT"
+  },
+  "KOXI": {
+    "city": "Knox",
+    "state": "IN"
+  },
+  "KOXR": {
+    "city": "Oxnard",
+    "state": "CA"
+  },
+  "KOZA": {
+    "city": "Ozona",
+    "state": "TX"
+  },
+  "KPAE": {
+    "city": "Everett",
+    "state": "WA"
+  },
+  "KPAH": {
+    "city": "Paducah",
+    "state": "KY"
+  },
+  "KPAN": {
+    "city": "Payson",
+    "state": "AZ"
+  },
+  "KPAO": {
+    "city": "Palo Alto",
+    "state": "CA"
+  },
+  "KPBG": {
+    "city": "Plattsburgh",
+    "state": "NY"
+  },
+  "KPBI": {
+    "city": "West Palm Beach",
+    "state": "FL"
+  },
+  "KPBX": {
+    "city": "Pikeville",
+    "state": "KY"
+  },
+  "KPCM": {
+    "city": "Plant City",
+    "state": "FL"
+  },
+  "KPCW": {
+    "city": "Port Clinton",
+    "state": "OH"
+  },
+  "KPDK": {
+    "city": "Atlanta",
+    "state": "GA"
+  },
+  "KPDT": {
+    "city": "Pendleton",
+    "state": "OR"
+  },
+  "KPDX": {
+    "city": "Portland",
+    "state": "OR"
+  },
+  "KPEA": {
+    "city": "Pella",
+    "state": "IA"
+  },
+  "KPEO": {
+    "city": "Penn Yan",
+    "state": "NY"
+  },
+  "KPEQ": {
+    "city": "Pecos",
+    "state": "TX"
+  },
+  "KPGA": {
+    "city": "Page",
+    "state": "AZ"
+  },
+  "KPGD": {
+    "city": "Punta Gorda",
+    "state": "FL"
+  },
+  "KPGR": {
+    "city": "Paragould",
+    "state": "AR"
+  },
+  "KPGV": {
+    "city": "Greenville",
+    "state": "NC"
+  },
+  "KPHF": {
+    "city": "Newport News",
+    "state": "VA"
+  },
+  "KPHK": {
+    "city": "Pahokee",
+    "state": "FL"
+  },
+  "KPHL": {
+    "city": "Philadelphia",
+    "state": "PA"
+  },
+  "KPHT": {
+    "city": "Paris",
+    "state": "TN"
+  },
+  "KPHX": {
+    "city": "Phoenix",
+    "state": "AZ"
+  },
+  "KPIA": {
+    "city": "Peoria",
+    "state": "IL"
+  },
+  "KPIB": {
+    "city": "Moselle",
+    "state": "MS"
+  },
+  "KPIE": {
+    "city": "Pinellas Park",
+    "state": "FL"
+  },
+  "KPIH": {
+    "city": "Pocatello",
+    "state": "ID"
+  },
+  "KPIM": {
+    "city": "Pine Mountain",
+    "state": "GA"
+  },
+  "KPIR": {
+    "city": "Pierre",
+    "state": "SD"
+  },
+  "KPIT": {
+    "city": "Pittsburgh",
+    "state": "PA"
+  },
+  "KPJC": {
+    "city": "Zelienople",
+    "state": "PA"
+  },
+  "KPKB": {
+    "city": "Parkersburg (Williamstown)",
+    "state": "WV"
+  },
+  "KPLN": {
+    "city": "Pellston",
+    "state": "MI"
+  },
+  "KPLR": {
+    "city": "Pell City",
+    "state": "AL"
+  },
+  "KPLU": {
+    "city": "Puyallup",
+    "state": "WA"
+  },
+  "KPMH": {
+    "city": "Portsmouth",
+    "state": "OH"
+  },
+  "KPMP": {
+    "city": "Pompano Beach",
+    "state": "FL"
+  },
+  "KPMU": {
+    "city": "Batesville",
+    "state": "MS"
+  },
+  "KPMZ": {
+    "city": "Plymouth",
+    "state": "NC"
+  },
+  "KPNA": {
+    "city": "Pinedale",
+    "state": "WY"
+  },
+  "KPNC": {
+    "city": "Ponca City",
+    "state": "OK"
+  },
+  "KPNE": {
+    "city": "Philadelphia",
+    "state": "PA"
+  },
+  "KPNS": {
+    "city": "Pensacola",
+    "state": "FL"
+  },
+  "KPOC": {
+    "city": "La Verne",
+    "state": "CA"
+  },
+  "KPOF": {
+    "city": "Poplar Bluff",
+    "state": "MO"
+  },
+  "KPOU": {
+    "city": "Poughkeepsie",
+    "state": "NY"
+  },
+  "KPPO": {
+    "city": "La Porte",
+    "state": "IN"
+  },
+  "KPQI": {
+    "city": "Presque Isle",
+    "state": "ME"
+  },
+  "KPQL": {
+    "city": "Pascagoula",
+    "state": "MS"
+  },
+  "KPRB": {
+    "city": "Paso Robles",
+    "state": "CA"
+  },
+  "KPRC": {
+    "city": "Prescott",
+    "state": "AZ"
+  },
+  "KPRX": {
+    "city": "Paris",
+    "state": "TX"
+  },
+  "KPSC": {
+    "city": "Pasco",
+    "state": "WA"
+  },
+  "KPSF": {
+    "city": "Pittsfield",
+    "state": "MA"
+  },
+  "KPSM": {
+    "city": "Portsmouth",
+    "state": "NH"
+  },
+  "KPSO": {
+    "city": "Pagosa Springs",
+    "state": "CO"
+  },
+  "KPSP": {
+    "city": "Palm Springs",
+    "state": "CA"
+  },
+  "KPTB": {
+    "city": "Petersburg",
+    "state": "VA"
+  },
+  "KPTD": {
+    "city": "Potsdam",
+    "state": "NY"
+  },
+  "KPTK": {
+    "city": "Pontiac",
+    "state": "MI"
+  },
+  "KPTT": {
+    "city": "Pratt",
+    "state": "KS"
+  },
+  "KPUB": {
+    "city": "Pueblo",
+    "state": "CO"
+  },
+  "KPUC": {
+    "city": "Price",
+    "state": "UT"
+  },
+  "KPUW": {
+    "city": "Pullman",
+    "state": "WA"
+  },
+  "KPVC": {
+    "city": "Provincetown",
+    "state": "MA"
+  },
+  "KPVD": {
+    "city": "Providence/Warwick",
+    "state": "RI"
+  },
+  "KPVE": {
+    "city": "Darden",
+    "state": "TN"
+  },
+  "KPVG": {
+    "city": "Chesapeake",
+    "state": "VA"
+  },
+  "KPVU": {
+    "city": "Provo",
+    "state": "UT"
+  },
+  "KPWA": {
+    "city": "Oklahoma City",
+    "state": "OK"
+  },
+  "KPWG": {
+    "city": "Waco",
+    "state": "TX"
+  },
+  "KPWK": {
+    "city": "Chicago/Prospect Heights/Wheeling",
+    "state": "IL"
+  },
+  "KPWM": {
+    "city": "Portland",
+    "state": "ME"
+  },
+  "KPWT": {
+    "city": "Bremerton",
+    "state": "WA"
+  },
+  "KPXE": {
+    "city": "Perry",
+    "state": "GA"
+  },
+  "KPYM": {
+    "city": "Plymouth",
+    "state": "MA"
+  },
+  "KRAC": {
+    "city": "Racine",
+    "state": "WI"
+  },
+  "KRAL": {
+    "city": "Riverside",
+    "state": "CA"
+  },
+  "KRAP": {
+    "city": "Rapid City",
+    "state": "SD"
+  },
+  "KRAS": {
+    "city": "Port Aransas",
+    "state": "TX"
+  },
+  "KRBD": {
+    "city": "Dallas",
+    "state": "TX"
+  },
+  "KRBG": {
+    "city": "Roseburg",
+    "state": "OR"
+  },
+  "KRBL": {
+    "city": "Red Bluff",
+    "state": "CA"
+  },
+  "KRDD": {
+    "city": "Redding",
+    "state": "CA"
+  },
+  "KRDG": {
+    "city": "Reading",
+    "state": "PA"
+  },
+  "KRDM": {
+    "city": "Redmond",
+    "state": "OR"
+  },
+  "KRDU": {
+    "city": "Raleigh/Durham",
+    "state": "NC"
+  },
+  "KRFD": {
+    "city": "Chicago/Rockford",
+    "state": "IL"
+  },
+  "KRFI": {
+    "city": "Henderson",
+    "state": "TX"
+  },
+  "KRHI": {
+    "city": "Rhinelander",
+    "state": "WI"
+  },
+  "KRIC": {
+    "city": "Richmond",
+    "state": "VA"
+  },
+  "KRIV": {
+    "city": "Riverside",
+    "state": "CA"
+  },
+  "KRIW": {
+    "city": "Riverton",
+    "state": "WY"
+  },
+  "KRKD": {
+    "city": "Rockland",
+    "state": "ME"
+  },
+  "KRKP": {
+    "city": "Rockport",
+    "state": "TX"
+  },
+  "KRKS": {
+    "city": "Rock Springs",
+    "state": "WY"
+  },
+  "KRKW": {
+    "city": "Rockwood",
+    "state": "TN"
+  },
+  "KRME": {
+    "city": "Rome",
+    "state": "NY"
+  },
+  "KRMG": {
+    "city": "Rome",
+    "state": "GA"
+  },
+  "KRNH": {
+    "city": "New Richmond",
+    "state": "WI"
+  },
+  "KRNO": {
+    "city": "Reno",
+    "state": "NV"
+  },
+  "KRNT": {
+    "city": "Renton",
+    "state": "WA"
+  },
+  "KRNV": {
+    "city": "Cleveland",
+    "state": "MS"
+  },
+  "KROA": {
+    "city": "Roanoke",
+    "state": "VA"
+  },
+  "KROC": {
+    "city": "Rochester",
+    "state": "NY"
+  },
+  "KROG": {
+    "city": "Rogers",
+    "state": "AR"
+  },
+  "KROW": {
+    "city": "Roswell",
+    "state": "NM"
+  },
+  "KROX": {
+    "city": "Roseau",
+    "state": "MN"
+  },
+  "KRPD": {
+    "city": "Rice Lake",
+    "state": "WI"
+  },
+  "KRPJ": {
+    "city": "Rochelle",
+    "state": "IL"
+  },
+  "KRRT": {
+    "city": "Warroad",
+    "state": "MN"
+  },
+  "KRSN": {
+    "city": "Ruston",
+    "state": "LA"
+  },
+  "KRST": {
+    "city": "Rochester",
+    "state": "MN"
+  },
+  "KRSW": {
+    "city": "Fort Myers",
+    "state": "FL"
+  },
+  "KRUE": {
+    "city": "Russellville",
+    "state": "AR"
+  },
+  "KRUQ": {
+    "city": "Salisbury",
+    "state": "NC"
+  },
+  "KRUT": {
+    "city": "Rutland",
+    "state": "VT"
+  },
+  "KRVS": {
+    "city": "Tulsa",
+    "state": "OK"
+  },
+  "KRWI": {
+    "city": "Rocky Mount",
+    "state": "NC"
+  },
+  "KRXE": {
+    "city": "Rexburg",
+    "state": "ID"
+  },
+  "KRYV": {
+    "city": "Watertown",
+    "state": "WI"
+  },
+  "KRYY": {
+    "city": "Atlanta",
+    "state": "GA"
+  },
+  "KRZL": {
+    "city": "Rensselaer",
+    "state": "IN"
+  },
+  "KRZR": {
+    "city": "Cleveland",
+    "state": "TN"
+  },
+  "KMAN": {
+    "city": "Nampa",
+    "state": "ID"
+  },
+  "KSAC": {
+    "city": "Sacramento",
+    "state": "CA"
+  },
+  "KSAF": {
+    "city": "Santa Fe",
+    "state": "NM"
+  },
+  "KSAN": {
+    "city": "San Diego",
+    "state": "CA"
+  },
+  "KSAT": {
+    "city": "San Antonio",
+    "state": "TX"
+  },
+  "KSAV": {
+    "city": "Savannah",
+    "state": "GA"
+  },
+  "KSAW": {
+    "city": "Gwinn",
+    "state": "MI"
+  },
+  "KSBA": {
+    "city": "Santa Barbara",
+    "state": "CA"
+  },
+  "KSBD": {
+    "city": "San Bernardino",
+    "state": "CA"
+  },
+  "KSBN": {
+    "city": "South Bend",
+    "state": "IN"
+  },
+  "KSBP": {
+    "city": "San Luis Obispo",
+    "state": "CA"
+  },
+  "KSBY": {
+    "city": "Salisbury",
+    "state": "MD"
+  },
+  "KSCH": {
+    "city": "Schenectady",
+    "state": "NY"
+  },
+  "KSCK": {
+    "city": "Stockton",
+    "state": "CA"
+  },
+  "KSCX": {
+    "city": "Oneida",
+    "state": "TN"
+  },
+  "KSDF": {
+    "city": "Louisville",
+    "state": "KY"
+  },
+  "KSDL": {
+    "city": "Scottsdale",
+    "state": "AZ"
+  },
+  "KSDM": {
+    "city": "San Diego",
+    "state": "CA"
+  },
+  "KSDY": {
+    "city": "Sidney",
+    "state": "MT"
+  },
+  "KSEA": {
+    "city": "Seattle",
+    "state": "WA"
+  },
+  "KSEE": {
+    "city": "San Diego/El Cajon",
+    "state": "CA"
+  },
+  "KSEF": {
+    "city": "Sebring",
+    "state": "FL"
+  },
+  "KSEG": {
+    "city": "Selinsgrove",
+    "state": "PA"
+  },
+  "KSEP": {
+    "city": "Stephenville",
+    "state": "TX"
+  },
+  "KSEZ": {
+    "city": "Sedona",
+    "state": "AZ"
+  },
+  "KSFB": {
+    "city": "Orlando",
+    "state": "FL"
+  },
+  "KSFF": {
+    "city": "Spokane",
+    "state": "WA"
+  },
+  "KSFO": {
+    "city": "San Francisco",
+    "state": "CA"
+  },
+  "KSFQ": {
+    "city": "Suffolk",
+    "state": "VA"
+  },
+  "KSFZ": {
+    "city": "Pawtucket",
+    "state": "RI"
+  },
+  "KSGF": {
+    "city": "Springfield",
+    "state": "MO"
+  },
+  "KSGH": {
+    "city": "Springfield",
+    "state": "OH"
+  },
+  "KSGJ": {
+    "city": "St Augustine",
+    "state": "FL"
+  },
+  "KSGR": {
+    "city": "Houston",
+    "state": "TX"
+  },
+  "KSGT": {
+    "city": "Stuttgart",
+    "state": "AR"
+  },
+  "KSGU": {
+    "city": "St George",
+    "state": "UT"
+  },
+  "KSHD": {
+    "city": "Weyers Cave",
+    "state": "VA"
+  },
+  "KSHR": {
+    "city": "Sheridan",
+    "state": "WY"
+  },
+  "KSHV": {
+    "city": "Shreveport",
+    "state": "LA"
+  },
+  "KSIF": {
+    "city": "Stoneville",
+    "state": "NC"
+  },
+  "KSJC": {
+    "city": "San Jose",
+    "state": "CA"
+  },
+  "KSJT": {
+    "city": "San Angelo",
+    "state": "TX"
+  },
+  "KSKF": {
+    "city": "San Antonio",
+    "state": "TX"
+  },
+  "KSKX": {
+    "city": "Taos",
+    "state": "NM"
+  },
+  "KSLC": {
+    "city": "Salt Lake City",
+    "state": "UT"
+  },
+  "KSLE": {
+    "city": "Salem",
+    "state": "OR"
+  },
+  "KSLG": {
+    "city": "Siloam Springs",
+    "state": "AR"
+  },
+  "KSLK": {
+    "city": "Saranac Lake",
+    "state": "NY"
+  },
+  "KSLN": {
+    "city": "Salina",
+    "state": "KS"
+  },
+  "KSLR": {
+    "city": "Sulphur Springs",
+    "state": "TX"
+  },
+  "KSMF": {
+    "city": "Sacramento",
+    "state": "CA"
+  },
+  "KSMO": {
+    "city": "Santa Monica",
+    "state": "CA"
+  },
+  "KSMS": {
+    "city": "Sumter",
+    "state": "SC"
+  },
+  "KSMX": {
+    "city": "Santa Maria",
+    "state": "CA"
+  },
+  "KSNA": {
+    "city": "Santa Ana",
+    "state": "CA"
+  },
+  "KSNH": {
+    "city": "Savannah",
+    "state": "TN"
+  },
+  "KSNS": {
+    "city": "Salinas",
+    "state": "CA"
+  },
+  "KSNY": {
+    "city": "Sidney",
+    "state": "NE"
+  },
+  "KSOP": {
+    "city": "Carthage",
+    "state": "NC"
+  },
+  "KSOW": {
+    "city": "Show Low",
+    "state": "AZ"
+  },
+  "KSPA": {
+    "city": "Spartanburg",
+    "state": "SC"
+  },
+  "KSPB": {
+    "city": "Scappoose",
+    "state": "OR"
+  },
+  "KSPF": {
+    "city": "Spearfish",
+    "state": "SD"
+  },
+  "KSPG": {
+    "city": "St Petersburg",
+    "state": "FL"
+  },
+  "KSPI": {
+    "city": "Springfield",
+    "state": "IL"
+  },
+  "KSPK": {
+    "city": "Spanish Fork",
+    "state": "UT"
+  },
+  "KSPS": {
+    "city": "Wichita Falls",
+    "state": "TX"
+  },
+  "KSQL": {
+    "city": "San Carlos",
+    "state": "CA"
+  },
+  "KSRB": {
+    "city": "Sparta",
+    "state": "TN"
+  },
+  "KSRC": {
+    "city": "Searcy",
+    "state": "AR"
+  },
+  "KSRQ": {
+    "city": "Sarasota/Bradenton",
+    "state": "FL"
+  },
+  "KSSF": {
+    "city": "San Antonio",
+    "state": "TX"
+  },
+  "KSSI": {
+    "city": "St Simons Island",
+    "state": "GA"
+  },
+  "KSTC": {
+    "city": "Saint Cloud",
+    "state": "MN"
+  },
+  "KSTE": {
+    "city": "Stevens Point",
+    "state": "WI"
+  },
+  "KSTF": {
+    "city": "Starkville",
+    "state": "MS"
+  },
+  "KSTJ": {
+    "city": "St Joseph",
+    "state": "MO"
+  },
+  "KSTL": {
+    "city": "St Louis",
+    "state": "MO"
+  },
+  "KSTP": {
+    "city": "Saint Paul",
+    "state": "MN"
+  },
+  "KSTS": {
+    "city": "Santa Rosa",
+    "state": "CA"
+  },
+  "KSUA": {
+    "city": "Stuart",
+    "state": "FL"
+  },
+  "KSUN": {
+    "city": "Hailey",
+    "state": "ID"
+  },
+  "KSUO": {
+    "city": "Rosebud",
+    "state": "SD"
+  },
+  "KSUS": {
+    "city": "St Louis",
+    "state": "MO"
+  },
+  "KSUU": {
+    "city": "Fairfield",
+    "state": "CA"
+  },
+  "KSUW": {
+    "city": "Superior",
+    "state": "WI"
+  },
+  "KSUX": {
+    "city": "Sioux City",
+    "state": "IA"
+  },
+  "KSVC": {
+    "city": "Silver City",
+    "state": "NM"
+  },
+  "KSVH": {
+    "city": "Statesville",
+    "state": "NC"
+  },
+  "KSWF": {
+    "city": "Newburgh",
+    "state": "NY"
+  },
+  "KSWO": {
+    "city": "Stillwater",
+    "state": "OK"
+  },
+  "KSXK": {
+    "city": "Maurice",
+    "state": "IA"
+  },
+  "KSYI": {
+    "city": "Shelbyville",
+    "state": "TN"
+  },
+  "KSYR": {
+    "city": "Syracuse",
+    "state": "NY"
+  },
+  "KSZT": {
+    "city": "Sandpoint",
+    "state": "ID"
+  },
+  "KTAD": {
+    "city": "Trinidad",
+    "state": "CO"
+  },
+  "KTBN": {
+    "city": "Fort Leonard Wood",
+    "state": "MO"
+  },
+  "KTCL": {
+    "city": "Tuscaloosa",
+    "state": "AL"
+  },
+  "KTCM": {
+    "city": "Tacoma",
+    "state": "WA"
+  },
+  "KTCY": {
+    "city": "Tracy",
+    "state": "CA"
+  },
+  "KTDF": {
+    "city": "Timberlake",
+    "state": "NC"
+  },
+  "KTDW": {
+    "city": "Amarillo",
+    "state": "TX"
+  },
+  "KTEB": {
+    "city": "Teterboro",
+    "state": "NJ"
+  },
+  "KTEX": {
+    "city": "Telluride",
+    "state": "CO"
+  },
+  "KTHA": {
+    "city": "Tullahoma",
+    "state": "TN"
+  },
+  "KTHV": {
+    "city": "Thomasville",
+    "state": "PA"
+  },
+  "KTIW": {
+    "city": "Tacoma",
+    "state": "WA"
+  },
+  "KTIX": {
+    "city": "Titusville",
+    "state": "FL"
+  },
+  "KTKI": {
+    "city": "Dallas",
+    "state": "TX"
+  },
+  "KTLH": {
+    "city": "Tallahassee",
+    "state": "FL"
+  },
+  "KTMA": {
+    "city": "Tifton",
+    "state": "GA"
+  },
+  "KTMB": {
+    "city": "Miami",
+    "state": "FL"
+  },
+  "KTME": {
+    "city": "Houston",
+    "state": "TX"
+  },
+  "KTNU": {
+    "city": "Newton",
+    "state": "IA"
+  },
+  "KTOC": {
+    "city": "Toccoa",
+    "state": "GA"
+  },
+  "KTOI": {
+    "city": "Troy",
+    "state": "AL"
+  },
+  "KTOL": {
+    "city": "Toledo",
+    "state": "OH"
+  },
+  "KTOP": {
+    "city": "Topeka",
+    "state": "KS"
+  },
+  "KTOR": {
+    "city": "Torrington",
+    "state": "WY"
+  },
+  "KTPA": {
+    "city": "Tampa",
+    "state": "FL"
+  },
+  "KTPF": {
+    "city": "Tampa",
+    "state": "FL"
+  },
+  "KTPL": {
+    "city": "Temple",
+    "state": "TX"
+  },
+  "KTQH": {
+    "city": "Tahlequah",
+    "state": "OK"
+  },
+  "KTQK": {
+    "city": "Scott City",
+    "state": "KS"
+  },
+  "KTRI": {
+    "city": "Blountville",
+    "state": "TN"
+  },
+  "KTRK": {
+    "city": "Truckee",
+    "state": "CA"
+  },
+  "KTRM": {
+    "city": "Palm Springs",
+    "state": "CA"
+  },
+  "KTSO": {
+    "city": "Carrollton",
+    "state": "OH"
+  },
+  "KTTA": {
+    "city": "Sanford",
+    "state": "NC"
+  },
+  "KTTD": {
+    "city": "Portland",
+    "state": "OR"
+  },
+  "KTTN": {
+    "city": "Ewing Township",
+    "state": "NJ"
+  },
+  "KTUL": {
+    "city": "Tulsa",
+    "state": "OK"
+  },
+  "KTUP": {
+    "city": "Tupelo",
+    "state": "MS"
+  },
+  "KTUS": {
+    "city": "Tucson",
+    "state": "AZ"
+  },
+  "KTVC": {
+    "city": "Traverse City",
+    "state": "MI"
+  },
+  "KTVF": {
+    "city": "Thief River Falls",
+    "state": "MN"
+  },
+  "KTVI": {
+    "city": "Thomasville",
+    "state": "GA"
+  },
+  "KTVL": {
+    "city": "South Lake Tahoe",
+    "state": "CA"
+  },
+  "KTWF": {
+    "city": "Twin Falls",
+    "state": "ID"
+  },
+  "KTXK": {
+    "city": "Texarkana",
+    "state": "AR"
+  },
+  "KTYQ": {
+    "city": "Indianapolis",
+    "state": "IN"
+  },
+  "KTYR": {
+    "city": "Tyler",
+    "state": "TX"
+  },
+  "KTYS": {
+    "city": "Knoxville/Maryville",
+    "state": "TN"
+  },
+  "KTZR": {
+    "city": "Columbus",
+    "state": "OH"
+  },
+  "KUAO": {
+    "city": "Aurora",
+    "state": "OR"
+  },
+  "KUCY": {
+    "city": "Union City",
+    "state": "TN"
+  },
+  "KUDD": {
+    "city": "Bermuda Dunes",
+    "state": "CA"
+  },
+  "KUES": {
+    "city": "Waukesha",
+    "state": "WI"
+  },
+  "KUGN": {
+    "city": "Chicago/Waukegan",
+    "state": "IL"
+  },
+  "KUIN": {
+    "city": "Quincy",
+    "state": "IL"
+  },
+  "KUKF": {
+    "city": "North Wilkesboro",
+    "state": "NC"
+  },
+  "KUMP": {
+    "city": "Indianapolis",
+    "state": "IN"
+  },
+  "KUNU": {
+    "city": "Juneau",
+    "state": "WI"
+  },
+  "KUNV": {
+    "city": "State College",
+    "state": "PA"
+  },
+  "KUOX": {
+    "city": "Oxford",
+    "state": "MS"
+  },
+  "KUVA": {
+    "city": "Uvalde",
+    "state": "TX"
+  },
+  "KUYF": {
+    "city": "London",
+    "state": "OH"
+  },
+  "KUZA": {
+    "city": "Rock Hill",
+    "state": "SC"
+  },
+  "KVBT": {
+    "city": "Bentonville",
+    "state": "AR"
+  },
+  "KVCT": {
+    "city": "Victoria",
+    "state": "TX"
+  },
+  "KVCV": {
+    "city": "Victorville",
+    "state": "CA"
+  },
+  "KVDF": {
+    "city": "Tampa",
+    "state": "FL"
+  },
+  "KVDI": {
+    "city": "Vidalia",
+    "state": "GA"
+  },
+  "KVEL": {
+    "city": "Vernal",
+    "state": "UT"
+  },
+  "KVGC": {
+    "city": "Hamilton",
+    "state": "NY"
+  },
+  "KVGT": {
+    "city": "Las Vegas",
+    "state": "NV"
+  },
+  "KVIH": {
+    "city": "Vichy",
+    "state": "MO"
+  },
+  "KVIS": {
+    "city": "Visalia",
+    "state": "CA"
+  },
+  "KVLA": {
+    "city": "Vandalia",
+    "state": "IL"
+  },
+  "KVLD": {
+    "city": "Valdosta",
+    "state": "GA"
+  },
+  "KVNC": {
+    "city": "Venice",
+    "state": "FL"
+  },
+  "KVNY": {
+    "city": "Van Nuys",
+    "state": "CA"
+  },
+  "KVPS": {
+    "city": "Valparaiso",
+    "state": "FL"
+  },
+  "KVPZ": {
+    "city": "Valparaiso",
+    "state": "IN"
+  },
+  "KVQQ": {
+    "city": "Jacksonville",
+    "state": "FL"
+  },
+  "KVRB": {
+    "city": "Vero Beach",
+    "state": "FL"
+  },
+  "KVSF": {
+    "city": "North Springfield",
+    "state": "VT"
+  },
+  "KVTN": {
+    "city": "Valentine",
+    "state": "NE"
+  },
+  "KVUO": {
+    "city": "Vancouver",
+    "state": "WA"
+  },
+  "KVYS": {
+    "city": "Peru",
+    "state": "IL"
+  },
+  "KWDG": {
+    "city": "Enid",
+    "state": "OK"
+  },
+  "KWDR": {
+    "city": "Winder",
+    "state": "GA"
+  },
+  "KWHP": {
+    "city": "Pacoima",
+    "state": "CA"
+  },
+  "KWMC": {
+    "city": "Winnemucca",
+    "state": "NV"
+  },
+  "KWST": {
+    "city": "Westerly",
+    "state": "RI"
+  },
+  "KWWD": {
+    "city": "Wildwood",
+    "state": "NJ"
+  },
+  "KFIN": {
+    "city": "Palm Coast",
+    "state": "FL"
+  },
+  "KXNA": {
+    "city": "Fayetteville/Springdale/Rogers",
+    "state": "AR"
+  },
+  "KXSA": {
+    "city": "Tappahannock",
+    "state": "VA"
+  },
+  "KXWA": {
+    "city": "Williston",
+    "state": "ND"
+  },
+  "KYIP": {
+    "city": "Detroit",
+    "state": "MI"
+  },
+  "KYKM": {
+    "city": "Yakima",
+    "state": "WA"
+  },
+  "KYNG": {
+    "city": "Youngstown/Warren",
+    "state": "OH"
+  }
+}

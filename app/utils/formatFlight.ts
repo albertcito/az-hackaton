@@ -10,6 +10,11 @@ export function formatAltitude(ft: number): string {
   return `${ft.toLocaleString()} ft`
 }
 
+export function formatCoordinate(value: number, axis: 'lat' | 'lon'): string {
+  const dir = axis === 'lat' ? (value >= 0 ? 'N' : 'S') : (value >= 0 ? 'E' : 'W')
+  return `${Math.abs(value).toFixed(4)}° ${dir}`
+}
+
 export function formatSpeed(kt: number): string {
   return `${kt} kt`
 }

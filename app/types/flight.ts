@@ -28,6 +28,12 @@ export interface FlightSearchItem {
   take_off_time: string
 }
 
+export interface FlightFilterOptions {
+  origins: string[]
+  destinations: string[]
+  flights: FlightSearchItem[]
+}
+
 export interface FlightWithSnapshot extends Flight {
   asked_at: string
 }

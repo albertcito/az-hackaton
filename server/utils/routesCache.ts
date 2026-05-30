@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
-import type { Flight, FlightSearchItem, FlightWithSnapshot, RoutesSnapshot } from '~/types/flight'
+import type { Flight, FlightFilterOptions, FlightSearchItem, FlightWithSnapshot, RoutesSnapshot } from '~/types/flight'
 import { buildFlightId } from '~/utils/flightId'
 import { formatRouteLabel } from '~/utils/formatFlight'
 
@@ -39,19 +39,53 @@ function toSearchItem(flight: Flight): FlightSearchItem {
   }
 }
 
-export async function searchFlights(query: string, limit = 20): Promise<FlightSearchItem[]> {
-  const data = await loadSnapshot()
-  const q = query.trim().toUpperCase()
-  if (!q) return []
+function filterFlights(
+  flights: Flight[],
+  filters: { origin?: string, destination?: string, q?: string }
+): Flight[] {
+  const origin = filters.origin?.trim().toUpperCase()
+  const destination = filters.destination?.trim().toUpperCase()
+  const q = filters.q?.trim().toUpperCase()
 
-  const matches: FlightSearchItem[] = []
-  for (const flight of data.flights) {
-    if (flight.flight_number.toUpperCase().includes(q)) {
-      matches.push(toSearchItem(flight))
-      if (matches.length >= limit) break
-    }
-  }
-  return matches
+  return flights.filter((flight) => {
+    if (origin && flight.origin_airport_icao !== origin) return false
+    if (destination && flight.destination_airport_icao !== destination) return false
+    if (q && !flight.flight_number.toUpperCase().includes(q)) return false
+    return true
+  })
+}
+
+export async function getFlightFilterOptions(
+  filters: { origin?: string, destination?: string, q?: string } = {},
+  limit = 50
+): Promise<FlightFilterOptions> {
+  const data = await loadSnapshot()
+  const origin = filters.origin?.trim().toUpperCase()
+
+  const origins = [...new Set(data.flights.map((flight) => flight.origin_airport_icao))].sort()
+
+  const routeFlights = origin
+    ? data.flights.filter((flight) => flight.origin_airport_icao === origin)
+    : data.flights
+  const destinations = [...new Set(routeFlights.map((flight) => flight.destination_airport_icao))].sort()
+
+  const flights = (() => {
+    const hasRoute = Boolean(origin && filters.destination?.trim())
+    const hasQuery = Boolean(filters.q?.trim())
+    if (!hasRoute && !hasQuery) return []
+    return filterFlights(data.flights, filters).slice(0, limit).map(toSearchItem)
+  })()
+
+  return { origins, destinations, flights }
+}
+
+export async function searchFlights(
+  query: string,
+  filters: { origin?: string, destination?: string } = {},
+  limit = 20
+): Promise<FlightSearchItem[]> {
+  const { flights } = await getFlightFilterOptions({ ...filters, q: query }, limit)
+  return flights
 }
 
 export async function getFlight(id: string): Promise<FlightWithSnapshot | null> {

@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import type { FlightWithSnapshot } from '~/types/flight'
-import { defaultFlightTime } from '~/utils/interpolatePosition'
-import { formatUtcDateTime, formatUtcTime } from '~/utils/formatFlight'
+import { defaultFlightTime, interpolatePosition } from '~/utils/interpolatePosition'
+import {
+  formatAltitude,
+  formatCoordinate,
+  formatUtcDateTime,
+  formatUtcTime
+} from '~/utils/formatFlight'
 
 const props = defineProps<{ flight: FlightWithSnapshot }>()
 const currentTime = defineModel<string>('currentTime', { required: true })
@@ -9,6 +14,8 @@ const currentTime = defineModel<string>('currentTime', { required: true })
 const startMs = computed(() => new Date(props.flight.take_off_time).getTime())
 const endMs = computed(() => new Date(props.flight.scheduled_landing_time).getTime())
 const sliderMs = ref(0)
+const scrubbing = ref(false)
+const hovering = ref(false)
 
 function clampMs(ms: number): number {
   return Math.min(Math.max(ms, startMs.value), endMs.value)
@@ -54,6 +61,31 @@ function togglePlay() {
   if (playing.value) pause()
   else play()
 }
+
+const thumbPercent = computed(() => {
+  const span = endMs.value - startMs.value
+  if (span <= 0) return 0
+  return ((sliderMs.value - startMs.value) / span) * 100
+})
+
+const sliderTimeIso = computed(() => msToIso(sliderMs.value))
+
+const positionAtSlider = computed(() =>
+  interpolatePosition(props.flight, sliderTimeIso.value)
+)
+
+const showThumbPopover = computed(() => hovering.value || scrubbing.value)
+
+function onScrubStart() {
+  scrubbing.value = true
+}
+
+function onScrubEnd() {
+  scrubbing.value = false
+}
+
+onMounted(() => window.addEventListener('pointerup', onScrubEnd))
+onUnmounted(() => window.removeEventListener('pointerup', onScrubEnd))
 </script>
 
 <template>
@@ -64,13 +96,58 @@ function togglePlay() {
         <span class="font-medium">{{ formatUtcDateTime(currentTime) }}</span>
         <span class="text-muted">{{ formatUtcTime(flight.scheduled_landing_time) }}</span>
       </div>
-      <USlider
-        v-model="sliderMs"
-        :min="startMs"
-        :max="endMs"
-        :step="1000"
-        tooltip
-      />
+      <div
+        class="relative py-1"
+        @pointerenter="hovering = true"
+        @pointerleave="hovering = false"
+        @pointerdown="onScrubStart"
+      >
+        <div
+          class="pointer-events-none absolute top-1/2 z-10 -translate-x-1/2 -translate-y-1/2"
+          :style="{ left: `${thumbPercent}%` }"
+        >
+          <UPopover
+            :open="showThumbPopover"
+            arrow
+            :content="{ side: 'top', sideOffset: 10, align: 'center' }"
+          >
+            <div class="size-4" aria-hidden="true" />
+            <template #content>
+              <div class="px-3 py-2 text-xs">
+                <p class="text-muted font-medium">
+                  {{ formatUtcDateTime(sliderTimeIso) }}
+                </p>
+                <dl class="mt-1.5 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1">
+                  <dt class="text-muted">
+                    Lat
+                  </dt>
+                  <dd class="font-medium tabular-nums">
+                    {{ formatCoordinate(positionAtSlider.lat, 'lat') }}
+                  </dd>
+                  <dt class="text-muted">
+                    Lon
+                  </dt>
+                  <dd class="font-medium tabular-nums">
+                    {{ formatCoordinate(positionAtSlider.lon, 'lon') }}
+                  </dd>
+                  <dt class="text-muted">
+                    Cruise alt
+                  </dt>
+                  <dd class="font-medium tabular-nums">
+                    {{ formatAltitude(positionAtSlider.altFt) }}
+                  </dd>
+                </dl>
+              </div>
+            </template>
+          </UPopover>
+        </div>
+        <USlider
+          v-model="sliderMs"
+          :min="startMs"
+          :max="endMs"
+          :step="1000"
+        />
+      </div>
       <div class="flex justify-center">
         <UButton
           :icon="playing ? 'i-lucide-pause' : 'i-lucide-play'"

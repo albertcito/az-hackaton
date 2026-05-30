@@ -62,7 +62,7 @@ defineEmits<{ close: [] }>()
         </UBadge>
       </dd>
       <dt class="text-muted">
-        Snapshot
+        Taken at:
       </dt>
       <dd>{{ formatUtcDateTime(flight.asked_at) }}</dd>
     </dl>
