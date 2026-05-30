@@ -20,3 +20,13 @@ logs
 
 # Generated Cesium assets (scripts/copy-cesium.mjs)
 public/cesium
+
+# Materialized data bundle (colon-free, extracted from hackathon_data_bundle.zip)
+data/
+hackathon_data_bundle.zip
+
+# Python
+__pycache__/
+*.pyc
+.venv
+venv

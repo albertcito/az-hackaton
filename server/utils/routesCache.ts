@@ -3,6 +3,7 @@ import { join } from 'node:path'
 import type { Flight, FlightFilterOptions, FlightSearchItem, FlightWithSnapshot, RoutesSnapshot } from '~/types/flight'
 import { buildFlightId } from '~/utils/flightId'
 import { formatRouteLabel } from '~/utils/formatFlight'
+import { sanitizeSnapshotId } from '~/utils/snapshotId'
 
 let snapshot: RoutesSnapshot | null = null
 let flightMap = new Map<string, Flight>()
@@ -11,7 +12,9 @@ async function loadSnapshot(): Promise<RoutesSnapshot> {
   if (snapshot) return snapshot
 
   const config = useRuntimeConfig()
-  const filePath = join(process.cwd(), 'public', config.routesSnapshotDir, 'routes.json')
+  // Data lives in the gitignored, colon-free data/ dir (materialize_data.py),
+  // not public/ — Windows can't hold the colon-bearing snapshot dir names.
+  const filePath = join(process.cwd(), 'data', sanitizeSnapshotId(config.routesSnapshotDir), 'routes.json')
   const raw = await readFile(filePath, 'utf-8')
   snapshot = JSON.parse(raw) as RoutesSnapshot
 

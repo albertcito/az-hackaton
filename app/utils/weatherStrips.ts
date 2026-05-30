@@ -1,15 +1,19 @@
+import { askedAtToSnapshotId } from '~/utils/snapshotId'
+
 const STRIP_MS = 15 * 60 * 1000
 const ANCHOR_OFFSET_MS = 7.5 * 60 * 1000
 
+// Weather strip filenames are colon-free on disk (':' -> '-', see
+// scripts/materialize_data.py), so we format timestamps with dashes here to
+// match the materialized names directly.
 function formatWxTimestamp(ms: number): string {
   const d = new Date(ms)
   const pad = (n: number) => String(n).padStart(2, '0')
-  return `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())}_${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}:${pad(d.getUTCSeconds())}`
+  return `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())}_${pad(d.getUTCHours())}-${pad(d.getUTCMinutes())}-${pad(d.getUTCSeconds())}`
 }
 
 export function askedAtSnapshotDir(askedAt: string): string {
-  const iso = new Date(askedAt).toISOString().replace('.000Z', 'Z')
-  return `asked_at_${iso}`
+  return askedAtToSnapshotId(askedAt)
 }
 
 export function weatherBasedAt(askedAt: string): Date {
@@ -35,5 +39,5 @@ export function weatherStripUrl(
   const dir = askedAtSnapshotDir(askedAt)
   const basedAt = weatherBasedAt(askedAt)
   const filename = weatherStripFilename(basedAt, timeMs)
-  return `/${dir}/${dir}/wx/${layer}/${filename}`
+  return `/api/wx/${dir}/${layer}/${filename}`
 }
