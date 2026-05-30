@@ -7,6 +7,11 @@ import {
   formatUtcDateTime,
   formatUtcTime
 } from '~/utils/formatFlight'
+import {
+  formatDbz,
+  formatEchoTop,
+  reflectivityLabel
+} from '~/utils/formatWeather'
 
 const props = defineProps<{ flight: FlightWithSnapshot }>()
 const currentTime = defineModel<string>('currentTime', { required: true })
@@ -76,6 +81,14 @@ const positionAtSlider = computed(() =>
 
 const showThumbPopover = computed(() => hovering.value || scrubbing.value)
 
+const askedAt = computed(() => props.flight.asked_at)
+const { weather, impact } = useWeatherAtPosition(
+  askedAt,
+  sliderTimeIso,
+  positionAtSlider,
+  showThumbPopover
+)
+
 function onScrubStart() {
   scrubbing.value = true
 }
@@ -137,6 +150,58 @@ onUnmounted(() => window.removeEventListener('pointerup', onScrubEnd))
                     {{ formatAltitude(positionAtSlider.altFt) }}
                   </dd>
                 </dl>
+                <div class="border-default mt-2 border-t pt-2">
+                  <p class="text-muted font-medium">
+                    Weather
+                  </p>
+                  <dl
+                    v-if="weather.loading"
+                    class="mt-1.5 text-muted"
+                  >
+                    Loading…
+                  </dl>
+                  <dl
+                    v-else-if="weather.error"
+                    class="mt-1.5 text-muted"
+                  >
+                    {{ weather.error }}
+                  </dl>
+                  <dl
+                    v-else
+                    class="mt-1.5 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1"
+                  >
+                    <dt class="text-muted">
+                      Reflectivity
+                    </dt>
+                    <dd class="font-medium tabular-nums">
+                      {{ formatDbz(weather.refcDbz) }}
+                      <span
+                        v-if="weather.refcDbz !== null"
+                        class="text-muted font-normal"
+                      >
+                        · {{ reflectivityLabel(weather.refcDbz) }}
+                      </span>
+                    </dd>
+                    <dt class="text-muted">
+                      Echo top
+                    </dt>
+                    <dd class="font-medium tabular-nums">
+                      {{ formatEchoTop(weather.echoTopFt) }}
+                    </dd>
+                    <dt class="text-muted">
+                      Impact
+                    </dt>
+                    <dd>
+                      <UBadge
+                        :color="impact.color"
+                        variant="subtle"
+                        size="xs"
+                      >
+                        {{ impact.label }}
+                      </UBadge>
+                    </dd>
+                  </dl>
+                </div>
               </div>
             </template>
           </UPopover>
