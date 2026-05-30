@@ -11,6 +11,10 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxt/ui'],
   css: ['~/assets/css/main.css'],
+  // The ops console is the product; the original flight explorer lives at /explore.
+  routeRules: {
+    '/': { redirect: '/ops' },
+  },
   runtimeConfig: {
     // Demo snapshot: strong congestion AND weather-driven over-demand (e.g. LOW_096
     // 38/20 with 100% weather-displaced bins). Colons ok here (sanitized on read).

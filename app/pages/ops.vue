@@ -2,7 +2,15 @@
 import type { BandFilter } from '~/types/demand'
 
 const store = useOpsStore()
+const assistant = useAssistant()
 const route = useRoute()
+
+useHead({ title: 'Airspace Flow Console' })
+
+function resetDemo() {
+  store.resetView()
+  assistant.resetServer()
+}
 
 onMounted(async () => {
   await store.loadDefault()
@@ -101,6 +109,17 @@ const showScorecard = ref(false)
             {{ b.label }}
           </button>
         </div>
+
+        <!-- reset demo -->
+        <button
+          v-if="store.mode.value === 'live' || store.selectedSector.value || store.binIndex.value !== store.peakStressBinIndex.value"
+          type="button"
+          class="transition-console flex cursor-pointer items-center gap-1.5 rounded-lg border border-[var(--glass-border)] px-2.5 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-400/40 hover:text-zinc-100"
+          title="Reset to baseline demo state"
+          @click="resetDemo"
+        >
+          <UIcon name="i-lucide-rotate-ccw" class="size-4" />
+        </button>
 
         <!-- scorecard -->
         <button

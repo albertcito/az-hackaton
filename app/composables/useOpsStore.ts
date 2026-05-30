@@ -175,6 +175,18 @@ export function useOpsStore() {
     selectedFlightId.value = null
   }
 
+  /** Reset the console view to the baseline demo state (no server call). */
+  function resetView() {
+    selectedSector.value = null
+    selectedFlightId.value = null
+    liveCounts.value = null
+    liveStress.value = null
+    liveSummary.value = null
+    mode.value = 'baseline'
+    band.value = 'ALL'
+    if (demand.value) binIndex.value = peakStressBinIndex.value
+  }
+
   /** Merge a live state delta from the assistant's action tools. */
   function applyStateDelta(delta: any) {
     if (!delta) return
@@ -205,6 +217,6 @@ export function useOpsStore() {
     // helpers
     countAt, memberFids, weatherDisplaced, formatBin,
     // actions
-    loadDefault, loadSnapshot, selectSector, applyStateDelta,
+    loadDefault, loadSnapshot, selectSector, applyStateDelta, resetView,
   }
 }

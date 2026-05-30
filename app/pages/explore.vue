@@ -25,7 +25,10 @@ function showInfo(f: FlightWithSnapshot) {
           <h1 class="text-highlighted text-lg font-semibold">
             4D Flight Visualization
           </h1>
-          <UColorModeButton />
+          <div class="flex items-center gap-3">
+            <NuxtLink to="/ops" class="text-sm text-cyan-500 hover:underline">Flow Console →</NuxtLink>
+            <UColorModeButton />
+          </div>
         </div>
         <FlightSearchForm @submit="loadFlight" />
       </div>
