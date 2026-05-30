@@ -12,6 +12,7 @@ onMounted(async () => {
     store.binIndex.value = Math.min(Math.max(0, Math.round(b)), store.nbins.value - 1)
   }
   if (route.query.wx === '1') store.showWeather.value = true
+  if (route.query.scorecard === '1') showScorecard.value = true
 })
 
 const bands: { label: string, value: BandFilter }[] = [
@@ -24,6 +25,7 @@ const stressNow = computed(() =>
   store.demand.value?.stress.find(s => s.bin_index === store.binIndex.value) ?? null,
 )
 const overCount = computed(() => store.hotspots.value.length)
+const showScorecard = ref(false)
 </script>
 
 <template>
@@ -100,6 +102,16 @@ const overCount = computed(() => store.hotspots.value.length)
           </button>
         </div>
 
+        <!-- scorecard -->
+        <button
+          type="button"
+          class="transition-console flex cursor-pointer items-center gap-1.5 rounded-lg border border-[var(--glass-border)] px-2.5 py-1.5 text-xs font-medium text-zinc-300 hover:border-cyan-400/40 hover:text-cyan-200"
+          @click="showScorecard = true"
+        >
+          <UIcon name="i-lucide-layout-grid" class="size-4" />
+          <span class="hidden lg:inline">Scorecard</span>
+        </button>
+
         <UColorModeButton class="opacity-0 pointer-events-none w-0" />
       </div>
     </header>
@@ -132,5 +144,8 @@ const overCount = computed(() => store.hotspots.value.length)
       <StressTimeline v-if="store.demand.value" />
       <BinScrubber v-if="store.demand.value" />
     </div>
+
+    <!-- Scorecard modal -->
+    <ScorecardPanel v-if="showScorecard" @close="showScorecard = false" />
   </div>
 </template>
