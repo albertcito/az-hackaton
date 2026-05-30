@@ -64,7 +64,8 @@ function showInfo(f: FlightWithSnapshot) {
     <header class="border-default bg-default z-20 border-b px-4 py-3">
       <div class="mx-auto flex max-w-6xl flex-col gap-2">
         <div class="flex items-center justify-between gap-4">
-          <div class="flex items-center gap-3">
+        <FlightSearchForm :current="flight" @submit="loadFlight" />
+        <div class="flex items-center gap-3">
             <UButton
               v-if="canGoBack"
               icon="i-lucide-arrow-left"
@@ -75,9 +76,6 @@ function showInfo(f: FlightWithSnapshot) {
             >
               Back to {{ previousFlight?.flight_number }}
             </UButton>
-            <h1 class="text-highlighted text-lg font-semibold">
-              4D Flight Visualization
-            </h1>
           </div>
           <div class="flex items-center gap-3">
             <USwitch
@@ -87,7 +85,6 @@ function showInfo(f: FlightWithSnapshot) {
             />
           </div>
         </div>
-        <FlightSearchForm :current="flight" @submit="loadFlight" />
       </div>
     </header>
 
