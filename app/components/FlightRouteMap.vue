@@ -11,15 +11,21 @@ const emit = defineEmits<{ select: [flight: FlightWithSnapshot] }>()
 
 const container = ref<HTMLElement | null>(null)
 const ready = ref(false)
-const { init, getViewer } = useCesiumViewer(container)
+const isDarkMap = useMapTimeTheme(toRef(props, 'flight'), toRef(props, 'currentTime'))
+const { init, getViewer, setBaseImagery } = useCesiumViewer(container)
 const { draw, clear, updateAircraft } = useFlightRouteLayer(getViewer, (f) => emit('select', f))
 
 async function ensureViewer() {
   if (getViewer() || !container.value) return
-  await init()
+  await init(isDarkMap.value)
   ready.value = true
   if (props.flight) await draw(props.flight)
 }
+
+watch(isDarkMap, async (isDark) => {
+  if (!getViewer()) return
+  await setBaseImagery(isDark)
+})
 
 watch(container, () => ensureViewer(), { flush: 'post' })
 
