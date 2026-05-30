@@ -2,7 +2,15 @@
 import type { BandFilter } from '~/types/demand'
 
 const store = useOpsStore()
+const assistant = useAssistant()
 const route = useRoute()
+
+useHead({ title: 'Airspace Flow Console' })
+
+function resetDemo() {
+  store.resetView()
+  assistant.resetServer()
+}
 
 onMounted(async () => {
   await store.loadDefault()
@@ -12,6 +20,7 @@ onMounted(async () => {
     store.binIndex.value = Math.min(Math.max(0, Math.round(b)), store.nbins.value - 1)
   }
   if (route.query.wx === '1') store.showWeather.value = true
+  if (route.query.scorecard === '1') showScorecard.value = true
 })
 
 const bands: { label: string, value: BandFilter }[] = [
@@ -24,6 +33,7 @@ const stressNow = computed(() =>
   store.demand.value?.stress.find(s => s.bin_index === store.binIndex.value) ?? null,
 )
 const overCount = computed(() => store.hotspots.value.length)
+const showScorecard = ref(false)
 </script>
 
 <template>
@@ -63,6 +73,16 @@ const overCount = computed(() => store.hotspots.value.length)
           </div>
         </div>
 
+        <!-- live indicator -->
+        <div
+          v-if="store.mode.value === 'live'"
+          class="flex items-center gap-1.5 rounded-lg border border-emerald-400/40 bg-emerald-500/15 px-2.5 py-1.5 text-xs font-semibold text-emerald-200"
+        >
+          <span class="size-1.5 animate-pulse rounded-full bg-emerald-400" />
+          LIVE
+          <span class="font-data text-emerald-300/80">+{{ store.liveSummary.value?.total_delay_minutes ?? 0 }}m</span>
+        </div>
+
         <!-- weather toggle -->
         <button
           type="button"
@@ -89,6 +109,27 @@ const overCount = computed(() => store.hotspots.value.length)
             {{ b.label }}
           </button>
         </div>
+
+        <!-- reset demo -->
+        <button
+          v-if="store.mode.value === 'live' || store.selectedSector.value || store.binIndex.value !== store.peakStressBinIndex.value"
+          type="button"
+          class="transition-console flex cursor-pointer items-center gap-1.5 rounded-lg border border-[var(--glass-border)] px-2.5 py-1.5 text-xs font-medium text-zinc-400 hover:border-zinc-400/40 hover:text-zinc-100"
+          title="Reset to baseline demo state"
+          @click="resetDemo"
+        >
+          <UIcon name="i-lucide-rotate-ccw" class="size-4" />
+        </button>
+
+        <!-- scorecard -->
+        <button
+          type="button"
+          class="transition-console flex cursor-pointer items-center gap-1.5 rounded-lg border border-[var(--glass-border)] px-2.5 py-1.5 text-xs font-medium text-zinc-300 hover:border-cyan-400/40 hover:text-cyan-200"
+          @click="showScorecard = true"
+        >
+          <UIcon name="i-lucide-layout-grid" class="size-4" />
+          <span class="hidden lg:inline">Scorecard</span>
+        </button>
 
         <UColorModeButton class="opacity-0 pointer-events-none w-0" />
       </div>
@@ -122,5 +163,8 @@ const overCount = computed(() => store.hotspots.value.length)
       <StressTimeline v-if="store.demand.value" />
       <BinScrubber v-if="store.demand.value" />
     </div>
+
+    <!-- Scorecard modal -->
+    <ScorecardPanel v-if="showScorecard" @close="showScorecard = false" />
   </div>
 </template>

@@ -1,6 +1,9 @@
 <script setup lang="ts">
 const store = useOpsStore()
-const { messages, sending, send, reset } = useAssistant()
+const { messages, sending, send, reset, ensureSession } = useAssistant()
+
+// Pre-create the session on mount so the first question isn't cold.
+onMounted(() => { ensureSession().catch(() => {}) })
 
 const open = ref(true)
 const draft = ref('')

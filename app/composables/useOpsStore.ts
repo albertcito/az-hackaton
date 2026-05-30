@@ -22,6 +22,10 @@ export function useOpsStore() {
   const mitigation = useState<MitigationData | null>('ops:mitigation', () => null)
   const attribution = useState<AttributionData | null>('ops:attribution', () => null)
   const showWeather = useState<boolean>('ops:showWeather', () => false)
+  // Live state from the assistant's action tools (overrides baseline/mitigated).
+  const liveCounts = useState<Record<string, number[]> | null>('ops:liveCounts', () => null)
+  const liveStress = useState<number[] | null>('ops:liveStress', () => null)
+  const liveSummary = useState<{ n_over_sectors: number, total_delay_minutes: number, n_actions: number } | null>('ops:liveSummary', () => null)
   const binIndex = useState<number>('ops:binIndex', () => 0)
   const band = useState<BandFilter>('ops:band', () => 'ALL')
   const mode = useState<ConsoleMode>('ops:mode', () => 'baseline')
@@ -41,6 +45,10 @@ export function useOpsStore() {
   })
 
   function countAt(s: DemandSector, bi: number): number {
+    if (mode.value === 'live') {
+      const live = liveCounts.value?.[s.name]
+      return (live ? live[bi] : s.counts[bi]) ?? 0
+    }
     const arr = mode.value === 'mitigated' && s.counts_mitigated ? s.counts_mitigated : s.counts
     return arr[bi] ?? 0
   }
@@ -70,11 +78,12 @@ export function useOpsStore() {
       }, 0),
     )
   })
-  const activeSeries = computed(() =>
-    mode.value === 'mitigated' ? mitigatedSeries.value : baselineSeries.value,
-  )
+  const activeSeries = computed(() => {
+    if (mode.value === 'live' && liveStress.value) return liveStress.value
+    return mode.value === 'mitigated' ? mitigatedSeries.value : baselineSeries.value
+  })
   const stressMax = computed(() =>
-    Math.max(1, ...baselineSeries.value, ...mitigatedSeries.value),
+    Math.max(1, ...baselineSeries.value, ...mitigatedSeries.value, ...(liveStress.value ?? [])),
   )
 
   const peakStressBinIndex = computed(() => {
@@ -166,9 +175,41 @@ export function useOpsStore() {
     selectedFlightId.value = null
   }
 
+  /** Reset the console view to the baseline demo state (no server call). */
+  function resetView() {
+    selectedSector.value = null
+    selectedFlightId.value = null
+    liveCounts.value = null
+    liveStress.value = null
+    liveSummary.value = null
+    mode.value = 'baseline'
+    band.value = 'ALL'
+    if (demand.value) binIndex.value = peakStressBinIndex.value
+  }
+
+  /** Merge a live state delta from the assistant's action tools. */
+  function applyStateDelta(delta: any) {
+    if (!delta) return
+    const n = delta.summary?.n_actions ?? 0
+    if (n === 0) {
+      liveCounts.value = null
+      liveStress.value = null
+      liveSummary.value = null
+      if (mode.value === 'live') mode.value = 'baseline'
+      return
+    }
+    const merged: Record<string, number[]> = { ...(liveCounts.value ?? {}) }
+    for (const [k, v] of Object.entries(delta.counts_now ?? {})) merged[k] = v as number[]
+    liveCounts.value = merged
+    liveStress.value = delta.stress_now ?? null
+    liveSummary.value = delta.summary ?? null
+    mode.value = 'live'
+  }
+
   return {
     // state
     snapshots, snapshotId, askedAt, demand, sectorsGeo, members, mitigation, attribution, showWeather,
+    liveCounts, liveStress, liveSummary,
     binIndex, band, mode, selectedSector, selectedFlightId, loading, error,
     // derived
     bins, nbins, currentBinIso, sectorMap, hotspots,
@@ -176,6 +217,6 @@ export function useOpsStore() {
     // helpers
     countAt, memberFids, weatherDisplaced, formatBin,
     // actions
-    loadDefault, loadSnapshot, selectSector,
+    loadDefault, loadSnapshot, selectSector, applyStateDelta, resetView,
   }
 }

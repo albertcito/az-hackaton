@@ -85,5 +85,12 @@ export function useAssistant() {
     messages.value = []
   }
 
-  return { sessionId, messages, sending, available, send, reset }
+  async function resetServer() {
+    if (!sessionId.value) return
+    try {
+      await $fetch(`/api/session/${sessionId.value}/reset`, { method: 'POST' })
+    } catch { /* ignore */ }
+  }
+
+  return { sessionId, messages, sending, available, send, reset, ensureSession, resetServer }
 }

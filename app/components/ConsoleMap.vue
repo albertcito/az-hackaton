@@ -57,6 +57,7 @@ watch(
     store.band.value,
     store.selectedSector.value,
     store.demand.value,
+    store.liveCounts.value,
   ] as const,
   () => doRecolor(),
 )
