@@ -85,7 +85,6 @@ function showInfo(f: FlightWithSnapshot) {
               label="Sector traffic"
               :disabled="!flight"
             />
-            <UColorModeButton />
           </div>
         </div>
         <FlightSearchForm :current="flight" @submit="loadFlight" />

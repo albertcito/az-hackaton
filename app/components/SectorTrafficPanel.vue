@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { SectorTraffic } from '~/types/sector'
+import { formatAirportAbbrLabel } from '~/utils/airports'
 import { formatAltitude } from '~/utils/formatFlight'
 
 const props = defineProps<{
@@ -80,7 +81,7 @@ const sector = computed(() => props.traffic?.sector ?? null)
               @click="$emit('select', other.id)"
             >
               <span class="font-medium">{{ other.flightNumber }}</span>
-              <span class="text-muted text-xs">{{ other.origin }} → {{ other.destination }}</span>
+              <span class="text-muted text-xs">{{ formatAirportAbbrLabel(other.origin) }} → {{ formatAirportAbbrLabel(other.destination) }}</span>
             </button>
           </li>
         </ul>
