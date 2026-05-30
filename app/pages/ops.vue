@@ -97,8 +97,14 @@ const legend = [
       {{ store.error.value }}
     </div>
 
-    <!-- Scrubber -->
-    <div class="absolute right-4 bottom-4 left-4 z-20">
+    <!-- Hotspots (left) -->
+    <div class="absolute top-[5.25rem] left-4 z-20 flex w-[340px] flex-col" style="bottom: 12.5rem">
+      <HotspotPanel v-if="store.demand.value" />
+    </div>
+
+    <!-- Timeline + scrubber (bottom) -->
+    <div class="absolute right-4 bottom-4 left-4 z-20 space-y-2">
+      <StressTimeline v-if="store.demand.value" />
       <BinScrubber v-if="store.demand.value" />
     </div>
   </div>

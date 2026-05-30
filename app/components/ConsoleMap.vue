@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import 'cesium/Build/Cesium/Widgets/widgets.css'
+import type { FlightWithSnapshot } from '~/types/flight'
 
 const store = useOpsStore()
 const container = ref<HTMLElement | null>(null)
 const { init, getViewer } = useCesiumViewer(container)
 const { build, recolor, isBuilt } = useSectorLayer(getViewer, (name) => {
-  store.selectedSector.value = store.selectedSector.value === name ? null : name
+  store.selectSector(store.selectedSector.value === name ? null : name)
 })
+const { draw: drawFlight, setTime: setFlightTime, clear: clearFlight } = useFlightHighlight(getViewer)
+const hlFlight = ref<FlightWithSnapshot | null>(null)
 
 function doRecolor() {
   recolor({
@@ -46,6 +49,22 @@ watch(
   ] as const,
   () => doRecolor(),
 )
+
+// Selected flight: fetch full route + draw on the globe; follow the scrubber.
+watch(() => store.selectedFlightId.value, async (fid) => {
+  if (!fid) { hlFlight.value = null; clearFlight(); return }
+  try {
+    const f = await $fetch<FlightWithSnapshot>(`/api/flights/${encodeURIComponent(fid)}`)
+    hlFlight.value = f
+    if (getViewer() && store.currentBinIso.value) await drawFlight(f, store.currentBinIso.value)
+  } catch {
+    hlFlight.value = null
+  }
+})
+
+watch(() => store.binIndex.value, () => {
+  if (hlFlight.value && store.currentBinIso.value) setFlightTime(hlFlight.value, store.currentBinIso.value)
+})
 </script>
 
 <template>

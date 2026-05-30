@@ -102,3 +102,33 @@ export async function getSnapshotMeta(): Promise<Pick<RoutesSnapshot, 'asked_at'
   const data = await loadSnapshot()
   return { asked_at: data.asked_at }
 }
+
+export interface FlightBasics {
+  id: string
+  flight_number: string
+  origin_airport_icao: string
+  destination_airport_icao: string
+  cruise_altitude_ft: number
+  cruise_speed_kt: number
+  take_off_time: string
+}
+
+/** Compact basics for a list of flight ids (for hotspot drill-down rows). */
+export async function getFlightsBasics(ids: string[]): Promise<FlightBasics[]> {
+  await loadSnapshot()
+  const out: FlightBasics[] = []
+  for (const id of ids) {
+    const f = flightMap.get(id)
+    if (!f) continue
+    out.push({
+      id,
+      flight_number: f.flight_number,
+      origin_airport_icao: f.origin_airport_icao,
+      destination_airport_icao: f.destination_airport_icao,
+      cruise_altitude_ft: f.cruise_altitude_ft,
+      cruise_speed_kt: f.cruise_speed_kt,
+      take_off_time: f.take_off_time,
+    })
+  }
+  return out
+}

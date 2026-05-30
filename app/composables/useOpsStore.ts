@@ -6,6 +6,8 @@ import type {
   SnapshotMeta,
 } from '~/types/demand'
 
+type MembersData = Record<string, Record<string, string[]>>
+
 // Shared, SSR-safe store for the ops console. All panels (map, timeline,
 // hotspots, resolve toggle, assistant) read and mutate this single state.
 export function useOpsStore() {
@@ -14,10 +16,12 @@ export function useOpsStore() {
   const askedAt = useState<string | null>('ops:askedAt', () => null)
   const demand = useState<DemandData | null>('ops:demand', () => null)
   const sectorsGeo = useState<any | null>('ops:sectorsGeo', () => null)
+  const members = useState<MembersData | null>('ops:members', () => null)
   const binIndex = useState<number>('ops:binIndex', () => 0)
   const band = useState<BandFilter>('ops:band', () => 'ALL')
   const mode = useState<ConsoleMode>('ops:mode', () => 'baseline')
   const selectedSector = useState<string | null>('ops:selectedSector', () => null)
+  const selectedFlightId = useState<string | null>('ops:selectedFlightId', () => null)
   const loading = useState<boolean>('ops:loading', () => false)
   const error = useState<string | null>('ops:error', () => null)
 
@@ -46,6 +50,28 @@ export function useOpsStore() {
       .sort((a, b) => b.over - a.over)
   })
 
+  // Network stress series per bin, for the timeline. Baseline comes straight
+  // from demand.stress; mitigated is derived from counts_mitigated.
+  const baselineSeries = computed<number[]>(() =>
+    (demand.value?.stress ?? []).map(s => s.total_over),
+  )
+  const mitigatedSeries = computed<number[]>(() => {
+    const d = demand.value
+    if (!d) return []
+    return d.bins.map((_, bi) =>
+      d.sectors.reduce((acc, s) => {
+        const c = (s.counts_mitigated ?? s.counts)[bi] ?? 0
+        return acc + Math.max(0, c - s.capacity)
+      }, 0),
+    )
+  })
+  const activeSeries = computed(() =>
+    mode.value === 'mitigated' ? mitigatedSeries.value : baselineSeries.value,
+  )
+  const stressMax = computed(() =>
+    Math.max(1, ...baselineSeries.value, ...mitigatedSeries.value),
+  )
+
   const peakStressBinIndex = computed(() => {
     let best = -1
     let bi = 0
@@ -57,6 +83,11 @@ export function useOpsStore() {
     }
     return bi
   })
+
+  /** Member fids for a sector at a bin (from members.json), or []. */
+  function memberFids(sector: string, bi: number): string[] {
+    return members.value?.[sector]?.[String(bi)] ?? []
+  }
 
   function formatBin(iso: string | null): string {
     if (!iso) return '--:--'
@@ -88,16 +119,19 @@ export function useOpsStore() {
   async function loadSnapshot(id: string) {
     loading.value = true
     error.value = null
+    selectedSector.value = null
+    selectedFlightId.value = null
     try {
-      const [d, geo] = await Promise.all([
+      const [d, geo, mem] = await Promise.all([
         $fetch<DemandData>(`/api/snapshot/${encodeURIComponent(id)}/demand`),
         sectorsGeo.value ? Promise.resolve(sectorsGeo.value) : $fetch('/api/sectors'),
+        $fetch<MembersData>(`/api/snapshot/${encodeURIComponent(id)}/members`).catch(() => ({})),
       ])
       demand.value = d
       sectorsGeo.value = geo
+      members.value = mem
       snapshotId.value = id
       askedAt.value = d.asked_at
-      // Open on the most-stressed moment for immediate impact.
       binIndex.value = (() => {
         let best = -1, bi = 0
         for (const st of d.stress) if (st.total_over > best) { best = st.total_over; bi = st.bin_index }
@@ -110,15 +144,21 @@ export function useOpsStore() {
     }
   }
 
+  function selectSector(name: string | null) {
+    selectedSector.value = name
+    selectedFlightId.value = null
+  }
+
   return {
     // state
-    snapshots, snapshotId, askedAt, demand, sectorsGeo,
-    binIndex, band, mode, selectedSector, loading, error,
+    snapshots, snapshotId, askedAt, demand, sectorsGeo, members,
+    binIndex, band, mode, selectedSector, selectedFlightId, loading, error,
     // derived
-    bins, nbins, currentBinIso, sectorMap, hotspots, peakStressBinIndex,
+    bins, nbins, currentBinIso, sectorMap, hotspots,
+    baselineSeries, mitigatedSeries, activeSeries, stressMax, peakStressBinIndex,
     // helpers
-    countAt, formatBin,
+    countAt, memberFids, formatBin,
     // actions
-    loadDefault, loadSnapshot,
+    loadDefault, loadSnapshot, selectSector,
   }
 }
