@@ -110,6 +110,13 @@ const overCount = computed(() => store.hotspots.value.length)
       <HotspotPanel v-if="store.demand.value" />
     </div>
 
+    <!-- Assistant (bottom center, above timeline) -->
+    <div
+      class="absolute bottom-[12.75rem] left-1/2 z-20 w-[min(540px,calc(100vw-44rem))] -translate-x-1/2"
+    >
+      <AssistantPanel v-if="store.demand.value" class="max-h-[58vh]" />
+    </div>
+
     <!-- Timeline + scrubber (bottom) -->
     <div class="absolute right-4 bottom-4 left-4 z-20 space-y-2">
       <StressTimeline v-if="store.demand.value" />

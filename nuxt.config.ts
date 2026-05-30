@@ -15,6 +15,9 @@ export default defineNuxtConfig({
     // Demo snapshot: strong congestion AND weather-driven over-demand (e.g. LOW_096
     // 38/20 with 100% weather-displaced bins). Colons ok here (sanitized on read).
     routesSnapshotDir: process.env.NUXT_ROUTES_SNAPSHOT || 'asked_at_2025-08-21T18:00:00Z',
+    // Server-only: Anthropic key for the assistant (never exposed to the client).
+    anthropicApiKey: process.env.ANTHROPIC_API_KEY || '',
+    assistantModel: process.env.ASSISTANT_MODEL || 'claude-sonnet-4-6',
     public: {
       cesiumIonToken: process.env.NUXT_PUBLIC_CESIUM_ION_TOKEN || '',
       // Sanitized (colon-free) id the console opens on by default.

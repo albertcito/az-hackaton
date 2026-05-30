@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare && node scripts/copy-cesium.mjs"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.100.1",
     "@nuxt/ui": "^4.8.1",
     "cesium": "^1.141.0",
     "fflate": "^0.8.3",
