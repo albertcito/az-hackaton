@@ -13,6 +13,15 @@ export function formatAirportLabel(icao: string): string {
   return `${location.city}, ${location.state}`
 }
 
+/** Airport code + state, e.g. ORD, IL (derived from ICAO by dropping the leading K). */
+export function formatAirportAbbrLabel(icao: string): string {
+  const code = icao.toUpperCase()
+  const abbr = code.startsWith('K') && code.length === 4 ? code.slice(1) : code
+  const location = getAirportLocation(code)
+  if (!location) return abbr
+  return `${abbr}, ${location.state}`
+}
+
 export function toAirportMenuItem(icao: string): AirportMenuItem {
   const code = icao.toUpperCase()
   const location = getAirportLocation(code)
