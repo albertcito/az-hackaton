@@ -154,9 +154,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="bg-default text-default flex h-screen flex-col">
-    <header class="border-default bg-default z-20 shrink-0 border-b px-4 py-3">
-        <div class="mx-auto flex max-w-7xl flex-col gap-2">
+  <div class="flex min-h-0 flex-1 flex-col">
+    <div class="border-default shrink-0 border-b px-4 py-3">
+      <div class="mx-auto flex max-w-7xl flex-col gap-2">
         <FlightTimelineForm
           :airport="selectedAirport"
           @submit="loadTimeline"
@@ -167,7 +167,7 @@ onMounted(() => {
           :flights="timeline.flights"
         />
       </div>
-    </header>
+    </div>
 
     <div v-if="loading" class="text-muted flex flex-1 items-center justify-center gap-2">
       <UIcon name="i-lucide-loader-circle" class="size-4 animate-spin" />

@@ -18,29 +18,12 @@ function showInfo(f: FlightWithSnapshot) {
 </script>
 
 <template>
-  <div class="bg-default text-default flex h-screen flex-col">
-    <header class="border-default bg-default z-20 border-b px-4 py-3">
-      <div class="mx-auto flex max-w-6xl flex-col gap-2">
-        <div class="flex items-center justify-between gap-4">
-          <div class="flex items-center gap-3">
-            <h1 class="text-highlighted text-lg font-semibold">
-              4D Flight Visualization
-            </h1>
-            <UButton
-              to="/timeline"
-              color="neutral"
-              variant="ghost"
-              size="sm"
-              icon="i-lucide-list"
-            >
-              Timeline
-            </UButton>
-          </div>
-          <UColorModeButton />
-        </div>
+  <div class="flex min-h-0 flex-1 flex-col">
+    <div class="border-default border-b px-4 py-3">
+      <div class="mx-auto max-w-7xl">
         <FlightSearchForm @submit="loadFlight" />
       </div>
-    </header>
+    </div>
 
     <main class="relative min-h-0 flex-1">
       <FlightRouteMap
