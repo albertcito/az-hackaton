@@ -17,6 +17,7 @@ import time
 from .attribution import compute_attribution
 from .demand import build_demand, build_members
 from .engine import OccupancyEngine
+from .penetration import compute_penetration
 from .flights import Flights
 from .ids import sanitize
 from .resolver import resolve
@@ -47,6 +48,7 @@ def precompute_snapshot(data_dir: str, snapshot_id: str, out_dir: str,
     demand = build_demand(engine, snapshot_id)
     members = build_members(engine)
     attribution = compute_attribution(engine, snap_dir)
+    penetration = compute_penetration(flights, snap_dir, engine.bins)
     baseline = engine.summary()
 
     # Baseline flight -> [(bin, sector)] index, for the live (TS) incremental
@@ -78,6 +80,7 @@ def precompute_snapshot(data_dir: str, snapshot_id: str, out_dir: str,
     _write_json(os.path.join(snap_out, "attribution.json"), attribution)
     _write_json(os.path.join(snap_out, "mitigation.json"), mitigation_out)
     _write_json(os.path.join(snap_out, "flight_cells.json"), flight_cells)
+    _write_json(os.path.join(snap_out, "penetration.json"), penetration)
 
     row = {
         "snapshot": snapshot_id,

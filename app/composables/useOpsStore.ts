@@ -260,11 +260,12 @@ export function useOpsStore() {
     return res.alert
   }
 
-  async function loadAlerts() {
-    const sid = sessionId.value
+  async function loadAlerts(now?: string) {
+    const sid = await ensureSession()
     if (!sid) return
     try {
-      const res = await $fetch<{ alerts: Alert[] }>(`/api/session/${sid}/alerts`)
+      const q = now ? `?now=${encodeURIComponent(now)}` : ''
+      const res = await $fetch<{ alerts: Alert[] }>(`/api/session/${sid}/alerts${q}`)
       alerts.value = res.alerts
     } catch { /* ignore */ }
   }

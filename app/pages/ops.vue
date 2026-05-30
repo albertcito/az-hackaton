@@ -26,6 +26,8 @@ onMounted(async () => {
     store.selectedSector.value = sector
     await store.raiseHazard({ kind: 'sector', ref: sector }, 'turbulence', 25)
   }
+  // Auto convective-penetration alerts for the current moment.
+  store.loadAlerts(store.currentBinIso.value ?? undefined)
 })
 
 const bands: { label: string, value: BandFilter }[] = [
@@ -44,6 +46,15 @@ const leftTab = ref<'hotspots' | 'alerts'>('hotspots')
 // Surface the alerts tab automatically when a new alert arrives.
 watch(() => store.activeAlerts.value.length, (n, prev) => {
   if (n > (prev ?? 0)) leftTab.value = 'alerts'
+})
+
+// Refresh convective-penetration alerts as the scrubber moves (debounced).
+let alertTimer: ReturnType<typeof setTimeout> | null = null
+watch(() => store.binIndex.value, () => {
+  if (alertTimer) clearTimeout(alertTimer)
+  alertTimer = setTimeout(() => {
+    if (store.currentBinIso.value) store.loadAlerts(store.currentBinIso.value)
+  }, 600)
 })
 </script>
 
