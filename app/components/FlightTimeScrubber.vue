@@ -8,10 +8,20 @@ const currentTime = defineModel<string>('currentTime', { required: true })
 
 const startMs = computed(() => new Date(props.flight.take_off_time).getTime())
 const endMs = computed(() => new Date(props.flight.scheduled_landing_time).getTime())
-const sliderValue = computed({
-  get: () => new Date(currentTime.value).getTime(),
-  set: (ms: number) => { currentTime.value = new Date(ms).toISOString() }
-})
+const sliderMs = ref(0)
+
+function clampMs(ms: number): number {
+  return Math.min(Math.max(ms, startMs.value), endMs.value)
+}
+
+function msToIso(ms: number): string {
+  return new Date(clampMs(ms)).toISOString()
+}
+
+function syncSliderFromCurrentTime() {
+  const ms = new Date(currentTime.value).getTime()
+  sliderMs.value = Number.isFinite(ms) ? clampMs(ms) : startMs.value
+}
 
 const startIso = computed(() => props.flight.take_off_time)
 const endIso = computed(() => props.flight.scheduled_landing_time)
@@ -22,9 +32,23 @@ watch(
   (flight) => {
     pause()
     currentTime.value = defaultFlightTime(flight, flight.asked_at)
+    syncSliderFromCurrentTime()
   },
   { immediate: true }
 )
+
+watch(sliderMs, (ms) => {
+  if (!Number.isFinite(ms)) return
+  const iso = msToIso(ms)
+  if (iso !== currentTime.value) currentTime.value = iso
+})
+
+watch(currentTime, () => {
+  const ms = new Date(currentTime.value).getTime()
+  if (!Number.isFinite(ms)) return
+  const clamped = clampMs(ms)
+  if (clamped !== sliderMs.value) sliderMs.value = clamped
+})
 
 function togglePlay() {
   if (playing.value) pause()
@@ -40,7 +64,13 @@ function togglePlay() {
         <span class="font-medium">{{ formatUtcDateTime(currentTime) }}</span>
         <span class="text-muted">{{ formatUtcTime(flight.scheduled_landing_time) }}</span>
       </div>
-      <USlider v-model="sliderValue" :min="startMs" :max="endMs" :step="1000" />
+      <USlider
+        v-model="sliderMs"
+        :min="startMs"
+        :max="endMs"
+        :step="1000"
+        tooltip
+      />
       <div class="flex justify-center">
         <UButton
           :icon="playing ? 'i-lucide-pause' : 'i-lucide-play'"
