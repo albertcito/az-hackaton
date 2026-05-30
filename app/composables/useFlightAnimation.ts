@@ -1,7 +1,10 @@
+const DEFAULT_PLAYBACK_SPEED = 60
+
 export function useFlightAnimation(
   startIso: Ref<string>,
   endIso: Ref<string>,
-  currentTime: Ref<string>
+  currentTime: Ref<string>,
+  speedMultiplier = DEFAULT_PLAYBACK_SPEED
 ) {
   const playing = ref(false)
   let frameId: number | null = null
@@ -23,7 +26,7 @@ export function useFlightAnimation(
     const startMs = new Date(startIso.value).getTime()
     const endMs = new Date(endIso.value).getTime()
     const currentMs = new Date(currentTime.value).getTime()
-    const nextMs = Math.min(currentMs + elapsed * 60, endMs)
+    const nextMs = Math.min(currentMs + elapsed * speedMultiplier, endMs)
 
     currentTime.value = new Date(nextMs).toISOString()
     if (nextMs >= endMs) {

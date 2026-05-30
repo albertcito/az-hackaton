@@ -36,7 +36,7 @@ async function ensureViewer() {
   await init(isDarkMap.value)
   if (props.flights.length) {
     await draw(props.flights, props.airport)
-    await updatePositions(props.currentTime)
+    updatePositions(props.currentTime)
   }
 }
 
@@ -57,7 +57,7 @@ watch(
     if (!getViewer()) return
     if (flights.length) {
       await draw(flights, airport)
-      await updatePositions(props.currentTime)
+      updatePositions(props.currentTime)
       await setSelected(props.selectedFlightId)
     } else {
       await clear()
@@ -74,8 +74,8 @@ watch(
 
 watch(
   () => [props.flights, props.currentTime] as const,
-  async ([flights, time]) => {
-    if (flights.length && time && getViewer()) await updatePositions(time)
+  ([flights, time]) => {
+    if (flights.length && time && getViewer()) updatePositions(time)
   }
 )
 

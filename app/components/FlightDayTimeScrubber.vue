@@ -34,7 +34,7 @@ function syncSliderFromCurrentTime() {
 
 const startIsoRef = computed(() => new Date(props.viewStartMs).toISOString())
 const endIsoRef = computed(() => new Date(props.viewEndMs).toISOString())
-const { playing, play, pause } = useFlightAnimation(startIsoRef, endIsoRef, currentTime)
+const { playing, play, pause } = useFlightAnimation(startIsoRef, endIsoRef, currentTime, 360)
 
 watch(
   () => [props.viewStartMs, props.viewEndMs] as const,
