@@ -52,5 +52,5 @@ export interface SnapshotMeta {
   asked_at: string
 }
 
-export type ConsoleMode = 'baseline' | 'mitigated'
+export type ConsoleMode = 'baseline' | 'mitigated' | 'live'
 export type BandFilter = 'ALL' | 'HIGH' | 'LOW'

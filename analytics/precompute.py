@@ -49,6 +49,15 @@ def precompute_snapshot(data_dir: str, snapshot_id: str, out_dir: str,
     attribution = compute_attribution(engine, snap_dir)
     baseline = engine.summary()
 
+    # Baseline flight -> [(bin, sector)] index, for the live (TS) incremental
+    # engine: lets it remove a flight's exact baseline contribution before
+    # recomputing its delayed position. Only flights with >=1 cell are emitted.
+    flight_cells = {
+        fid: [[b, name] for (b, name) in cells]
+        for fid, cells in engine.flight_cells.items()
+        if cells
+    }
+
     # Mitigation mutates engine.counts -> mitigated occupancy.
     mitigation = resolve(engine)
     mitigated = engine.summary()
@@ -68,6 +77,7 @@ def precompute_snapshot(data_dir: str, snapshot_id: str, out_dir: str,
     _write_json(os.path.join(snap_out, "members.json"), members)
     _write_json(os.path.join(snap_out, "attribution.json"), attribution)
     _write_json(os.path.join(snap_out, "mitigation.json"), mitigation_out)
+    _write_json(os.path.join(snap_out, "flight_cells.json"), flight_cells)
 
     row = {
         "snapshot": snapshot_id,

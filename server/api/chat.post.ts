@@ -1,5 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk'
-import { READ_TOOLS, executeReadTool } from '../utils/opsTools'
+import { ALL_TOOLS, executeTool } from '../utils/opsTools'
 
 const MAX_TOOL_ITERATIONS = 6
 
@@ -23,6 +23,7 @@ function buildSystemPrompt(snapshot: string, derived: any): string {
     `At the most-stressed moment (${peakTime}), ${d.stress[peakBin].n_over_sectors} sectors are over capacity; across the window ${nOver} sectors peak over capacity.`,
     `Answer questions about sectors, flights, weather and demand USING THE TOOLS. Never invent sector names, flight ids, counts, or percentages — if you need a value, call a tool first.`,
     `Weather attribution is an explicit heuristic (a flight is "weather-displaced" if blocking weather — refc >= 40 dBZ above the flight's altitude — is within 100 nm); say "heuristic" when you cite it.`,
+    `You can ALSO act: when the user asks you to fix or relieve congestion, call apply_resolution (for one sector, or the whole network if no sector) or apply_ground_delay; use suggest_resolution to preview first. Only flights still on the ground at asked_at can be delayed. After acting, report what changed: sectors cleared, flights affected, total delay-minutes — using the numbers the action tool returned. Call reset to return to baseline.`,
     `Be specific and terse. Round numbers. Refer to sectors like LOW_096 and times like 19:45Z. When asked "why" a sector is over capacity, give load vs capacity, the weather-displaced share, and a few top flights.`,
   ].join('\n')
 }
@@ -54,7 +55,7 @@ export default defineEventHandler(async (event) => {
           model: config.assistantModel,
           max_tokens: 1024,
           system,
-          tools: READ_TOOLS as any,
+          tools: ALL_TOOLS as any,
           messages: session.messages,
         })
         stream.on('text', (t: string) => send({ type: 'text', text: t }))
@@ -69,7 +70,9 @@ export default defineEventHandler(async (event) => {
           send({ type: 'tool', name: tu.name, input: tu.input })
           let result: any
           try {
-            result = await executeReadTool(session.snapshot, tu.name, tu.input)
+            const out = await executeTool(session, tu.name, tu.input)
+            result = out.result
+            if (out.delta) send({ type: 'state', state: out.delta })
           } catch (e: any) {
             result = { error: e?.message ?? String(e) }
           }

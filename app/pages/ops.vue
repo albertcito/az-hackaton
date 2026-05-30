@@ -63,6 +63,16 @@ const overCount = computed(() => store.hotspots.value.length)
           </div>
         </div>
 
+        <!-- live indicator -->
+        <div
+          v-if="store.mode.value === 'live'"
+          class="flex items-center gap-1.5 rounded-lg border border-emerald-400/40 bg-emerald-500/15 px-2.5 py-1.5 text-xs font-semibold text-emerald-200"
+        >
+          <span class="size-1.5 animate-pulse rounded-full bg-emerald-400" />
+          LIVE
+          <span class="font-data text-emerald-300/80">+{{ store.liveSummary.value?.total_delay_minutes ?? 0 }}m</span>
+        </div>
+
         <!-- weather toggle -->
         <button
           type="button"
