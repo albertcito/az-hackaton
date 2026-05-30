@@ -2,8 +2,17 @@
 import type { BandFilter } from '~/types/demand'
 
 const store = useOpsStore()
+const route = useRoute()
 
-onMounted(() => store.loadDefault())
+onMounted(async () => {
+  await store.loadDefault()
+  // Optional deep-link to a specific bin / weather toggle (for demo links).
+  const b = Number(route.query.bin)
+  if (Number.isFinite(b) && store.nbins.value) {
+    store.binIndex.value = Math.min(Math.max(0, Math.round(b)), store.nbins.value - 1)
+  }
+  if (route.query.wx === '1') store.showWeather.value = true
+})
 
 const bands: { label: string, value: BandFilter }[] = [
   { label: 'All', value: 'ALL' },
@@ -53,6 +62,19 @@ const overCount = computed(() => store.hotspots.value.length)
             <div class="text-[10px] tracking-wide text-zinc-500 uppercase">airborne</div>
           </div>
         </div>
+
+        <!-- weather toggle -->
+        <button
+          type="button"
+          class="transition-console flex cursor-pointer items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs font-medium"
+          :class="store.showWeather.value
+            ? 'border-violet-400/40 bg-violet-500/20 text-violet-200'
+            : 'border-[var(--glass-border)] text-zinc-400 hover:text-zinc-200'"
+          @click="store.showWeather.value = !store.showWeather.value"
+        >
+          <UIcon name="i-lucide-cloud-lightning" class="size-4" />
+          <span class="hidden sm:inline">Weather</span>
+        </button>
 
         <!-- band filter -->
         <div class="flex rounded-lg border border-[var(--glass-border)] p-0.5">

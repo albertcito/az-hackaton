@@ -8,6 +8,7 @@ import type {
 } from '~/types/demand'
 
 type MembersData = Record<string, Record<string, string[]>>
+type AttributionData = Record<string, Record<string, { weather_displaced: number, n_total: number, n_weather: number }>>
 
 // Shared, SSR-safe store for the ops console. All panels (map, timeline,
 // hotspots, resolve toggle, assistant) read and mutate this single state.
@@ -19,6 +20,8 @@ export function useOpsStore() {
   const sectorsGeo = useState<any | null>('ops:sectorsGeo', () => null)
   const members = useState<MembersData | null>('ops:members', () => null)
   const mitigation = useState<MitigationData | null>('ops:mitigation', () => null)
+  const attribution = useState<AttributionData | null>('ops:attribution', () => null)
+  const showWeather = useState<boolean>('ops:showWeather', () => false)
   const binIndex = useState<number>('ops:binIndex', () => 0)
   const band = useState<BandFilter>('ops:band', () => 'ALL')
   const mode = useState<ConsoleMode>('ops:mode', () => 'baseline')
@@ -91,6 +94,12 @@ export function useOpsStore() {
     return members.value?.[sector]?.[String(bi)] ?? []
   }
 
+  /** Weather-displaced fraction for an over-demand (sector, bin), or null. */
+  function weatherDisplaced(sector: string, bi: number): number | null {
+    const v = attribution.value?.[sector]?.[String(bi)]
+    return v ? v.weather_displaced : null
+  }
+
   function formatBin(iso: string | null): string {
     if (!iso) return '--:--'
     const d = new Date(iso)
@@ -105,12 +114,14 @@ export function useOpsStore() {
     try {
       const res = await $fetch<{ snapshots: SnapshotMeta[] }>('/api/snapshots')
       snapshots.value = res.snapshots
-      const first = res.snapshots[0]
-      if (!first) {
+      if (!res.snapshots.length) {
         error.value = 'No snapshots materialized. Run scripts/materialize_data.py.'
         return
       }
-      await loadSnapshot(first.id)
+      // Prefer the configured demo snapshot (best weather<->congestion overlap).
+      const preferred = useRuntimeConfig().public.demoSnapshot as string | undefined
+      const pick = (preferred && res.snapshots.find(s => s.id === preferred)?.id) || res.snapshots[0]!.id
+      await loadSnapshot(pick)
     } catch (e: any) {
       error.value = e?.message ?? 'Failed to load snapshot'
     } finally {
@@ -124,16 +135,18 @@ export function useOpsStore() {
     selectedSector.value = null
     selectedFlightId.value = null
     try {
-      const [d, geo, mem, mit] = await Promise.all([
+      const [d, geo, mem, mit, attr] = await Promise.all([
         $fetch<DemandData>(`/api/snapshot/${encodeURIComponent(id)}/demand`),
         sectorsGeo.value ? Promise.resolve(sectorsGeo.value) : $fetch('/api/sectors'),
         $fetch<MembersData>(`/api/snapshot/${encodeURIComponent(id)}/members`).catch(() => ({})),
         $fetch<MitigationData>(`/api/snapshot/${encodeURIComponent(id)}/mitigation`).catch(() => null),
+        $fetch<AttributionData>(`/api/snapshot/${encodeURIComponent(id)}/attribution`).catch(() => ({})),
       ])
       demand.value = d
       sectorsGeo.value = geo
       members.value = mem
       mitigation.value = mit
+      attribution.value = attr
       snapshotId.value = id
       askedAt.value = d.asked_at
       binIndex.value = (() => {
@@ -155,13 +168,13 @@ export function useOpsStore() {
 
   return {
     // state
-    snapshots, snapshotId, askedAt, demand, sectorsGeo, members, mitigation,
+    snapshots, snapshotId, askedAt, demand, sectorsGeo, members, mitigation, attribution, showWeather,
     binIndex, band, mode, selectedSector, selectedFlightId, loading, error,
     // derived
     bins, nbins, currentBinIso, sectorMap, hotspots,
     baselineSeries, mitigatedSeries, activeSeries, stressMax, peakStressBinIndex,
     // helpers
-    countAt, memberFids, formatBin,
+    countAt, memberFids, weatherDisplaced, formatBin,
     // actions
     loadDefault, loadSnapshot, selectSector,
   }

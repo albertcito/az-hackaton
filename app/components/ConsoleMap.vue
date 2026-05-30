@@ -10,6 +10,17 @@ const { build, recolor, isBuilt } = useSectorLayer(getViewer, (name) => {
 })
 const { draw: drawFlight, setTime: setFlightTime, clear: clearFlight } = useFlightHighlight(getViewer)
 const hlFlight = ref<FlightWithSnapshot | null>(null)
+const { update: updateWx, show: showWx } = useWeatherLayer(getViewer)
+
+async function refreshWeather() {
+  if (!getViewer()) return
+  if (store.showWeather.value && store.askedAt.value && store.currentBinIso.value) {
+    await updateWx(store.askedAt.value, store.currentBinIso.value)
+    showWx(true)
+  } else {
+    showWx(false)
+  }
+}
 
 function doRecolor() {
   recolor({
@@ -65,6 +76,11 @@ watch(() => store.selectedFlightId.value, async (fid) => {
 watch(() => store.binIndex.value, () => {
   if (hlFlight.value && store.currentBinIso.value) setFlightTime(hlFlight.value, store.currentBinIso.value)
 })
+
+watch(
+  () => [store.showWeather.value, store.binIndex.value, store.snapshotId.value] as const,
+  () => refreshWeather(),
+)
 </script>
 
 <template>

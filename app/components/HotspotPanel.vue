@@ -38,6 +38,10 @@ function onSectorClick(name: string) {
 function pad(n: number) {
   return Math.round(n).toLocaleString()
 }
+
+function wx(sector: string): number {
+  return store.weatherDisplaced(sector, store.binIndex.value) ?? 0
+}
 </script>
 
 <template>
@@ -73,6 +77,13 @@ function pad(n: number) {
                 class="rounded px-1 py-0.5 text-[10px] font-medium"
                 :class="h.sector.band === 'HIGH' ? 'bg-indigo-500/15 text-indigo-300' : 'bg-sky-500/15 text-sky-300'"
               >{{ h.sector.band }}</span>
+              <span
+                v-if="wx(h.sector.name) > 0"
+                class="flex items-center gap-0.5 rounded bg-violet-500/15 px-1 py-0.5 text-[10px] font-medium text-violet-300"
+                :title="`${Math.round(wx(h.sector.name) * 100)}% weather-displaced (heuristic)`"
+              >
+                <UIcon name="i-lucide-cloud-lightning" class="size-3" />{{ Math.round(wx(h.sector.name) * 100) }}%
+              </span>
             </div>
             <span class="font-data text-sm font-semibold" :style="{ color: heatCss(h.count / h.sector.capacity) }">
               {{ h.count }}<span class="text-zinc-500">/{{ h.sector.capacity }}</span>

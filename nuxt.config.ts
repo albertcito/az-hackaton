@@ -12,9 +12,13 @@ export default defineNuxtConfig({
   modules: ['@nuxt/ui'],
   css: ['~/assets/css/main.css'],
   runtimeConfig: {
-    routesSnapshotDir: process.env.NUXT_ROUTES_SNAPSHOT || 'asked_at_2026-04-08T18:00:00Z',
+    // Demo snapshot: strong congestion AND weather-driven over-demand (e.g. LOW_096
+    // 38/20 with 100% weather-displaced bins). Colons ok here (sanitized on read).
+    routesSnapshotDir: process.env.NUXT_ROUTES_SNAPSHOT || 'asked_at_2025-08-21T18:00:00Z',
     public: {
-      cesiumIonToken: process.env.NUXT_PUBLIC_CESIUM_ION_TOKEN || ''
+      cesiumIonToken: process.env.NUXT_PUBLIC_CESIUM_ION_TOKEN || '',
+      // Sanitized (colon-free) id the console opens on by default.
+      demoSnapshot: process.env.NUXT_PUBLIC_DEMO_SNAPSHOT || 'asked_at_2025-08-21T18-00-00Z'
     }
   },
   vite: {
