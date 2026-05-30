@@ -15,14 +15,6 @@ const stressNow = computed(() =>
   store.demand.value?.stress.find(s => s.bin_index === store.binIndex.value) ?? null,
 )
 const overCount = computed(() => store.hotspots.value.length)
-
-const legend = [
-  { label: 'Clear', cls: 'bg-green-500' },
-  { label: '', cls: 'bg-lime-500' },
-  { label: 'Busy', cls: 'bg-yellow-500' },
-  { label: 'Full', cls: 'bg-amber-500' },
-  { label: 'Over', cls: 'bg-red-500' },
-]
 </script>
 
 <template>
@@ -80,15 +72,9 @@ const legend = [
       </div>
     </header>
 
-    <!-- Heat legend -->
-    <div class="glass-panel absolute top-24 right-4 z-20 hidden flex-col gap-1.5 px-3 py-2.5 lg:flex">
-      <div class="text-[10px] font-medium tracking-wide text-zinc-400 uppercase">Load / capacity</div>
-      <div class="flex items-center gap-1">
-        <span v-for="(l, i) in legend" :key="i" class="size-3 rounded-sm" :class="l.cls" />
-      </div>
-      <div class="flex justify-between text-[10px] text-zinc-500">
-        <span>0</span><span>over</span>
-      </div>
+    <!-- Resolution (right) -->
+    <div class="absolute top-[5.25rem] right-4 z-20 flex w-[330px] flex-col" style="bottom: 12.5rem">
+      <ResolvePanel v-if="store.demand.value" />
     </div>
 
     <!-- error toast -->

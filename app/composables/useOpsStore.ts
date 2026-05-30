@@ -3,6 +3,7 @@ import type {
   ConsoleMode,
   DemandData,
   DemandSector,
+  MitigationData,
   SnapshotMeta,
 } from '~/types/demand'
 
@@ -17,6 +18,7 @@ export function useOpsStore() {
   const demand = useState<DemandData | null>('ops:demand', () => null)
   const sectorsGeo = useState<any | null>('ops:sectorsGeo', () => null)
   const members = useState<MembersData | null>('ops:members', () => null)
+  const mitigation = useState<MitigationData | null>('ops:mitigation', () => null)
   const binIndex = useState<number>('ops:binIndex', () => 0)
   const band = useState<BandFilter>('ops:band', () => 'ALL')
   const mode = useState<ConsoleMode>('ops:mode', () => 'baseline')
@@ -122,14 +124,16 @@ export function useOpsStore() {
     selectedSector.value = null
     selectedFlightId.value = null
     try {
-      const [d, geo, mem] = await Promise.all([
+      const [d, geo, mem, mit] = await Promise.all([
         $fetch<DemandData>(`/api/snapshot/${encodeURIComponent(id)}/demand`),
         sectorsGeo.value ? Promise.resolve(sectorsGeo.value) : $fetch('/api/sectors'),
         $fetch<MembersData>(`/api/snapshot/${encodeURIComponent(id)}/members`).catch(() => ({})),
+        $fetch<MitigationData>(`/api/snapshot/${encodeURIComponent(id)}/mitigation`).catch(() => null),
       ])
       demand.value = d
       sectorsGeo.value = geo
       members.value = mem
+      mitigation.value = mit
       snapshotId.value = id
       askedAt.value = d.asked_at
       binIndex.value = (() => {
@@ -151,7 +155,7 @@ export function useOpsStore() {
 
   return {
     // state
-    snapshots, snapshotId, askedAt, demand, sectorsGeo, members,
+    snapshots, snapshotId, askedAt, demand, sectorsGeo, members, mitigation,
     binIndex, band, mode, selectedSector, selectedFlightId, loading, error,
     // derived
     bins, nbins, currentBinIso, sectorMap, hotspots,
