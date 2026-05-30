@@ -3,6 +3,12 @@ import * as z from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui'
 import { toAirportMenuItems } from '~/utils/airports'
 
+const props = withDefaults(defineProps<{
+  airport?: string
+}>(), {
+  airport: ''
+})
+
 const emit = defineEmits<{ submit: [airport: string] }>()
 
 const schema = z.object({
@@ -20,6 +26,7 @@ const airportItems = computed(() => toAirportMenuItems(airports.value))
 const canSubmit = computed(() => Boolean(state.airport))
 
 onMounted(async () => {
+  state.airport = props.airport
   loading.value = true
   try {
     const data = await $fetch<{ airports: string[] }>('/api/flights/timeline', {
@@ -30,6 +37,13 @@ onMounted(async () => {
     loading.value = false
   }
 })
+
+watch(
+  () => props.airport,
+  (airport) => {
+    if (airport !== state.airport) state.airport = airport
+  }
+)
 
 async function onSubmit(event: FormSubmitEvent<z.infer<typeof schema>>) {
   emit('submit', event.data.airport)

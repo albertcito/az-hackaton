@@ -2,18 +2,24 @@
 import { formatUtcDateTime, formatUtcTime } from '~/utils/formatFlight'
 
 const props = defineProps<{
-  startIso: string
-  endIso: string
+  viewStartMs: number
+  viewEndMs: number
+  isZoomed: boolean
+}>()
+
+const emit = defineEmits<{
+  zoomIn: []
+  zoomOut: []
+  resetZoom: []
+  wheel: [event: WheelEvent]
 }>()
 
 const currentTime = defineModel<string>('currentTime', { required: true })
 
-const startMs = computed(() => new Date(props.startIso).getTime())
-const endMs = computed(() => new Date(props.endIso).getTime())
 const sliderMs = ref(0)
 
 function clampMs(ms: number): number {
-  return Math.min(Math.max(ms, startMs.value), endMs.value)
+  return Math.min(Math.max(ms, props.viewStartMs), props.viewEndMs)
 }
 
 function msToIso(ms: number): string {
@@ -22,15 +28,15 @@ function msToIso(ms: number): string {
 
 function syncSliderFromCurrentTime() {
   const ms = new Date(currentTime.value).getTime()
-  sliderMs.value = Number.isFinite(ms) ? clampMs(ms) : startMs.value
+  sliderMs.value = Number.isFinite(ms) ? clampMs(ms) : props.viewStartMs
 }
 
-const startIsoRef = computed(() => props.startIso)
-const endIsoRef = computed(() => props.endIso)
+const startIsoRef = computed(() => new Date(props.viewStartMs).toISOString())
+const endIsoRef = computed(() => new Date(props.viewEndMs).toISOString())
 const { playing, play, pause } = useFlightAnimation(startIsoRef, endIsoRef, currentTime)
 
 watch(
-  () => [props.startIso, props.endIso] as const,
+  () => [props.viewStartMs, props.viewEndMs] as const,
   () => syncSliderFromCurrentTime(),
   { immediate: true }
 )
@@ -52,23 +58,54 @@ function togglePlay() {
   if (playing.value) pause()
   else play()
 }
+
+function onWheel(event: WheelEvent) {
+  emit('wheel', event)
+}
 </script>
 
 <template>
-  <div class="border-default bg-default/95 absolute right-0 bottom-0 left-0 z-10 border-t p-3 backdrop-blur">
+  <div
+    class="border-default bg-default/95 absolute right-0 bottom-0 left-0 z-10 border-t p-3 backdrop-blur"
+    @wheel="onWheel"
+  >
     <div class="mx-auto flex max-w-4xl flex-col gap-2">
       <div class="flex items-center justify-between gap-4 text-sm">
-        <span class="text-muted">{{ formatUtcTime(startIso) }}</span>
+        <span class="text-muted">{{ formatUtcTime(new Date(viewStartMs).toISOString()) }}</span>
         <span class="font-medium">{{ formatUtcDateTime(currentTime) }}</span>
-        <span class="text-muted">{{ formatUtcTime(endIso) }}</span>
+        <span class="text-muted">{{ formatUtcTime(new Date(viewEndMs).toISOString()) }}</span>
       </div>
       <USlider
         v-model="sliderMs"
-        :min="startMs"
-        :max="endMs"
+        :min="viewStartMs"
+        :max="viewEndMs"
         :step="1000"
       />
-      <div class="flex justify-center">
+      <div class="flex items-center justify-center gap-2">
+        <UButtonGroup size="sm">
+          <UButton
+            icon="i-lucide-zoom-out"
+            color="neutral"
+            variant="soft"
+            aria-label="Zoom out"
+            @click="emit('zoomOut')"
+          />
+          <UButton
+            icon="i-lucide-zoom-in"
+            color="neutral"
+            variant="soft"
+            aria-label="Zoom in"
+            @click="emit('zoomIn')"
+          />
+          <UButton
+            v-if="isZoomed"
+            icon="i-lucide-maximize"
+            color="neutral"
+            variant="soft"
+            aria-label="Reset zoom"
+            @click="emit('resetZoom')"
+          />
+        </UButtonGroup>
         <UButton
           :icon="playing ? 'i-lucide-pause' : 'i-lucide-play'"
           color="primary"
@@ -76,9 +113,12 @@ function togglePlay() {
           size="sm"
           @click="togglePlay"
         >
-          {{ playing ? 'Pause' : 'Play day' }}
+          {{ playing ? 'Pause' : 'Play' }}
         </UButton>
       </div>
+      <p v-if="isZoomed" class="text-muted text-center text-xs">
+        Scroll on the scrubber to zoom · Ctrl+scroll on the event list
+      </p>
     </div>
   </div>
 </template>
