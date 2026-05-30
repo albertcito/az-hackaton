@@ -13,7 +13,10 @@ import {
   reflectivityLabel
 } from '~/utils/formatWeather'
 
-const props = defineProps<{ flight: FlightWithSnapshot }>()
+const props = defineProps<{
+  flight: FlightWithSnapshot
+  playRequest?: number
+}>()
 const currentTime = defineModel<string>('currentTime', { required: true })
 
 const startMs = computed(() => new Date(props.flight.take_off_time).getTime())
@@ -45,6 +48,14 @@ watch(
     pause()
     currentTime.value = defaultFlightTime(flight, flight.asked_at)
     syncSliderFromCurrentTime()
+  },
+  { immediate: true }
+)
+
+watch(
+  () => props.playRequest,
+  (request) => {
+    if (request) nextTick(() => play())
   },
   { immediate: true }
 )

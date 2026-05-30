@@ -1,6 +1,14 @@
 import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
-import type { Flight, FlightFilterOptions, FlightSearchItem, FlightWithSnapshot, RoutesSnapshot } from '~/types/flight'
+import type {
+  Flight,
+  FlightFilterOptions,
+  FlightSearchItem,
+  FlightTimelineEvent,
+  FlightTimelineResponse,
+  FlightWithSnapshot,
+  RoutesSnapshot
+} from '~/types/flight'
 import { buildFlightId } from '~/utils/flightId'
 import { formatRouteLabel } from '~/utils/formatFlight'
 
@@ -107,4 +115,78 @@ export async function getRoutesSnapshot(): Promise<RoutesSnapshot> {
 /** Synchronous lookup — only valid after the snapshot has been loaded. */
 export function getFlightById(id: string): Flight | undefined {
   return flightMap.get(id)
+}
+
+export async function getTimelineAirports(): Promise<string[]> {
+  const data = await loadSnapshot()
+  const airports = new Set<string>()
+
+  for (const flight of data.flights) {
+    airports.add(flight.origin_airport_icao)
+    airports.add(flight.destination_airport_icao)
+  }
+
+  return [...airports].sort()
+}
+
+export async function getAirportTimeline(airport: string): Promise<FlightTimelineResponse | null> {
+  const icao = airport.trim().toUpperCase()
+  if (!icao) return null
+
+  const data = await loadSnapshot()
+  const events: FlightTimelineEvent[] = []
+  const flights: FlightWithSnapshot[] = []
+  const seen = new Set<string>()
+
+  for (const flight of data.flights) {
+    const involvesAirport =
+      flight.origin_airport_icao === icao || flight.destination_airport_icao === icao
+    if (!involvesAirport) continue
+
+    const flightId = buildFlightId(flight)
+    if (!seen.has(flightId)) {
+      seen.add(flightId)
+      flights.push({ ...flight, asked_at: data.asked_at })
+    }
+
+    if (flight.origin_airport_icao === icao) {
+      events.push({
+        id: `${flightId}|departure`,
+        flight_id: flightId,
+        time: flight.take_off_time,
+        type: 'departure',
+        flight_number: flight.flight_number,
+        origin_airport_icao: flight.origin_airport_icao,
+        destination_airport_icao: flight.destination_airport_icao,
+        other_airport_icao: flight.destination_airport_icao,
+        is_airborne: flight.is_airborne
+      })
+    }
+
+    if (flight.destination_airport_icao === icao) {
+      events.push({
+        id: `${flightId}|arrival`,
+        flight_id: flightId,
+        time: flight.scheduled_landing_time,
+        type: 'arrival',
+        flight_number: flight.flight_number,
+        origin_airport_icao: flight.origin_airport_icao,
+        destination_airport_icao: flight.destination_airport_icao,
+        other_airport_icao: flight.origin_airport_icao,
+        is_airborne: flight.is_airborne
+      })
+    }
+  }
+
+  flights.sort((a, b) => new Date(a.take_off_time).getTime() - new Date(b.take_off_time).getTime())
+  events.sort((a, b) => new Date(a.time).getTime() - new Date(b.time).getTime())
+
+  return {
+    asked_at: data.asked_at,
+    window_start: data.window_start,
+    window_end: data.window_end,
+    airport: icao,
+    flights,
+    events
+  }
 }

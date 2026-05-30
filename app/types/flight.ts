@@ -43,3 +43,26 @@ export interface LatLonAlt {
   lon: number
   altFt: number
 }
+
+export type FlightTimelineEventType = 'departure' | 'arrival'
+
+export interface FlightTimelineEvent {
+  id: string
+  flight_id: string
+  time: string
+  type: FlightTimelineEventType
+  flight_number: string
+  origin_airport_icao: string
+  destination_airport_icao: string
+  other_airport_icao: string
+  is_airborne: boolean
+}
+
+export interface FlightTimelineResponse {
+  asked_at: string
+  window_start: string
+  window_end: string
+  airport: string
+  flights: FlightWithSnapshot[]
+  events: FlightTimelineEvent[]
+}

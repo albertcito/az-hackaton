@@ -7,6 +7,7 @@ const flight = ref<FlightWithSnapshot | null>(null)
 const selectedFlight = ref<FlightWithSnapshot | null>(null)
 const currentTime = ref('')
 const showSectorTraffic = ref(false)
+const playRequest = ref(0)
 
 // Navigation history: a fresh search resets it to a single root; jumping to a
 // flight from the sector panel pushes onto it. Back pops to the previous flight.
@@ -114,6 +115,7 @@ function showInfo(f: FlightWithSnapshot) {
         v-if="flight"
         v-model:current-time="currentTime"
         :flight="flight"
+        :play-request="playRequest"
       />
     </main>
   </div>
