@@ -6,11 +6,14 @@ const store = useOpsStore()
 const container = ref<HTMLElement | null>(null)
 const { init, getViewer } = useCesiumViewer(container)
 const { build, recolor, isBuilt } = useSectorLayer(getViewer, (name) => {
+  if (store.placingCircle.value) return // circle-placement click handles it
   store.selectSector(store.selectedSector.value === name ? null : name)
 })
 const { draw: drawFlight, setTime: setFlightTime, clear: clearFlight } = useFlightHighlight(getViewer)
 const hlFlight = ref<FlightWithSnapshot | null>(null)
 const { update: updateWx, show: showWx } = useWeatherLayer(getViewer)
+const { draw: drawHazard } = useHazardLayer(getViewer)
+let circleHandler: import('cesium').ScreenSpaceEventHandler | null = null
 
 async function refreshWeather() {
   if (!getViewer()) return
@@ -38,6 +41,23 @@ async function ensure() {
   if (store.sectorsGeo.value && !isBuilt()) {
     await build(store.sectorsGeo.value)
     doRecolor()
+  }
+  // Globe click while placing a circle hazard -> pick lat/lon and raise it.
+  const v = getViewer()
+  if (v && !circleHandler) {
+    const Cesium = await import('cesium')
+    circleHandler = new Cesium.ScreenSpaceEventHandler(v.scene.canvas)
+    circleHandler.setInputAction((click: { position: import('cesium').Cartesian2 }) => {
+      if (!store.placingCircle.value) return
+      const cart = v.scene.camera.pickEllipsoid(click.position, v.scene.globe.ellipsoid)
+      if (!cart) return
+      const carto = Cesium.Cartographic.fromCartesian(cart)
+      store.raiseHazard(
+        { kind: 'circle', lat: Cesium.Math.toDegrees(carto.latitude), lon: Cesium.Math.toDegrees(carto.longitude), radius_nm: 60 },
+        store.hazardKind.value,
+        store.hazardHorizon.value,
+      )
+    }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
   }
 }
 
@@ -81,6 +101,11 @@ watch(() => store.binIndex.value, () => {
 watch(
   () => [store.showWeather.value, store.binIndex.value, store.snapshotId.value] as const,
   () => refreshWeather(),
+)
+
+watch(
+  () => [store.hazardRegion.value, store.sectorsGeo.value] as const,
+  () => drawHazard(store.hazardRegion.value, store.sectorsGeo.value),
 )
 </script>
 

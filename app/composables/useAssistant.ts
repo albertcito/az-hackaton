@@ -15,19 +15,13 @@ export interface ChatMessage {
 // collapse/expand.
 export function useAssistant() {
   const store = useOpsStore()
-  const sessionId = useState<string | null>('assistant:sid', () => null)
+  const sessionId = store.sessionId // shared session (alerts + assistant)
   const messages = useState<ChatMessage[]>('assistant:messages', () => [])
   const sending = useState<boolean>('assistant:sending', () => false)
   const available = useState<boolean>('assistant:available', () => true)
 
   async function ensureSession() {
-    if (sessionId.value) return
-    const res = await $fetch<{ session_id: string, has_assistant: boolean }>('/api/session', {
-      method: 'POST',
-      body: { snapshot: store.snapshotId.value },
-    })
-    sessionId.value = res.session_id
-    available.value = res.has_assistant
+    await store.ensureSession()
   }
 
   async function send(text: string) {
@@ -70,6 +64,7 @@ export function useAssistant() {
           if (ev.type === 'text') asst.text += ev.text
           else if (ev.type === 'tool') asst.tools.push({ name: ev.name, input: ev.input })
           else if (ev.type === 'state') store.applyStateDelta?.(ev.state)
+          else if (ev.type === 'alerts') store.applyAlertsDelta?.(ev.alerts)
           else if (ev.type === 'error') { asst.text += `\n_(error: ${ev.error})_`; asst.error = true }
         }
       }

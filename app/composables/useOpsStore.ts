@@ -6,6 +6,7 @@ import type {
   MitigationData,
   SnapshotMeta,
 } from '~/types/demand'
+import type { Alert, AlertRegion } from '~/types/alert'
 
 type MembersData = Record<string, Record<string, string[]>>
 type AttributionData = Record<string, Record<string, { weather_displaced: number, n_total: number, n_weather: number }>>
@@ -26,6 +27,14 @@ export function useOpsStore() {
   const liveCounts = useState<Record<string, number[]> | null>('ops:liveCounts', () => null)
   const liveStress = useState<number[] | null>('ops:liveStress', () => null)
   const liveSummary = useState<{ n_over_sectors: number, total_delay_minutes: number, n_actions: number } | null>('ops:liveSummary', () => null)
+  // Session (shared by alerts + the assistant) and proactive alerting state.
+  const sessionId = useState<string | null>('ops:sessionId', () => null)
+  const alerts = useState<Alert[]>('ops:alerts', () => [])
+  const hazardRegion = useState<AlertRegion | null>('ops:hazardRegion', () => null)
+  const hazardAffectedFids = useState<string[]>('ops:hazardAffected', () => [])
+  const placingCircle = useState<boolean>('ops:placingCircle', () => false)
+  const hazardKind = useState<string>('ops:hazardKind', () => 'turbulence')
+  const hazardHorizon = useState<number>('ops:hazardHorizon', () => 25)
   const binIndex = useState<number>('ops:binIndex', () => 0)
   const band = useState<BandFilter>('ops:band', () => 'ALL')
   const mode = useState<ConsoleMode>('ops:mode', () => 'baseline')
@@ -206,17 +215,93 @@ export function useOpsStore() {
     mode.value = 'live'
   }
 
+  // ---- Session + proactive alerts ----
+
+  const activeAlerts = computed(() => alerts.value.filter(a => a.status !== 'resolved'))
+
+  async function ensureSession(): Promise<string | null> {
+    if (sessionId.value) return sessionId.value
+    try {
+      const res = await $fetch<{ session_id: string }>('/api/session', { method: 'POST', body: { snapshot: snapshotId.value } })
+      sessionId.value = res.session_id
+    } catch { /* assistant/alerts unavailable */ }
+    return sessionId.value
+  }
+
+  function isoPlus(iso: string, minutes: number): string {
+    return new Date(new Date(iso).getTime() + minutes * 60000).toISOString()
+  }
+
+  function focusAlert(a: Alert) {
+    hazardRegion.value = a.region
+    hazardAffectedFids.value = a.affected.map(x => x.fid)
+    const from = new Date(a.window.from).getTime()
+    let bi = binIndex.value, best = Infinity
+    bins.value.forEach((iso, i) => { const d = Math.abs(new Date(iso).getTime() - from); if (d < best) { best = d; bi = i } })
+    binIndex.value = bi
+  }
+
+  function clearHazardOverlay() {
+    hazardRegion.value = null
+    hazardAffectedFids.value = []
+  }
+
+  async function raiseHazard(region: AlertRegion, kind: string, horizonMin = 25): Promise<Alert | null> {
+    const sid = await ensureSession()
+    if (!sid || !currentBinIso.value) return null
+    const now = currentBinIso.value
+    const res = await $fetch<{ alert: Alert, alerts: Alert[] }>(`/api/session/${sid}/hazard`, {
+      method: 'POST',
+      body: { region, kind, now, window: { from: now, to: isoPlus(now, horizonMin) } },
+    })
+    alerts.value = res.alerts
+    placingCircle.value = false
+    focusAlert(res.alert)
+    return res.alert
+  }
+
+  async function loadAlerts() {
+    const sid = sessionId.value
+    if (!sid) return
+    try {
+      const res = await $fetch<{ alerts: Alert[] }>(`/api/session/${sid}/alerts`)
+      alerts.value = res.alerts
+    } catch { /* ignore */ }
+  }
+
+  async function ackAlert(id: string) {
+    const sid = sessionId.value
+    if (!sid) return
+    const res = await $fetch<{ alerts: Alert[] }>(`/api/session/${sid}/alerts/${id}/ack`, { method: 'POST' })
+    alerts.value = res.alerts
+  }
+
+  async function resolveAlert(id: string) {
+    const sid = sessionId.value
+    if (!sid) return
+    const res = await $fetch<{ alerts: Alert[] }>(`/api/session/${sid}/alerts/${id}/resolve`, { method: 'POST' })
+    alerts.value = res.alerts
+    clearHazardOverlay()
+  }
+
+  /** Merge an alerts delta pushed from the assistant (PA4). */
+  function applyAlertsDelta(next: Alert[]) {
+    if (Array.isArray(next)) alerts.value = next
+  }
+
   return {
     // state
     snapshots, snapshotId, askedAt, demand, sectorsGeo, members, mitigation, attribution, showWeather,
     liveCounts, liveStress, liveSummary,
+    sessionId, alerts, hazardRegion, hazardAffectedFids, placingCircle, hazardKind, hazardHorizon,
     binIndex, band, mode, selectedSector, selectedFlightId, loading, error,
     // derived
     bins, nbins, currentBinIso, sectorMap, hotspots,
-    baselineSeries, mitigatedSeries, activeSeries, stressMax, peakStressBinIndex,
+    baselineSeries, mitigatedSeries, activeSeries, stressMax, peakStressBinIndex, activeAlerts,
     // helpers
     countAt, memberFids, weatherDisplaced, formatBin,
     // actions
     loadDefault, loadSnapshot, selectSector, applyStateDelta, resetView,
+    ensureSession, raiseHazard, loadAlerts, ackAlert, resolveAlert, focusAlert, clearHazardOverlay, applyAlertsDelta,
   }
 }

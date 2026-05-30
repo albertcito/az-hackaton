@@ -21,6 +21,11 @@ onMounted(async () => {
   }
   if (route.query.wx === '1') store.showWeather.value = true
   if (route.query.scorecard === '1') showScorecard.value = true
+  if (route.query.hazard) {
+    const sector = String(route.query.hazard)
+    store.selectedSector.value = sector
+    await store.raiseHazard({ kind: 'sector', ref: sector }, 'turbulence', 25)
+  }
 })
 
 const bands: { label: string, value: BandFilter }[] = [
@@ -34,6 +39,12 @@ const stressNow = computed(() =>
 )
 const overCount = computed(() => store.hotspots.value.length)
 const showScorecard = ref(false)
+const leftTab = ref<'hotspots' | 'alerts'>('hotspots')
+
+// Surface the alerts tab automatically when a new alert arrives.
+watch(() => store.activeAlerts.value.length, (n, prev) => {
+  if (n > (prev ?? 0)) leftTab.value = 'alerts'
+})
 </script>
 
 <template>
@@ -121,6 +132,9 @@ const showScorecard = ref(false)
           <UIcon name="i-lucide-rotate-ccw" class="size-4" />
         </button>
 
+        <!-- raise hazard -->
+        <HazardTool />
+
         <!-- scorecard -->
         <button
           type="button"
@@ -146,9 +160,30 @@ const showScorecard = ref(false)
       {{ store.error.value }}
     </div>
 
-    <!-- Hotspots (left) -->
-    <div class="absolute top-[5.25rem] left-4 z-20 flex w-[340px] flex-col" style="bottom: 12.5rem">
-      <HotspotPanel v-if="store.demand.value" />
+    <!-- Hotspots / Alerts (left) -->
+    <div class="absolute top-[5.25rem] left-4 z-20 flex w-[340px] flex-col gap-2" style="bottom: 12.5rem">
+      <div v-if="store.demand.value" class="glass-panel-strong flex shrink-0 gap-1 p-1">
+        <button
+          type="button"
+          class="transition-console flex flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-md px-2 py-1.5 text-xs font-semibold"
+          :class="leftTab === 'hotspots' ? 'bg-cyan-500/20 text-cyan-200' : 'text-zinc-400 hover:text-zinc-200'"
+          @click="leftTab = 'hotspots'"
+        >
+          Hotspots
+          <span v-if="overCount" class="font-data rounded-full bg-red-500/20 px-1.5 text-[10px] text-red-300">{{ overCount }}</span>
+        </button>
+        <button
+          type="button"
+          class="transition-console flex flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-md px-2 py-1.5 text-xs font-semibold"
+          :class="leftTab === 'alerts' ? 'bg-amber-500/20 text-amber-200' : 'text-zinc-400 hover:text-zinc-200'"
+          @click="leftTab = 'alerts'"
+        >
+          Alerts
+          <span v-if="store.activeAlerts.value.length" class="font-data rounded-full bg-amber-500/20 px-1.5 text-[10px] text-amber-300">{{ store.activeAlerts.value.length }}</span>
+        </button>
+      </div>
+      <HotspotPanel v-if="store.demand.value && leftTab === 'hotspots'" class="min-h-0 flex-1" />
+      <AlertsFeed v-else-if="store.demand.value" class="min-h-0 flex-1" />
     </div>
 
     <!-- Assistant (bottom center, above timeline) -->
