@@ -3,7 +3,8 @@ const route = useRoute()
 
 const navItems = [
   { label: 'Route', to: '/', icon: 'i-lucide-map' },
-  { label: 'Timeline', to: '/timeline', icon: 'i-lucide-list' }
+  { label: 'Timeline', to: '/timeline', icon: 'i-lucide-list' },
+  { label: 'Ops', to: '/ops', icon: 'i-lucide-radar' }
 ]
 
 function isActive(to: string) {
