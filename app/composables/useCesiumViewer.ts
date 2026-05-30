@@ -33,6 +33,9 @@ function applySceneTheme(viewer: import('cesium').Viewer, Cesium: typeof import(
 
   if (isDark) {
     scene.backgroundColor = Cesium.Color.fromCssColorString('#09090b')
+    // Deep slate base so the globe + sectors stay visible even if external
+    // dark basemap tiles are slow to load.
+    scene.globe.baseColor = Cesium.Color.fromCssColorString('#0b1220')
     if (scene.skyAtmosphere) scene.skyAtmosphere.show = false
     if (scene.skyBox) scene.skyBox.show = false
     if (scene.sun) scene.sun.show = false

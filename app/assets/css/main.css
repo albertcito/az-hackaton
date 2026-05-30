@@ -1,2 +1,111 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+/* ============================================================
+   Dark glass ATC console — design system
+   Frosted floating panels over a dark CesiumJS globe (#09090b).
+   ============================================================ */
+
+:root {
+  /* Surface palette (zinc-based, tuned to the globe background) */
+  --console-bg: #09090b;
+  --glass-bg: rgba(14, 16, 22, 0.62);
+  --glass-bg-strong: rgba(12, 14, 20, 0.85);
+  --glass-border: rgba(148, 163, 184, 0.16);
+  --glass-border-strong: rgba(148, 163, 184, 0.28);
+  --glass-highlight: rgba(255, 255, 255, 0.04);
+
+  /* Accent (cyan) + status glows */
+  --accent-cyan: 34, 211, 238;     /* #22d3ee */
+  --accent-amber: 245, 158, 11;    /* #f59e0b */
+  --accent-red: 239, 68, 68;       /* #ef4444 */
+  --accent-green: 34, 197, 94;     /* #22c55e */
+
+  /* Congestion heat scale stops (count / capacity). Mirrored in app/utils/heat.ts —
+     keep the two in sync. */
+  --heat-0: 34, 197, 94;     /* 0.00  green-500  — plenty of room */
+  --heat-1: 132, 204, 22;    /* 0.60  lime-500  */
+  --heat-2: 234, 179, 8;     /* 0.80  yellow-500 */
+  --heat-3: 245, 158, 11;    /* 1.00  amber-500  — at capacity */
+  --heat-4: 239, 68, 68;     /* 1.25  red-500    — over capacity */
+  --heat-5: 185, 28, 28;     /* 1.75+ red-700    — severely over */
+
+  --shadow-panel: 0 8px 30px rgba(0, 0, 0, 0.45), 0 1px 0 var(--glass-highlight) inset;
+  --radius-panel: 16px;
+}
+
+body {
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Tabular / numeric data reads as monospace for that instrument feel. */
+.font-data {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* ---- Frosted glass panels ---- */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-panel);
+  box-shadow: var(--shadow-panel);
+}
+
+.glass-panel-strong {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(22px) saturate(150%);
+  -webkit-backdrop-filter: blur(22px) saturate(150%);
+  border: 1px solid var(--glass-border-strong);
+  border-radius: var(--radius-panel);
+  box-shadow: var(--shadow-panel);
+}
+
+/* Subtle inner hairline used on rows / list items */
+.glass-divide > * + * {
+  border-top: 1px solid var(--glass-border);
+}
+
+/* ---- Accent glows ---- */
+.glow-cyan { box-shadow: 0 0 0 1px rgba(var(--accent-cyan), 0.35), 0 0 22px rgba(var(--accent-cyan), 0.18); }
+.glow-amber { box-shadow: 0 0 0 1px rgba(var(--accent-amber), 0.40), 0 0 22px rgba(var(--accent-amber), 0.20); }
+.glow-red { box-shadow: 0 0 0 1px rgba(var(--accent-red), 0.45), 0 0 26px rgba(var(--accent-red), 0.26); }
+
+.text-glow-cyan { text-shadow: 0 0 12px rgba(var(--accent-cyan), 0.55); }
+
+/* ---- Motion: tasteful, fast, accessibility-aware ---- */
+.transition-console { transition: background-color .2s ease, border-color .2s ease, color .2s ease, box-shadow .2s ease, transform .2s ease; }
+
+@keyframes value-pop {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+.value-pop { animation: value-pop .28s ease; }
+
+@keyframes panel-rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.panel-rise { animation: panel-rise .26s ease both; }
+
+@keyframes pulse-over {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(var(--accent-red), 0.45), 0 0 18px rgba(var(--accent-red), 0.20); }
+  50% { box-shadow: 0 0 0 1px rgba(var(--accent-red), 0.65), 0 0 30px rgba(var(--accent-red), 0.38); }
+}
+.pulse-over { animation: pulse-over 2s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .value-pop, .panel-rise, .pulse-over { animation: none; }
+  .transition-console { transition: none; }
+}
+
+/* Thin custom scrollbars inside glass panels */
+.scroll-thin { scrollbar-width: thin; scrollbar-color: rgba(148,163,184,0.35) transparent; }
+.scroll-thin::-webkit-scrollbar { width: 8px; height: 8px; }
+.scroll-thin::-webkit-scrollbar-thumb { background: rgba(148,163,184,0.30); border-radius: 8px; }
+.scroll-thin::-webkit-scrollbar-track { background: transparent; }
