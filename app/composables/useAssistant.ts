@@ -3,10 +3,16 @@ export interface ChatTool {
   input: any
 }
 
+export interface ChatChip {
+  label: string
+  prompt: string
+}
+
 export interface ChatMessage {
-  role: 'user' | 'assistant'
+  role: 'user' | 'assistant' | 'system'
   text: string
   tools: ChatTool[]
+  chips?: ChatChip[]
   error?: boolean
 }
 
@@ -80,6 +86,17 @@ export function useAssistant() {
     messages.value = []
   }
 
+  // Proactive surfacing: drop a system note + action chips when a new alert arrives.
+  const announced = useState<string[]>('assistant:announced', () => [])
+  function announceAlert(alert: any) {
+    if (!alert || announced.value.includes(alert.id)) return
+    announced.value = [...announced.value, alert.id]
+    const region = alert.region?.ref ?? 'the area'
+    const chips: ChatChip[] = [{ label: 'Draft advisory', prompt: `Draft an advisory for alert ${alert.id}.` }]
+    chips.push({ label: 'Divert them', prompt: `Divert the flights in alert ${alert.id} to clear it.` })
+    messages.value.push({ role: 'system', text: alert.message, tools: [], chips })
+  }
+
   async function resetServer() {
     if (!sessionId.value) return
     try {
@@ -87,5 +104,5 @@ export function useAssistant() {
     } catch { /* ignore */ }
   }
 
-  return { sessionId, messages, sending, available, send, reset, ensureSession, resetServer }
+  return { sessionId, messages, sending, available, send, reset, ensureSession, resetServer, announceAlert }
 }

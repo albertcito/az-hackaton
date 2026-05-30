@@ -1,9 +1,14 @@
 <script setup lang="ts">
 const store = useOpsStore()
-const { messages, sending, send, reset, ensureSession } = useAssistant()
+const { messages, sending, send, reset, ensureSession, announceAlert } = useAssistant()
 
 // Pre-create the session on mount so the first question isn't cold.
 onMounted(() => { ensureSession().catch(() => {}) })
+
+// Proactively surface newly-raised hazards as a system note with action chips.
+watch(store.activeAlerts, (list) => {
+  for (const a of list) if (a.type === 'hazard' && a.status === 'new') announceAlert(a)
+}, { deep: true })
 
 const open = ref(true)
 const draft = ref('')
@@ -84,7 +89,28 @@ watch(
           </button>
         </div>
 
-        <div v-for="(m, i) in messages" :key="i" class="flex" :class="m.role === 'user' ? 'justify-end' : 'justify-start'">
+        <div v-for="(m, i) in messages" :key="i">
+          <!-- proactive system note + action chips -->
+          <div v-if="m.role === 'system'" class="rounded-xl border border-amber-400/30 bg-amber-500/10 px-3 py-2">
+            <div class="flex items-start gap-1.5 text-xs text-amber-200">
+              <UIcon name="i-lucide-radar" class="mt-0.5 size-3.5 shrink-0" />
+              <span>{{ m.text }}</span>
+            </div>
+            <div v-if="m.chips?.length" class="mt-2 flex flex-wrap gap-1.5">
+              <button
+                v-for="c in m.chips"
+                :key="c.label"
+                type="button"
+                class="transition-console cursor-pointer rounded-full border border-cyan-400/40 bg-cyan-500/10 px-2.5 py-1 text-[11px] font-medium text-cyan-200 hover:bg-cyan-500/20"
+                @click="submit(c.prompt)"
+              >
+                {{ c.label }}
+              </button>
+            </div>
+          </div>
+
+          <!-- user / assistant bubble -->
+          <div v-else class="flex" :class="m.role === 'user' ? 'justify-end' : 'justify-start'">
           <div class="max-w-[85%]">
             <div
               class="rounded-2xl px-3 py-2 text-sm leading-relaxed whitespace-pre-wrap"
@@ -108,6 +134,7 @@ watch(
                 <UIcon name="i-lucide-wrench" class="size-2.5" />{{ t.name }}<span v-if="t.input?.sector" class="text-cyan-300/80">{{ t.input.sector }}</span>
               </span>
             </div>
+          </div>
           </div>
         </div>
       </div>

@@ -38,8 +38,7 @@ function advise(a: Alert) {
   assistant.send(`Draft a controller advisory for the flights in alert ${a.id} entering ${regionLabel(a)}.`)
 }
 function reroute(a: Alert) {
-  if (a.region.kind === 'sector') assistant.send(`Reroute the flights around ${a.region.ref} and clear alert ${a.id}.`)
-  else assistant.send(`Suggest how to handle the flights in alert ${a.id}.`)
+  assistant.send(`Divert the flights in alert ${a.id} to clear it.`)
 }
 </script>
 

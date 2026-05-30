@@ -64,9 +64,9 @@ function pointInRing(lon: number, lat: number, ring: number[][]): boolean {
   return inside
 }
 
-function positionAt(f: LFlight, tMs: number): [number, number] | null {
-  if (tMs < f.takeMs || tMs > f.landMs) return null
-  const targetNm = (f.speed * ((tMs - f.takeMs) / 1000)) / 3600
+function positionAt(f: LFlight, tMs: number, takeMs = f.takeMs, landMs = f.landMs): [number, number] | null {
+  if (tMs < takeMs || tMs > landMs) return null
+  const targetNm = (f.speed * ((tMs - takeMs) / 1000)) / 3600
   if (f.total <= 0 || targetNm <= 0) return [f.lons[0]!, f.lats[0]!]
   if (targetNm >= f.total) return [f.lons[f.lons.length - 1]!, f.lats[f.lats.length - 1]!]
   let k = 1
@@ -138,6 +138,7 @@ export async function flightsEntering(
   toMs: number,
   altBand?: 'LOW' | 'HIGH' | null,
   stepSeconds = 60,
+  delaysByFid?: Record<string, number> | null,
 ): Promise<{ flights: EnteringFlight[] } | { error: string }> {
   const snap = await getSnapData(snapshot)
   const table = await getFlightTable(snapshot)
@@ -149,7 +150,10 @@ export async function flightsEntering(
   const results: EnteringFlight[] = []
 
   for (const f of table) {
-    if (f.landMs < fromMs || f.takeMs > toMs) continue
+    const dms = delaysByFid ? (delaysByFid[f.fid] ?? 0) * 60000 : 0
+    const takeMs = f.takeMs + dms
+    const landMs = f.landMs + dms
+    if (landMs < fromMs || takeMs > toMs) continue
     if (f.maxLon < rMinLon || f.minLon > rMaxLon || f.maxLat < rMinLat || f.minLat > rMaxLat) continue
     if (altBand && (f.alt < BAND_BREAK_FT ? 'LOW' : 'HIGH') !== altBand) continue
 
@@ -160,7 +164,7 @@ export async function flightsEntering(
     let exitMs: number | null = null
     let prevInside: boolean | null = null
     for (let t = fromMs; t <= toMs; t += stepMs) {
-      const pos = positionAt(f, t)
+      const pos = positionAt(f, t, takeMs, landMs)
       if (!pos) continue
       const isIn = rt.inside(pos[0], pos[1], f.alt)
       if (etaMs == null && prevInside === false && isIn) { etaMs = t; entry = pos }

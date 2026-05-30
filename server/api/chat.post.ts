@@ -24,6 +24,7 @@ function buildSystemPrompt(snapshot: string, derived: any): string {
     `Answer questions about sectors, flights, weather and demand USING THE TOOLS. Never invent sector names, flight ids, counts, or percentages — if you need a value, call a tool first.`,
     `Weather attribution is an explicit heuristic (a flight is "weather-displaced" if blocking weather — refc >= 40 dBZ above the flight's altitude — is within 100 nm); say "heuristic" when you cite it.`,
     `You can ALSO act: when the user asks you to fix or relieve congestion, call apply_resolution (for one sector, or the whole network if no sector) or apply_ground_delay; use suggest_resolution to preview first. Only flights still on the ground at asked_at can be delayed. After acting, report what changed: sectors cleared, flights affected, total delay-minutes — using the numbers the action tool returned. Call reset to return to baseline.`,
+    `You also handle proactive ALERTS (injected hazards + auto convective-penetration). Inspect with list_alerts / flights_entering; create one with raise_hazard; compose a grounded per-flight warning with draft_advisory. To reroute/divert an alert's flights, call divert_alert(alert_id) — it ground-delays them past the window and auto-resolves the alert; use resolve_alert/acknowledge_alert otherwise. When alerts are active, proactively name the most urgent and offer to draft the advisory or divert the affected flights.`,
     `Be specific and terse. Round numbers. Refer to sectors like LOW_096 and times like 19:45Z. When asked "why" a sector is over capacity, give load vs capacity, the weather-displaced share, and a few top flights.`,
   ].join('\n')
 }
@@ -41,7 +42,11 @@ export default defineEventHandler(async (event) => {
   // stray ANTHROPIC_AUTH_TOKEN in the environment (we authenticate via x-api-key).
   const client = new Anthropic({ apiKey: config.anthropicApiKey, authToken: null })
   const derived = await getDerived(session.snapshot)
-  const system = buildSystemPrompt(session.snapshot, derived)
+  let system = buildSystemPrompt(session.snapshot, derived)
+  const activeAlerts = session.alerts.filter(a => a.status !== 'resolved')
+  if (activeAlerts.length) {
+    system += `\n\nACTIVE ALERTS (proactively help): ${activeAlerts.map(a => `[${a.id}] ${a.message}`).join(' | ')}`
+  }
 
   session.messages.push({ role: 'user', content: userMsg })
 
@@ -73,6 +78,7 @@ export default defineEventHandler(async (event) => {
             const out = await executeTool(session, tu.name, tu.input)
             result = out.result
             if (out.delta) send({ type: 'state', state: out.delta })
+            if (out.alerts) send({ type: 'alerts', alerts: out.alerts })
           } catch (e: any) {
             result = { error: e?.message ?? String(e) }
           }

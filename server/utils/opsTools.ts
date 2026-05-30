@@ -1,6 +1,8 @@
 import { binFromIso, getDerived, hotspotsAt, sectorByName } from './opsData'
 import { getFlight, getFlightsBasics } from './routesCache'
 import { getEngine } from './opsEngine'
+import { flightsEntering, type Region } from './opsLookahead'
+import { raiseHazard, reconcileHazardAlerts, setAlertStatus } from './opsAlerts'
 import type { OpsSession } from './opsSession'
 
 // Read-only tools for the assistant. Every number the model reports must come
@@ -223,6 +225,51 @@ export const ACTION_TOOLS = [
     description: 'Discard all applied actions and return the network to its baseline state.',
     input_schema: { type: 'object', properties: {} },
   },
+  {
+    name: 'list_alerts',
+    description: 'List current proactive alerts (injected hazards + auto convective-penetration) with their affected flights and ETAs.',
+    input_schema: { type: 'object', properties: { status: { type: 'string', description: 'filter: new|ack|resolved' } } },
+  },
+  {
+    name: 'flights_entering',
+    description: 'Look ahead: which flights will enter a region (a sector, or a circle of lat/lon/radius_nm) within a horizon. Use to forewarn the controller.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        sector: { type: 'string' }, lat: { type: 'number' }, lon: { type: 'number' }, radius_nm: { type: 'number' },
+        bin_iso: { type: 'string', description: 'time (defaults to peak)' }, horizon_min: { type: 'number' },
+      },
+    },
+  },
+  {
+    name: 'raise_hazard',
+    description: 'Raise a hazard over a sector (kind: turbulence|convection|closure) and create an alert listing the flights entering it within the horizon.',
+    input_schema: {
+      type: 'object',
+      properties: { sector: { type: 'string' }, kind: { type: 'string' }, horizon_min: { type: 'number' }, bin_iso: { type: 'string' } },
+      required: ['sector', 'kind'],
+    },
+  },
+  {
+    name: 'draft_advisory',
+    description: 'Compose a per-flight controller advisory for an alert, grounded in its real flights and ETAs.',
+    input_schema: { type: 'object', properties: { alert_id: { type: 'string' } }, required: ['alert_id'] },
+  },
+  {
+    name: 'acknowledge_alert',
+    description: 'Mark an alert acknowledged.',
+    input_schema: { type: 'object', properties: { alert_id: { type: 'string' } }, required: ['alert_id'] },
+  },
+  {
+    name: 'resolve_alert',
+    description: 'Mark an alert resolved.',
+    input_schema: { type: 'object', properties: { alert_id: { type: 'string' } }, required: ['alert_id'] },
+  },
+  {
+    name: 'divert_alert',
+    description: 'Divert (ground-delay) the flights in a hazard alert so they enter after the window — clears the alert. Use for "reroute/divert them".',
+    input_schema: { type: 'object', properties: { alert_id: { type: 'string' }, minutes: { type: 'number' } }, required: ['alert_id'] },
+  },
 ]
 
 const READ_TOOL_NAMES = new Set(READ_TOOLS.map(t => t.name))
@@ -266,6 +313,7 @@ async function executeActionTool(session: OpsSession, name: string, input: any):
         const n = await engine.applyResolutionSector(sector)
         const si = engine.snap.sectorIndex.get(sector)!
         const peakNow = Math.max(...engine.counts[si]!)
+        await reconcileHazardAlerts(session)
         return {
           result: {
             sector,
@@ -277,9 +325,11 @@ async function executeActionTool(session: OpsSession, name: string, input: any):
             n_over_sectors_now: engine.nOverSectors(),
           },
           delta: engine.delta(),
+          alerts: session.alerts,
         }
       }
       engine.applyResolutionAll()
+      await reconcileHazardAlerts(session)
       return {
         result: {
           scope: 'network',
@@ -289,6 +339,7 @@ async function executeActionTool(session: OpsSession, name: string, input: any):
           actions: engine.actions.length,
         },
         delta: engine.delta(),
+        alerts: session.alerts,
       }
     }
 
@@ -308,6 +359,7 @@ async function executeActionTool(session: OpsSession, name: string, input: any):
       }
       if (!fids.length) return { result: { error: 'no delayable flights (already airborne at asked_at)' } }
       await engine.addGroundDelay(fids, minutes)
+      await reconcileHazardAlerts(session)
       return {
         result: {
           delayed_flights: fids.length,
@@ -316,6 +368,105 @@ async function executeActionTool(session: OpsSession, name: string, input: any):
           n_over_sectors_now: engine.nOverSectors(),
         },
         delta: engine.delta(),
+        alerts: session.alerts,
+      }
+    }
+
+    case 'list_alerts': {
+      const status = input?.status
+      const list = (status ? session.alerts.filter(a => a.status === status) : session.alerts)
+      return {
+        result: {
+          alerts: list.map(a => ({
+            id: a.id, type: a.type, kind: a.kind, severity: a.severity, status: a.status,
+            region: a.region.ref ?? a.region.kind, message: a.message,
+            affected: a.affected.slice(0, 8).map(f => ({ flight: f.fid.split('|')[0], fid: f.fid, eta_min: f.minutes_to_entry, origin: f.origin, dest: f.dest })),
+          })),
+        },
+      }
+    }
+
+    case 'flights_entering': {
+      let region: Region | null = null
+      if (input?.sector) {
+        if (!sectorByName(demand, input.sector)) return { result: { error: `unknown sector ${input.sector}` } }
+        region = { kind: 'sector', ref: input.sector }
+      } else if (input?.lat != null && input?.lon != null) {
+        region = { kind: 'circle', lat: input.lat, lon: input.lon, radius_nm: input.radius_nm ?? 60 }
+      } else {
+        return { result: { error: 'provide sector, or lat/lon (+radius_nm)' } }
+      }
+      const { iso: nowIso } = binFromIso(demand, input?.bin_iso)
+      const horizon = Math.min(60, Math.max(5, Math.round(input?.horizon_min ?? 30)))
+      const nowMs = Date.parse(nowIso)
+      const delays: Record<string, number> = {}
+      for (const [f, m] of engine.delays) delays[f] = m
+      const res = await flightsEntering(session.snapshot, region, nowMs, nowMs, nowMs + horizon * 60000, null, 60, delays)
+      const flights = ('flights' in res ? res.flights : []).slice(0, 15).map(f => ({
+        flight: f.fid.split('|')[0], fid: f.fid, eta_min: f.minutes_to_entry, origin: f.origin, dest: f.dest, alt: f.alt,
+      }))
+      return { result: { region: input.sector ?? 'circle', now: nowIso, count: flights.length, flights } }
+    }
+
+    case 'raise_hazard': {
+      const sector = input?.sector
+      if (!sectorByName(demand, sector)) return { result: { error: `unknown sector ${sector}` } }
+      const kind = ['turbulence', 'convection', 'closure'].includes(input?.kind) ? input.kind : 'turbulence'
+      const { iso: nowIso } = binFromIso(demand, input?.bin_iso)
+      const horizon = Math.min(60, Math.max(5, Math.round(input?.horizon_min ?? 25)))
+      const toIso = new Date(Date.parse(nowIso) + horizon * 60000).toISOString()
+      const alert = await raiseHazard(session, { kind: 'sector', ref: sector }, kind, nowIso, toIso, nowIso)
+      return {
+        result: { alert_id: alert.id, severity: alert.severity, affected: alert.affected.length, message: alert.message },
+        alerts: session.alerts,
+      }
+    }
+
+    case 'draft_advisory': {
+      const a = session.alerts.find(x => x.id === input?.alert_id)
+      if (!a) return { result: { error: `unknown alert ${input?.alert_id}` } }
+      const region = a.region.ref ?? 'the hazard area'
+      const lines = a.affected.slice(0, 12).map((f) => {
+        const t = new Date(f.eta)
+        const hh = String(t.getUTCHours()).padStart(2, '0')
+        const mm = String(t.getUTCMinutes()).padStart(2, '0')
+        return `${f.fid.split('|')[0]} (${f.origin}->${f.dest}, FL${Math.round(f.alt / 100)}): ${a.kind} in ${region} ~${hh}:${mm}Z (${f.minutes_to_entry} min) — advise avoid/reroute.`
+      })
+      return { result: { alert_id: a.id, n_flights: a.affected.length, advisory: `ADVISORY — ${a.kind.toUpperCase()} ${region}\n${lines.join('\n')}` } }
+    }
+
+    case 'acknowledge_alert': {
+      const a = setAlertStatus(session, String(input?.alert_id ?? ''), 'ack')
+      return { result: { ok: Boolean(a), id: input?.alert_id, status: 'ack' }, alerts: session.alerts }
+    }
+
+    case 'resolve_alert': {
+      const a = setAlertStatus(session, String(input?.alert_id ?? ''), 'resolved')
+      return { result: { ok: Boolean(a), id: input?.alert_id, status: 'resolved' }, alerts: session.alerts }
+    }
+
+    case 'divert_alert': {
+      const a = session.alerts.find(x => x.id === input?.alert_id)
+      if (!a) return { result: { error: `unknown alert ${input?.alert_id}` } }
+      const minutes = Math.min(60, Math.max(5, Math.round(input?.minutes ?? 30)))
+      const delayable = a.affected
+        .map(f => f.fid)
+        .filter(fid => new Date(fid.split('|')[1] ?? '').getTime() > engine.snap.askedMs)
+      await engine.addGroundDelay(delayable, minutes)
+      await reconcileHazardAlerts(session)
+      const after = session.alerts.find(x => x.id === a.id)
+      return {
+        result: {
+          alert_id: a.id,
+          diverted_flights: delayable.length,
+          not_delayable: a.affected.length - delayable.length,
+          minutes,
+          alert_status: after?.status,
+          still_entering: after?.affected.length ?? 0,
+          total_delay_minutes: engine.totalDelay(),
+        },
+        delta: engine.delta(),
+        alerts: session.alerts,
       }
     }
 
@@ -324,8 +475,8 @@ async function executeActionTool(session: OpsSession, name: string, input: any):
   }
 }
 
-/** Unified dispatch: read tools return {result}; action tools also return {delta}. */
-export async function executeTool(session: OpsSession, name: string, input: any): Promise<{ result: any, delta?: any }> {
+/** Unified dispatch: read tools return {result}; action tools may also return {delta, alerts}. */
+export async function executeTool(session: OpsSession, name: string, input: any): Promise<{ result: any, delta?: any, alerts?: any }> {
   if (READ_TOOL_NAMES.has(name)) {
     return { result: await executeReadTool(session.snapshot, name, input) }
   }

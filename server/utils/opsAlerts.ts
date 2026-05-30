@@ -3,6 +3,7 @@ import { join } from 'node:path'
 import type { Alert, AlertKind, AlertRegion, AlertSeverity } from '~/types/alert'
 import type { OpsSession } from './opsSession'
 import { flightsEntering, type Region } from './opsLookahead'
+import { getEngine } from './opsEngine'
 
 function regionLabel(r: AlertRegion): string {
   if (r.kind === 'sector') return r.ref ?? 'sector'
@@ -69,6 +70,33 @@ export async function raiseHazard(
 
 export function listAlerts(session: OpsSession, status?: string): Alert[] {
   return status ? session.alerts.filter(a => a.status === status) : session.alerts
+}
+
+/**
+ * Re-evaluate active hazard alerts using the live engine's ground delays: a
+ * delayed flight may no longer enter the region during the window. Empties
+ * auto-resolve. (Lets "reroute them" clear the alert.)
+ */
+export async function reconcileHazardAlerts(session: OpsSession): Promise<void> {
+  const engine = await getEngine(session)
+  const delays: Record<string, number> = {}
+  for (const [fid, m] of engine.delays) delays[fid] = m
+
+  for (const a of session.alerts) {
+    if (a.type !== 'hazard' || a.status === 'resolved') continue
+    const region = a.region as Region
+    const fromMs = Date.parse(a.window.from)
+    const toMs = Date.parse(a.window.to)
+    const res = await flightsEntering(session.snapshot, region, fromMs, fromMs, toMs, null, 60, delays)
+    const flights = 'flights' in res ? res.flights : []
+    a.affected = flights.map(f => ({
+      fid: f.fid, eta: f.eta, minutes_to_entry: f.minutes_to_entry,
+      origin: f.origin, dest: f.dest, alt: f.alt,
+    }))
+    const horizonMin = Math.round((toMs - fromMs) / 60000)
+    a.message = `${flights.length} flight${flights.length === 1 ? '' : 's'} enter ${regionLabel(a.region)} (${a.kind}) within ${horizonMin} min.`
+    if (flights.length === 0) a.status = 'resolved'
+  }
 }
 
 export function setAlertStatus(session: OpsSession, id: string, status: Alert['status']): Alert | undefined {
