@@ -2,12 +2,13 @@ import type { FlightWithSnapshot } from '~/types/flight'
 import type { SectorTraffic } from '~/types/sector'
 import { buildFlightId } from '~/utils/flightId'
 
-const DEBOUNCE_MS = 180
+const THROTTLE_MS = 180
 
 /**
  * Reactively fetches the other flights sharing the selected flight's sector at
- * the current time. Debounced so scrubbing/playback doesn't spam the server,
- * and request-id guarded so out-of-order responses are discarded.
+ * the current time. Throttled so scrubbing/playback don't spam the server but
+ * still refresh while time keeps moving, and request-id guarded so out-of-order
+ * responses are discarded.
  */
 export function useSectorTraffic(
   flight: Ref<FlightWithSnapshot | null>,
@@ -18,6 +19,7 @@ export function useSectorTraffic(
   const loading = ref(false)
   let requestId = 0
   let timer: ReturnType<typeof setTimeout> | null = null
+  let lastRefreshAt = 0
 
   async function refresh() {
     if (!enabled.value || !flight.value || !currentTime.value) {
@@ -43,13 +45,31 @@ export function useSectorTraffic(
   }
 
   function schedule() {
-    if (timer) clearTimeout(timer)
     if (!enabled.value || !flight.value) {
+      if (timer) clearTimeout(timer)
+      timer = null
       traffic.value = null
       loading.value = false
       return
     }
-    timer = setTimeout(refresh, DEBOUNCE_MS)
+
+    const now = Date.now()
+    const elapsed = now - lastRefreshAt
+
+    if (elapsed >= THROTTLE_MS) {
+      if (timer) {
+        clearTimeout(timer)
+        timer = null
+      }
+      lastRefreshAt = now
+      refresh()
+    } else if (!timer) {
+      timer = setTimeout(() => {
+        timer = null
+        lastRefreshAt = Date.now()
+        refresh()
+      }, THROTTLE_MS - elapsed)
+    }
   }
 
   watch(
