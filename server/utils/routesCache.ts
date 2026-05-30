@@ -103,6 +103,12 @@ export async function getSnapshotMeta(): Promise<Pick<RoutesSnapshot, 'asked_at'
   return { asked_at: data.asked_at }
 }
 
+/** All flights in the configured snapshot (for the lookahead flight table). */
+export async function getAllFlights(): Promise<Flight[]> {
+  const data = await loadSnapshot()
+  return data.flights
+}
+
 export interface FlightBasics {
   id: string
   flight_number: string
