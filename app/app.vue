@@ -1,5 +1,5 @@
 <template>
-  <div>
-    Test
-  </div>
+  <UApp>
+    <NuxtPage />
+  </UApp>
 </template>
