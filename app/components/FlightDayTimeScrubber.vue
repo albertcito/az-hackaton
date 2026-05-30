@@ -5,6 +5,7 @@ const props = defineProps<{
   viewStartMs: number
   viewEndMs: number
   isZoomed: boolean
+  playRequest?: number
 }>()
 
 const emit = defineEmits<{
@@ -38,6 +39,14 @@ const { playing, play, pause } = useFlightAnimation(startIsoRef, endIsoRef, curr
 watch(
   () => [props.viewStartMs, props.viewEndMs] as const,
   () => syncSliderFromCurrentTime(),
+  { immediate: true }
+)
+
+watch(
+  () => props.playRequest,
+  (request) => {
+    if (request) nextTick(() => play())
+  },
   { immediate: true }
 )
 

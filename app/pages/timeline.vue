@@ -102,6 +102,7 @@ const snapshotDay = computed(() => {
 })
 
 const selectedAirport = ref(DEFAULT_AIRPORT)
+const playRequest = ref(0)
 
 async function loadTimeline(airport: string) {
   selectedAirport.value = airport.toUpperCase()
@@ -116,6 +117,7 @@ async function loadTimeline(airport: string) {
       query: { airport }
     })
     currentTime.value = timeline.value.asked_at
+    playRequest.value++
   } catch {
     timeline.value = null
     error.value = 'Could not load flights for that city.'
@@ -207,6 +209,7 @@ onMounted(() => {
           :view-start-ms="viewStartMs"
           :view-end-ms="viewEndMs"
           :is-zoomed="isZoomed"
+          :play-request="playRequest"
           @zoom-in="zoomIn"
           @zoom-out="zoomOut"
           @reset-zoom="resetZoom"
