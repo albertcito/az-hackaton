@@ -91,7 +91,7 @@ function onWheel(event: WheelEvent) {
         :step="1000"
       />
       <div class="flex items-center justify-center gap-2">
-        <UButtonGroup size="sm">
+        <UFieldGroup size="sm">
           <UButton
             icon="i-lucide-zoom-out"
             color="neutral"
@@ -114,7 +114,7 @@ function onWheel(event: WheelEvent) {
             aria-label="Reset zoom"
             @click="emit('resetZoom')"
           />
-        </UButtonGroup>
+        </UFieldGroup>
         <UButton
           :icon="playing ? 'i-lucide-pause' : 'i-lucide-play'"
           color="primary"

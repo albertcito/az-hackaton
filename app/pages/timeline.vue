@@ -234,7 +234,7 @@ onMounted(() => {
                 · snapshot {{ formatUtcDateTime(timeline.asked_at) }}
               </p>
             </div>
-            <UButtonGroup size="xs">
+            <UFieldGroup size="xs">
               <UButton
                 icon="i-lucide-zoom-out"
                 color="neutral"
@@ -257,7 +257,7 @@ onMounted(() => {
                 aria-label="Reset zoom"
                 @click="resetZoom()"
               />
-            </UButtonGroup>
+            </UFieldGroup>
           </div>
         </div>
 
