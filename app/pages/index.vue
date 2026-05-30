@@ -5,11 +5,13 @@ import { defaultFlightTime } from '~/utils/interpolatePosition'
 const flight = ref<FlightWithSnapshot | null>(null)
 const selectedFlight = ref<FlightWithSnapshot | null>(null)
 const currentTime = ref('')
+const playRequest = ref(0)
 
 async function loadFlight(flightId: string) {
   flight.value = await $fetch<FlightWithSnapshot>(`/api/flights/${encodeURIComponent(flightId)}`)
   currentTime.value = defaultFlightTime(flight.value, flight.value.asked_at)
   selectedFlight.value = flight.value
+  playRequest.value++
 }
 
 function showInfo(f: FlightWithSnapshot) {
@@ -40,6 +42,7 @@ function showInfo(f: FlightWithSnapshot) {
         v-if="flight"
         v-model:current-time="currentTime"
         :flight="flight"
+        :play-request="playRequest"
       />
     </main>
   </div>

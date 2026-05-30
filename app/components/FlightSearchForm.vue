@@ -102,7 +102,7 @@ async function onSubmit(event: FormSubmitEvent<z.infer<typeof schema>>) {
 
 <template>
   <UForm :schema="schema" :state="state" class="flex flex-wrap items-end gap-3" @submit="onSubmit">
-    <UFormField name="origin" label="Origin" class="min-w-40 flex-1">
+    <UFormField name="origin" label="Origin">
       <UInputMenu
         v-model="state.origin"
         value-key="icao"
@@ -115,7 +115,7 @@ async function onSubmit(event: FormSubmitEvent<z.infer<typeof schema>>) {
       />
     </UFormField>
 
-    <UFormField name="destination" label="Destination" class="min-w-40 flex-1">
+    <UFormField name="destination" label="Destination">
       <UInputMenu
         v-model="state.destination"
         value-key="icao"
@@ -125,11 +125,12 @@ async function onSubmit(event: FormSubmitEvent<z.infer<typeof schema>>) {
         icon="i-lucide-plane-landing"
         :disabled="!state.origin"
         :loading="loading && Boolean(state.origin)"
+        :ui="{ content: 'min-w-fit' }"
         open-on-focus
       />
     </UFormField>
 
-    <UFormField name="flightId" label="Flight number" class="min-w-72 flex-1">
+    <UFormField name="flightId" label="Flight number">
       <UInputMenu
         v-model="state.flightId"
         v-model:search-term="searchTerm"
